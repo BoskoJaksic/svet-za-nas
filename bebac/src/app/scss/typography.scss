@@ -1,0 +1,16 @@
+@import '../scss/mixins/font.mixin';
+.size16-600{
+  @include font(16px,600,normal,#1A154C);
+}
+.size-16-400{
+  @include font(16px,400,normal);
+}
+.size14-600{
+  @include font(14px,600,normal,rgba(26, 21, 76, 0.60));
+}
+.size20-800{
+  @include font(20px,800,normal,#F5F5F5);
+}
+.size14-900{
+  @include font(14px,900,normal,#1A154C);
+}

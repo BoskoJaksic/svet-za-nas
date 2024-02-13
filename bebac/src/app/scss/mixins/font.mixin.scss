@@ -1,0 +1,12 @@
+@mixin font(
+  $fontSize: medium,
+  $fontWeight: medium,
+  $lineHeight: normal,
+  $color: color
+) {
+  font-size: $fontSize;
+  font-weight: $fontWeight;
+  font-family: 'Mulish', sans-serif;
+  color: $color;
+  line-height: $lineHeight;
+}

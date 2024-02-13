@@ -1,0 +1,41 @@
+<ion-content>
+  <ng-container *ngIf="!login">
+    <div class="main-content">
+      <div class="title center-content">
+        <img ngSrc="./assets/images/logo.png" height="73" width="73" alt="logo" priority>
+      </div>
+      <div class="title center-content">
+        Registracija
+      </div>
+      <div style="height: 65%">
+        <app-custom-stepper [currentStep]="currentStep" [stepCompleted]="stepCompleted">
+          <div *ngIf="currentStep === 1">
+            <app-step1></app-step1>
+          </div>
+          <div *ngIf="currentStep === 2">
+            <app-step2></app-step2>
+          </div>
+          <div *ngIf="currentStep === 3">
+            <app-step3></app-step3>
+          </div>
+        </app-custom-stepper>
+      </div>
+      <div>
+        <ion-button expand="full" type="submit" shape="round" mode="ios" class="login-button" (click)="nextStep()"><span
+          class="size20-800">Sledeci korak</span>
+          <ion-icon name="chevron-forward-outline" size="large" style="color: white"></ion-icon>
+        </ion-button>
+        <div class="center-content" style="margin-top: 10px;">
+          <span class="size14-900" (click)="prevStep()">Prethodni korak</span>
+        </div>
+        <div class="center-content" style="margin-top: 10px;">
+          <span class="size14-900" (click)="goToLogin()">Vec imas nalog?</span>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="login">
+    <app-login (loginChanged)="onLoginChanged($event)"></app-login>
+  </ng-container>
+</ion-content>

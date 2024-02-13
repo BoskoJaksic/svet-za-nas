@@ -1,0 +1,68 @@
+.custom-stepper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.step {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid var(--ion-color-primary);
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.step-content {
+  font-size: 18px;
+  color: #fff;
+}
+
+.active {
+  background-color: var(--ion-color-primary);
+  color: #fff;
+}
+
+.completed {
+  background-color: var(--ion-color-primary);
+  color: #fff;
+}
+
+.connector {
+  //flex: 1;
+  //height: 2px;
+  //background-color: var(--ion-color-primary);
+  //margin-left: 2px;
+  //margin-right: 2px;
+  flex: 1;
+  height: 2px;
+  background-color: var(--ion-color-primary);
+  margin-left: -12px;
+  margin-right: 17px;
+  margin-top: -11px;
+}
+
+//.step:not(:last-child) {
+//  position: relative;
+//}
+
+//.step:not(:last-child):after {
+//  content: '';
+//  position: absolute;
+//  top: 50%;
+//  right: -50%;
+//  width: 50%;
+//  height: 2px;
+//  background-color: #ccc;
+//}
+.non-active{
+  color: var(--ion-color-primary) !important;
+}
+.additional-class{
+  color: var(--ion-color-primary);
+  margin-top: 30px;
+  margin-bottom: 20px;
+}

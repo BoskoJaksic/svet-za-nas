@@ -1,0 +1,34 @@
+<div class="size-16-400 center-content additional-class">Podaci o porodici</div>
+<div class="custom-stepper">
+  <div>
+    <div class="step" [ngClass]="{ 'active': currentStep === 1, 'completed': stepCompleted[0] }">
+      <div class="step-content">
+        <div *ngIf="stepCompleted[0]"><ion-icon name="checkmark-outline" size="large"></ion-icon></div>
+        <div *ngIf="!stepCompleted[0]">1</div>
+      </div>
+    </div>
+    <div class="size-16-400 primary-color">Licni podaci</div>
+
+  </div>
+  <div class="connector"></div>
+  <div>
+    <div class="step" [ngClass]="{ 'active': currentStep === 2, 'completed': stepCompleted[1] }">
+      <div class="step-content">
+        <div *ngIf="stepCompleted[1]"><ion-icon name="checkmark-outline" size="large"></ion-icon></div>
+        <div *ngIf="!stepCompleted[1]" [ngClass]="{'non-active':currentStep === 1}">2</div>
+      </div>
+    </div>
+    <div class="size-16-400 primary-color">Podaci o deci</div>
+  </div>
+  <div class="connector"></div>
+  <div>
+    <div class="step" [ngClass]="{ 'active': currentStep === 3, 'completed': stepCompleted[2] }">
+      <div class="step-content">
+        <div *ngIf="stepCompleted[2]"><ion-icon name="checkmark-outline" size="large"></ion-icon></div>
+        <div *ngIf="!stepCompleted[2]" [ngClass]="{'non-active':currentStep === 1 || currentStep === 2}">3</div>
+      </div>
+    </div>
+    <div class="size-16-400 primary-color">Nas ljubimac</div>
+  </div>
+</div>
+<ng-content></ng-content>
