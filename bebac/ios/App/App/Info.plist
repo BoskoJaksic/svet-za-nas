@@ -18,6 +18,12 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>$(MARKETING_VERSION)</string>
+	<key>NSCameraUsageDescription</key>
+  <string>Need camera access for ability to upload images.</string>
+ 	<key>NSPhotoLibraryAddUsageDescription</key>
+ 	<string></string>
+ 	<key>NSPhotoLibraryUsageDescription</key>
+  <string>Your photo library allows you to pick image for your profile picture</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>

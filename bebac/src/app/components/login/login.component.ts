@@ -1,4 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {CommonService} from "../../common/services/common.service";
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ export class LoginComponent  implements OnInit {
   rememberMe: boolean = false
   @Output() loginChanged = new EventEmitter<boolean>();
 
-  constructor() { }
+  constructor(private commonService:CommonService) { }
 
   ngOnInit() {}
   showRegisterPage(){
@@ -25,7 +26,6 @@ export class LoginComponent  implements OnInit {
       rememberMe:this.rememberMe
     };
     console.log(formData)
+    this.commonService.goToRoute('home')
   }
-
-
 }

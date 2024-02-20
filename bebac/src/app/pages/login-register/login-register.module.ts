@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import {CommonModule, NgOptimizedImage} from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -23,6 +23,7 @@ import {Step3Component} from "../../components/custom-stepper/step3/step3.compon
     LoginRegisterPageRoutingModule,
     SharedModule,
     NgOptimizedImage,
+    ReactiveFormsModule
 
   ],
   declarations: [LoginRegisterPage,CustomStepperComponent, LoginComponent, Step1Component,Step2Component,Step3Component]
