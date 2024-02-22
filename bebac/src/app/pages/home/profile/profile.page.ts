@@ -14,6 +14,10 @@ export class ProfilePage implements OnInit {
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {
   }
 
+  dumpObj = {
+    personId:'BBB',
+  }
+
   ngOnInit() {
     this.router.events.pipe(
       filter((event: NavigationEvent): event is NavigationEnd => event instanceof NavigationEnd),

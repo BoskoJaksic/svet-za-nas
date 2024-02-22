@@ -4,6 +4,7 @@ import {ToasterService} from "../../common/services/toaster.service";
 import {Step2Component} from "../../components/custom-stepper/step2/step2.component";
 import {Step3Component} from "../../components/custom-stepper/step3/step3.component";
 import {ComponentStepperSharedService} from "../../common/services/component-stepper-shared.service";
+import {RegisterService} from "../../common/services/login-register/register.service";
 
 @Component({
   selector: 'app-login-register',
@@ -20,7 +21,8 @@ export class LoginRegisterPage implements OnInit {
   login = true;
 
   constructor(private toasterService: ToasterService,
-              private componentStepperSharedService: ComponentStepperSharedService
+              private componentStepperSharedService: ComponentStepperSharedService,
+              private registerService: RegisterService
   ) {
   }
 
@@ -83,12 +85,28 @@ export class LoginRegisterPage implements OnInit {
       const step1Data = this.componentStepperSharedService.step1Data;
       const step2Data = this.componentStepperSharedService.step2Data;
       const step3Data = this.componentStepperSharedService.step3Data;
+      const date1 = new Date(`${step1Data.birthdateMonth} ${step1Data.birthdateDay}, ${step1Data.birthdateYear}`);
+      const date3 = new Date(`${step3Data.birthdateMonth} ${step3Data.birthdateDay}, ${step3Data.birthdateYear}`);
+      step1Data.dateOfBirth = date1.toDateString();
+      step3Data.dateOfBirth = date3.toDateString();
+
+      for (const child of step2Data) {
+        const date2 = new Date(`${child.birthMonth} ${child.birthDate}, ${child.birthYear}`);
+        child.dateOfBirth = date2.toDateString();
+      }
       const dataToSend = {
-        personalData: step1Data,
-        children: step2Data,
-        petData: step3Data
+        step1Data,
+        children:step2Data,
+        pets:step3Data
       }
       console.log(dataToSend)
+      this.registerService.registerUser(dataToSend).subscribe({
+        next: (r) => {
+          console.log('r', r)
+        }, error: (err) => {
+          console.log('err', err)
+        }
+      })
 
     } else {
       this.toasterService.presentToast('Forma nije validna', 'warning')

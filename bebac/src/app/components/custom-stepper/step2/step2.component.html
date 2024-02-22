@@ -48,8 +48,8 @@
 
     <div class="center-content">
       <div class="main-square" (click)="takePicture(i)">
-        <img *ngIf="child.photo && child.photo !== ''" [src]="child.photo" class="selected-image" alt="profileImg">
-        <div class="dotted-square" *ngIf="!child.photo && child.photo === ''">
+        <img *ngIf="child.profilePicture && child.profilePicture !== ''" [src]="child.profilePicture" class="selected-image" alt="profileImg">
+        <div class="dotted-square" *ngIf="!child.profilePicture && child.profilePicture === ''">
           <div class="center-icon">
             <span class="primary-color">+</span>
           </div>

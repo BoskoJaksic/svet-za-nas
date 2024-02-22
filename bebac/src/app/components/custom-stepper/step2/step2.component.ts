@@ -24,7 +24,7 @@ export class Step2Component  implements OnInit {
       allowEditing: false,
       resultType: CameraResultType.DataUrl
     });
-    this.children[index].photo = image.dataUrl;
+    this.children[index].profilePicture = image.dataUrl;
   };
   ngOnInit() {
     this.addChild();
@@ -42,7 +42,7 @@ export class Step2Component  implements OnInit {
       birthYear: 2024,
       gender: '',
       name: '',
-      photo: ''
+      profilePicture: ''
     });
   }
 

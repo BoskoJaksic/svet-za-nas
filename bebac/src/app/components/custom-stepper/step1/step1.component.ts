@@ -19,14 +19,14 @@ export class Step1Component implements OnInit {
 
   constructor(public fb: FormBuilder, private componentStepperSharedService: ComponentStepperSharedService) {
     this.form = this.fb.group({
-      name: ['', Validators.required],
+      fullName: ['', Validators.required],
       birthdateDay: [31, Validators.required],
       birthdateMonth: ['January', Validators.required],
       birthdateYear: [2024, Validators.required],
-      role: ['mom', Validators.required],
+      parentRole: ['mom', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
-      image: ['']
+      profilePicture: ['']
     });
   }
 
@@ -34,14 +34,14 @@ export class Step1Component implements OnInit {
     const step1Data = this.componentStepperSharedService.step1Data;
     if (step1Data && Object.keys(step1Data).length > 0){
       const formData: { [key: string]: any } = {};
-      if (step1Data.name !== undefined) formData['name'] = step1Data.name;
+      if (step1Data.fullName !== undefined) formData['fullName'] = step1Data.fullName;
       if (step1Data.birthdateDay !== undefined) formData['birthdateDay'] = step1Data.birthdateDay;
       if (step1Data.birthdateMonth !== undefined) formData['birthdateMonth'] = step1Data.birthdateMonth;
       if (step1Data.birthdateYear !== undefined) formData['birthdateYear'] = step1Data.birthdateYear;
-      if (step1Data.role !== undefined) formData['role'] = step1Data.role;
+      if (step1Data.parentRole !== undefined) formData['parentRole'] = step1Data.parentRole;
       if (step1Data.email !== undefined) formData['email'] = step1Data.email;
       if (step1Data.password !== undefined) formData['password'] = step1Data.password;
-      if (step1Data.image !== undefined) formData['image'] = step1Data.image;
+      if (step1Data.profilePicture !== undefined) formData['profilePicture'] = step1Data.profilePicture;
 
       this.form.patchValue(formData);
     }
@@ -59,7 +59,7 @@ export class Step1Component implements OnInit {
     });
     this.selectedImage = image.dataUrl
     if (image) {
-      this.form.patchValue({image: 'data:image/jpeg;base64,' + image.dataUrl});
+      this.form.patchValue({profilePicture: 'data:image/jpeg;base64,' + image.dataUrl});
       console.log(this.form)
     } else {
       console.error('Nije odabrana slika.');

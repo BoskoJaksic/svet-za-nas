@@ -4,5 +4,5 @@ export interface Child {
   birthYear: number;
   gender: string;
   name: string;
-  photo: string | undefined;
+  profilePicture: string | undefined;
 }

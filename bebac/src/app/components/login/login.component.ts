@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {CommonService} from "../../common/services/common.service";
+import {LoginService} from "../../common/services/login-register/login.service";
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ export class LoginComponent  implements OnInit {
   rememberMe: boolean = false
   @Output() loginChanged = new EventEmitter<boolean>();
 
-  constructor(private commonService:CommonService) { }
+  constructor(private commonService:CommonService,private loginService:LoginService) { }
 
   ngOnInit() {}
   showRegisterPage(){
@@ -21,11 +22,20 @@ export class LoginComponent  implements OnInit {
   }
   onSubmit() {
     const formData = {
-      email: this.email,
+      username: this.email,
       password: this.password,
-      rememberMe:this.rememberMe
+      // rememberMe:this.rememberMe
     };
     console.log(formData)
-    this.commonService.goToRoute('home')
+    this.loginService.loginUser(formData).subscribe({
+      next: (r) => {
+        console.log('r', r)
+        this.commonService.goToRoute('home')
+      }, error: (err) => {
+        console.log('err', err)
+      }
+    })
+
+
   }
 }

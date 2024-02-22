@@ -25,7 +25,7 @@ export class Step3Component implements OnInit {
       birthdateYear: [2024, Validators.required],
       role: [''],
       elsePet: [''],
-      image: ['']
+      profilePicture: ['']
     });
   }
 
@@ -53,7 +53,7 @@ export class Step3Component implements OnInit {
       if (step3Data.birthdateYear !== undefined) formData['birthdateYear'] = step3Data.birthdateYear;
       if (step3Data.role !== undefined) formData['role'] = step3Data.role;
       if (step3Data.elsePet !== undefined) formData['elsePet'] = step3Data.elsePet;
-      if (step3Data.image !== undefined) formData['image'] = step3Data.image;
+      if (step3Data.profilePicture !== undefined) formData['profilePicture'] = step3Data.profilePicture;
       this.addPet = true;
       this.form.patchValue(formData);
     } else {
@@ -94,7 +94,7 @@ export class Step3Component implements OnInit {
     });
     this.selectedImage = image.dataUrl
     if (image) {
-      this.form.patchValue({image: 'data:image/jpeg;base64,' + image.dataUrl});
+      this.form.patchValue({profilePicture: 'data:image/jpeg;base64,' + image.dataUrl});
       console.log(this.form)
     } else {
       console.error('Nije odabrana slika.');
@@ -117,9 +117,9 @@ export class Step3Component implements OnInit {
     return true;
   }
 
-  petChoose() {
+  petChoose(event:any) {
     this.form.patchValue({
-      role: ''
+      role: event.target.value
     });
   }
 }
