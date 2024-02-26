@@ -6,19 +6,19 @@
       <span class="size16-600 text-color">VTP/Datum rodjenja deteta</span>
     </div>
     <div style="display: flex;justify-content: space-around">
-      <ion-item lines="none" shape="round" fill="outline" style="width: 23%">
+      <ion-item lines="none" shape="round" fill="outline" style="width: 23%"  mode="md">
         <ion-select aria-label="birthDay" interface="popover" mode="ios" [(ngModel)]="child.birthDate">
           <ion-select-option *ngFor="let day of days" [value]="day">{{ day }}</ion-select-option>
         </ion-select>
       </ion-item>
 
-      <ion-item lines="none" shape="round" fill="outline" style="width: 25%">
+      <ion-item lines="none" shape="round" fill="outline" style="width: 25%"  mode="md">
         <ion-select aria-label="birthMonth" interface="popover" mode="ios" [(ngModel)]="child.birthMonth">
           <ion-select-option *ngFor="let month of abbreviatedMonths; let i = index" [value]="months[i]">{{ month }}</ion-select-option>
         </ion-select>
       </ion-item>
 
-      <ion-item lines="none" shape="round" fill="outline" style="width: 27%">
+      <ion-item lines="none" shape="round" fill="outline" style="width: 27%"  mode="md">
         <ion-select aria-label="birthYear" interface="popover" mode="ios" [(ngModel)]="child.birthYear">
           <ion-select-option *ngFor="let year of years" [value]="year">{{ year }}</ion-select-option>
         </ion-select>
@@ -29,7 +29,7 @@
       <img ngSrc="./assets/icons/child.png" height="20" width="20" style="margin-right: 20px" alt="calendar"/>
       <span class="size16-600 text-color">Pol deteta:</span>
     </div>
-    <ion-radio-group [(ngModel)]="child.gender">
+    <ion-radio-group [(ngModel)]="child.gender"  mode="md">
       <ion-radio value="boy" labelPlacement="end" style="margin-right: 20px">Musko</ion-radio>
       <ion-radio value="girl" labelPlacement="end" style="margin-right: 20px">Zensko</ion-radio>
       <ion-radio value="dontKnow" labelPlacement="end">Ne znam</ion-radio>
@@ -39,7 +39,7 @@
       <img src="./assets/icons/user.png" height="20" width="20" style="margin-right: 20px" alt="user"/>
       <span class="size16-600 text-color">Ime deteta:</span>
     </div>
-    <ion-input [(ngModel)]="child.name" aria-label="Custom input" class="custom" fill="outline" shape="round"></ion-input>
+    <ion-input  mode="md" [(ngModel)]="child.name" aria-label="Custom input" class="custom" fill="outline" shape="round"></ion-input>
 
     <div class="icon-class">
       <img src="./assets/icons/camera.png" height="20" width="22" style="margin-right: 20px" alt="user"/>

@@ -5,6 +5,8 @@ import {Step2Component} from "../../components/custom-stepper/step2/step2.compon
 import {Step3Component} from "../../components/custom-stepper/step3/step3.component";
 import {ComponentStepperSharedService} from "../../common/services/component-stepper-shared.service";
 import {RegisterService} from "../../common/services/login-register/register.service";
+import {DatePipe} from "@angular/common";
+import {CommonService} from "../../common/services/common.service";
 
 @Component({
   selector: 'app-login-register',
@@ -22,7 +24,9 @@ export class LoginRegisterPage implements OnInit {
 
   constructor(private toasterService: ToasterService,
               private componentStepperSharedService: ComponentStepperSharedService,
-              private registerService: RegisterService
+              private registerService: RegisterService,
+              private commonService: CommonService,
+              private datePipe: DatePipe,
   ) {
   }
 
@@ -86,23 +90,35 @@ export class LoginRegisterPage implements OnInit {
       const step2Data = this.componentStepperSharedService.step2Data;
       const step3Data = this.componentStepperSharedService.step3Data;
       const date1 = new Date(`${step1Data.birthdateMonth} ${step1Data.birthdateDay}, ${step1Data.birthdateYear}`);
-      const date3 = new Date(`${step3Data.birthdateMonth} ${step3Data.birthdateDay}, ${step3Data.birthdateYear}`);
-      step1Data.dateOfBirth = date1.toDateString();
-      step3Data.dateOfBirth = date3.toDateString();
+      step1Data.dateOfBirth = this.datePipe.transform(date1, 'yyyy-MM-dd');
+      if (step3Data) {
+        const date3 = new Date(`${step3Data.birthdateMonth} ${step3Data.birthdateDay}, ${step3Data.birthdateYear}`);
+        step3Data.dateOfBirth = this.datePipe.transform(date3, 'yyyy-MM-dd');
+      }
+
 
       for (const child of step2Data) {
         const date2 = new Date(`${child.birthMonth} ${child.birthDate}, ${child.birthYear}`);
-        child.dateOfBirth = date2.toDateString();
+        child.dateOfBirth = this.datePipe.transform(date2, 'yyyy-MM-dd');
+
       }
       const dataToSend = {
-        step1Data,
-        children:step2Data,
-        pets:step3Data
+        fullName: step1Data.fullName,
+        email: step1Data.email,
+        password: step1Data.password,
+        dateOfBirth: step1Data.dateOfBirth,
+        profilePicture: step1Data.profilePicture,
+        parentRole: step1Data.parentRole,
+        children: step2Data,
+        pets:
+          [step3Data]
       }
       console.log(dataToSend)
       this.registerService.registerUser(dataToSend).subscribe({
         next: (r) => {
           console.log('r', r)
+          this.login = true;
+          this.toasterService.presentToast('Registracija uspesna', 'success')
         }, error: (err) => {
           console.log('err', err)
         }

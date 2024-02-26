@@ -25,14 +25,26 @@ export class Step1Component implements OnInit {
       birthdateYear: [2024, Validators.required],
       parentRole: ['mom', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
+      password: ['', [Validators.required, this.passwordValidator]],
       profilePicture: ['']
     });
   }
 
+  passwordValidator(control: FormGroup) {
+    const password = control.value;
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasNumber = /\d/.test(password);
+    const hasNonAlphanumeric = /[^\w\d]/.test(password);
+
+    const valid = hasUpperCase && hasLowerCase && hasNumber && hasNonAlphanumeric;
+
+    return valid ? null : {invalidPassword: true};
+  }
+
   ngOnInit() {
     const step1Data = this.componentStepperSharedService.step1Data;
-    if (step1Data && Object.keys(step1Data).length > 0){
+    if (step1Data && Object.keys(step1Data).length > 0) {
       const formData: { [key: string]: any } = {};
       if (step1Data.fullName !== undefined) formData['fullName'] = step1Data.fullName;
       if (step1Data.birthdateDay !== undefined) formData['birthdateDay'] = step1Data.birthdateDay;

@@ -2,12 +2,13 @@
 <ion-content>
   <app-our-world></app-our-world>
   <div class="tree-class">
-    <div style="display: flex;
-    flex-direction: column;">
-      <ion-grid>
-        <ion-row style="padding-top: 50px">
-          <ion-col>
-            <app-avatar></app-avatar>
+    <div style="display: flex; width: 100%">
+      <ion-grid style="width: 100%;">
+        <ion-row style="padding-top: 50px;width: 100%;">
+          <ion-col style="width: 100%">
+            <div class="parent-div">
+              <app-avatar></app-avatar>
+            </div>
           </ion-col>
           <ion-col>
             <app-avatar></app-avatar>
@@ -17,25 +18,37 @@
     </div>
 
     <div>
-    <ion-row>
-      <ion-col size="3">
-        <app-avatar></app-avatar>
-      </ion-col>
-      <ion-col size="3">
-        <app-avatar></app-avatar>
-      </ion-col>
-      <ion-col size="3">
-        <app-avatar></app-avatar>
-      </ion-col>
-      <ion-col size="3">
-        <app-avatar></app-avatar>
-      </ion-col>
-      <ion-col size="3">
-        <app-avatar></app-avatar>
-      </ion-col>
-    </ion-row>
+      <ion-row>
+        <ion-col size="3">
+          <div class="center-content">
+            <app-avatar></app-avatar>
+          </div>
+        </ion-col>
+        <ion-col size="3">
+          <div class="center-content">
+            <app-avatar></app-avatar>
+          </div>
+        </ion-col>
+        <ion-col size="3">
+          <div class="center-content">
+            <app-avatar></app-avatar>
+          </div>
+        </ion-col>
+        <ion-col size="3">
+          <div class="center-content">
+            <app-avatar></app-avatar>
+          </div>
+        </ion-col>
+        <ion-col size="3">
+          <div class="center-content">
+            <app-avatar></app-avatar>
+          </div>
+        </ion-col>
+      </ion-row>
     </div>
-
+  </div>
+  <div class="center-content">
+    <app-avatar></app-avatar>
   </div>
 </ion-content>
 

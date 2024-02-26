@@ -77,3 +77,8 @@ ion-modal {
     }
   }
 }
+ion-popover {
+  &::part(content) {
+    min-width: 270px;
+  }
+}

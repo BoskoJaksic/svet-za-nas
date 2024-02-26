@@ -14,6 +14,7 @@
       aria-label="Custom input"
       class="custom"
       fill="outline"
+      mode="md"
       shape="round"></ion-input>
 
     <div class="icon-class">
@@ -21,19 +22,19 @@
       class="size16-600 text-color">Datum rodjenja ljubimca</span>
     </div>
     <div style="display: flex;justify-content: space-around">
-      <ion-item lines="none" shape="round" fill="outline" style="width: 23%">
+      <ion-item lines="none" shape="round" fill="outline" style="width: 23%"  mode="md">
         <ion-select aria-label="Fruit" interface="popover" mode="ios" formControlName="birthdateDay">
           <ion-select-option *ngFor="let day of days" [value]="day">{{ day }}</ion-select-option>
         </ion-select>
       </ion-item>
 
-      <ion-item lines="none" shape="round" fill="outline" style="width: 25%">
+      <ion-item lines="none" shape="round" fill="outline" style="width: 25%"  mode="md">
         <ion-select aria-label="Fruit" interface="popover" mode="ios" formControlName="birthdateMonth">
           <ion-select-option *ngFor="let month of abbreviatedMonths; let i = index" [value]="months[i]">{{ month }}</ion-select-option>
         </ion-select>
       </ion-item>
 
-      <ion-item lines="none" shape="round" fill="outline" style="width: 27%">
+      <ion-item lines="none" shape="round" fill="outline" style="width: 27%"  mode="md">
         <ion-select aria-label="Fruit" interface="popover" mode="ios" formControlName="birthdateYear">
           <ion-select-option *ngFor="let year of years" [value]="year">{{ year }}</ion-select-option>
         </ion-select>
@@ -46,7 +47,7 @@
       class="size16-600 text-color">Vrsta zivotinje?</span>
     </div>
     <div>
-      <ion-radio-group value="dog" formControlName="role" [disabled]="!addPet">
+      <ion-radio-group value="dog" formControlName="role" [disabled]="!addPet"  mode="md">
         <ion-row>
           <ion-col>
             <ion-radio value="dog" labelPlacement="end" style="margin-right: 20px">Pas</ion-radio>

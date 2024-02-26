@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {filter, Subject, takeUntil} from "rxjs";
 import {ActivatedRoute, Event as NavigationEvent, NavigationEnd, Router} from "@angular/router";
+import {UserService} from "../../../common/services/user.service";
+import {LocalStorageService} from "../../../common/services/local-storage.service";
 
 @Component({
   selector: 'app-profile',
@@ -11,12 +13,13 @@ export class ProfilePage implements OnInit {
   private firstLoad: boolean = true;
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(private router: Router,
+              private userService:UserService,
+              private localStorageService:LocalStorageService,
+              private activatedRoute: ActivatedRoute) {
   }
 
-  dumpObj = {
-    personId:'BBB',
-  }
+
 
   ngOnInit() {
     this.router.events.pipe(
@@ -41,6 +44,14 @@ export class ProfilePage implements OnInit {
   }
 
   loadData() {
+    const userEmail = this.localStorageService.getUserEmail();
+    this.userService.getUserDataByEmail(userEmail).subscribe({
+      next: (r) => {
+        console.log('get user', r)
+      }, error: (err) => {
+        console.log('err', err)
+      }
+    })
     console.log('loaded')
   }
 }
