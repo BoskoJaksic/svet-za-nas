@@ -9,6 +9,7 @@ import {NavController} from "@ionic/angular";
   styleUrls: ['./profile-details.page.scss'],
 })
 export class ProfileDetailsPage implements OnInit {
+  receivedObject: any;
 
   constructor(private route: ActivatedRoute,
               public commonService:CommonService,
@@ -18,11 +19,11 @@ export class ProfileDetailsPage implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params.subscribe(async params => {
-      const paramId = params['id'];
-      console.log('paramId', paramId)
-      this.getProfileData()
-    })
+    this.route.queryParams.subscribe(params => {
+      const encodedObject = params['data'];
+      this.receivedObject = JSON.parse(decodeURIComponent(encodedObject));
+      console.log('received',this.receivedObject)
+    });
   }
 
   getProfileData() {

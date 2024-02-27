@@ -3,6 +3,7 @@ import {filter, Subject, takeUntil} from "rxjs";
 import {ActivatedRoute, Event as NavigationEvent, NavigationEnd, Router} from "@angular/router";
 import {UserService} from "../../../common/services/user.service";
 import {LocalStorageService} from "../../../common/services/local-storage.service";
+import {Child} from "../../../models/child.model";
 
 @Component({
   selector: 'app-profile',
@@ -12,13 +13,13 @@ import {LocalStorageService} from "../../../common/services/local-storage.servic
 export class ProfilePage implements OnInit {
   private firstLoad: boolean = true;
   private destroy$: Subject<boolean> = new Subject<boolean>();
+  children: Child[] = []
 
   constructor(private router: Router,
-              private userService:UserService,
-              private localStorageService:LocalStorageService,
+              private userService: UserService,
+              private localStorageService: LocalStorageService,
               private activatedRoute: ActivatedRoute) {
   }
-
 
 
   ngOnInit() {
@@ -47,6 +48,7 @@ export class ProfilePage implements OnInit {
     const userEmail = this.localStorageService.getUserEmail();
     this.userService.getUserDataByEmail(userEmail).subscribe({
       next: (r) => {
+        this.children = r.value.children
         console.log('get user', r)
       }, error: (err) => {
         console.log('err', err)
