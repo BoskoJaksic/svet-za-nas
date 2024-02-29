@@ -9,8 +9,10 @@ export class LoginService {
   constructor(private apiService: ApiService) {}
 
   loginUser(data: any): Observable<any> {
-    return this.apiService.post('ApplicationUsers/LoginUser', data, {
-      withCredentials: true,
-    });
+    return this.apiService.post('ApplicationUsers/LoginUser', data);
+  }
+
+  googleLoginIn(data: any): Observable<any> {
+    return this.apiService.post('ApplicationUsers/GoogleLogin', data);
   }
 }

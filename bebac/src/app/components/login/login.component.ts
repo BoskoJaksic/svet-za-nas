@@ -3,28 +3,34 @@ import {CommonService} from "../../common/services/common.service";
 import {LoginService} from "../../common/services/login-register/login.service";
 import {LocalStorageService} from "../../common/services/local-storage.service";
 import {ToasterService} from "../../common/services/toaster.service";
+import {GoogleAuth, User} from "@codetrix-studio/capacitor-google-auth";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent  implements OnInit {
+export class LoginComponent implements OnInit {
   email: string = ''
   password: string = ''
   rememberMe: boolean = false
   @Output() loginChanged = new EventEmitter<boolean>();
+  googleUser: any
 
-  constructor(private commonService:CommonService,
-              private localStorageService:LocalStorageService,
-              private toasterService:ToasterService,
-              private loginService:LoginService) { }
+  constructor(private commonService: CommonService,
+              private localStorageService: LocalStorageService,
+              private toasterService: ToasterService,
+              private loginService: LoginService) {
+  }
 
-  ngOnInit() {}
-  showRegisterPage(){
+  ngOnInit() {
+  }
+
+  showRegisterPage() {
     this.loginChanged.emit(false);
 
   }
+
   onSubmit() {
     const formData = {
       username: this.email,
@@ -35,22 +41,43 @@ export class LoginComponent  implements OnInit {
     this.loginService.loginUser(formData).subscribe({
       next: (r) => {
         console.log('r', r)
-        if (r.statusCode === 401){
-          this.toasterService.presentToast('Pogresni kredencijali ili korisnik nije autorizovan','warning')
+        if (r.statusCode === 401) {
+          this.toasterService.presentToast('Pogresni kredencijali ili korisnik nije autorizovan', 'warning')
           return;
         }
         this.localStorageService.setUserEmail(this.email);
         this.commonService.goToRoute('home')
       }, error: (err) => {
-        if (err.status === 500){{
-          this.toasterService.presentToast('Pogresni kredencijali ili korisnik nije autorizovan','warning')
+        if (err.status === 500) {
+          {
+            this.toasterService.presentToast('Pogresni kredencijali ili korisnik nije autorizovan', 'warning')
 
-        }
+          }
         }
         console.log('err', err)
       }
     })
 
 
+  }
+
+  async googleLogin() {
+    // this.googleUser = await GoogleAuth.signIn();
+    const user: User = await GoogleAuth.signIn();
+    let dataToSend = {
+      email: user.email,
+      provider: "Google",
+      idToken: user.id
+    }
+    this.loginService.googleLoginIn(dataToSend).subscribe({
+        next: (r) => {
+          console.log('loginresp', r)
+        }, error: (err) => {
+          console.log('login err', err)
+        }
+      }
+    )
+
+    console.log('gogle', user)
   }
 }
