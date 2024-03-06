@@ -5,9 +5,10 @@ const config: CapacitorConfig = {
   appName: 'bebac',
   webDir: 'www',
   plugins:{
-    "GoogleAuth":{
+    GoogleAuth:{
       scopes:['profile',"email"],
-      clientId:'211967449887-kg2vpsiljrrthvfo22rkiifaklb1mb12.apps.googleusercontent.com',
+      iosClientId:'211967449887-kg2vpsiljrrthvfo22rkiifaklb1mb12.apps.googleusercontent.com',
+      serverClientId:'211967449887-99mtov0ld9urj5hl0oksi2579k7u8jt5.apps.googleusercontent.com',
       forceCodeForRefreshToken: true
     }
   },

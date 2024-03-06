@@ -100,7 +100,7 @@ export class LoginRegisterPage implements OnInit {
       for (const child of step2Data) {
         const date2 = new Date(`${child.birthMonth} ${child.birthDate}, ${child.birthYear}`);
         child.dateOfBirth = this.datePipe.transform(date2, 'yyyy-MM-dd');
-
+        child.profilePicture = child.profilePicture.replace(/^data:image\/\w+;base64,/, '');
       }
       const dataToSend = {
         fullName: step1Data.fullName,

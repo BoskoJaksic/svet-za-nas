@@ -14,3 +14,16 @@
 .size14-900{
   @include font(14px,900,normal,#1A154C);
 }
+
+.size24-900{
+  @include font(24px,900,normal,#1A154C);
+}
+.size16-900{
+  @include font(16px,900,normal,#1A154C);
+}
+.size12-900{
+  @include font(12px,900,normal,#1A154C);
+}
+.size12-400{
+  @include font(12px,400,normal,#1A154C);
+}

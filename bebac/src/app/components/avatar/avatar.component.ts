@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {CommonService} from "../../common/services/common.service";
 import {Router} from "@angular/router";
 
 @Component({
@@ -8,20 +7,37 @@ import {Router} from "@angular/router";
   styleUrls: ['./avatar.component.scss'],
 })
 export class AvatarComponent implements OnInit {
-  @Input() personId: any
-  @Input() childObj: any
 
-  constructor(public commonService: CommonService,private router: Router) {
+  @Input() personObj: any
+
+  constructor(private router: Router) {
   }
 
   ngOnInit() {
   }
 
-  goTo(){
-    console.log('childobj',this.childObj)
-    const queryParams = encodeURIComponent(JSON.stringify(this.childObj));
-    this.router.navigate(['home/profile/profile-details'], { queryParams: { data: queryParams } });
+  calculateYears() {
+    if (this.personObj?.dateOfBirth) {
+      const today = new Date();
+      const dobParts = this.personObj?.dateOfBirth.split('-');
+      const dateOfBirth = new Date(+dobParts[0], dobParts[1] - 1, +dobParts[2]);
 
+      let noOfYears = today.getFullYear() - dateOfBirth.getFullYear();
+
+      // Check if the birthday for this year has passed
+      if (today.getMonth() < dateOfBirth.getMonth() ||
+        (today.getMonth() === dateOfBirth.getMonth() && today.getDate() < dateOfBirth.getDate())) {
+        noOfYears--;
+      }
+      return noOfYears;
+    }
+    return
+  }
+
+  goTo() {
+    console.log('childobj', this.personObj)
+    const queryParams = encodeURIComponent(JSON.stringify(this.personObj));
+    this.router.navigate(['home/profile/profile-details'], {queryParams: {data: queryParams}});
   }
 
 }

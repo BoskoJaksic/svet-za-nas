@@ -15,7 +15,6 @@ export class LoginComponent implements OnInit {
   password: string = ''
   rememberMe: boolean = false
   @Output() loginChanged = new EventEmitter<boolean>();
-  googleUser: any
 
   constructor(private commonService: CommonService,
               private localStorageService: LocalStorageService,
@@ -67,17 +66,21 @@ export class LoginComponent implements OnInit {
     let dataToSend = {
       email: user.email,
       provider: "Google",
-      idToken: user.id
+      idToken: user.authentication.idToken
     }
     this.loginService.googleLoginIn(dataToSend).subscribe({
         next: (r) => {
           console.log('loginresp', r)
+          if (r.statusCode === 200){
+            this.commonService.goToRoute('home')
+          }
+
         }, error: (err) => {
           console.log('login err', err)
         }
       }
     )
 
-    console.log('gogle', user)
+    console.log('gogle user', user)
   }
 }

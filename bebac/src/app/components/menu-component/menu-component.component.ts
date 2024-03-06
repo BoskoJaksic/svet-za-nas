@@ -2,6 +2,10 @@ import {Component, Input, OnInit} from '@angular/core';
 import {filter} from "rxjs";
 import {NavigationEnd, Router} from "@angular/router";
 import {CommonService} from "../../common/services/common.service";
+import {GoogleAuth} from "@codetrix-studio/capacitor-google-auth";
+import {LocalStorageService} from "../../common/services/local-storage.service";
+import {ToasterService} from "../../common/services/toaster.service";
+import {UserService} from "../../common/services/user.service";
 
 @Component({
   selector: 'app-menu-component',
@@ -9,13 +13,31 @@ import {CommonService} from "../../common/services/common.service";
   styleUrls: ['./menu-component.component.scss'],
 })
 export class MenuComponentComponent implements OnInit {
-
+  public alertButtons = [
+    {
+      text: 'Ponisti',
+      role: 'cancel',
+      handler: () => {
+        console.log('Alert canceled');
+      },
+    },
+    {
+      text: 'Obrisi',
+      role: 'confirm',
+      handler: () => {
+        console.log('Alert confirmed');
+      },
+    },
+  ];
 
   pageTitle: string = '';
   @Input() sidebarsUrl: any;
   selectedPageUrl: string = '';
 
   constructor(private router: Router,
+              private localStorageService: LocalStorageService,
+              private toasterService: ToasterService,
+              private userService: UserService,
               private commonService: CommonService
   ) {
 
@@ -44,7 +66,30 @@ export class MenuComponentComponent implements OnInit {
 
 
   logout() {
+    GoogleAuth.signOut();
+    this.localStorageService.clearLocalStorage();
     this.commonService.goToRoute('');
+  }
+
+  deleteAccount(ev: any) {
+    console.log(`Dismissed with role: ${ev.detail.role}`);
+    if (ev.detail.role === 'confirm') {
+      // this.loaderService.showLoader();
+      let userEmail = this.localStorageService.getUserEmail()
+
+      this.userService.deleteAccount(userEmail).subscribe({
+        next: (r) => {
+          GoogleAuth.signOut();
+          this.localStorageService.clearLocalStorage();
+          this.commonService.goToRoute('');
+          this.toasterService.presentToast('Nalog uspesno obrisan', 'success');
+
+        }, error: (err) => {
+          // this.loaderService.hideLoader();
+          this.toasterService.presentToast('Doslo je do greske', 'danger');
+        }
+      })
+    }
   }
 
   toggleNav() {

@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {Platform} from "@ionic/angular";
+import {LoaderService} from "./common/services/loader.service";
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,7 @@ import {Platform} from "@ionic/angular";
 export class AppComponent {
 
   constructor(private platform: Platform,
+              public loaderService: LoaderService,
   ) {
     this.initializeApp()
   }

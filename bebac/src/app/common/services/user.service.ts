@@ -15,4 +15,8 @@ export class UserService {
     return this.apiService.get(`ApplicationUsers/GetByEmail/${email}`);
   }
 
+  deleteAccount(email: any): Observable<any> {
+    return this.apiService.delete(`ApplicationUsers/DeleteUser/${email}`);
+  }
+
 }
