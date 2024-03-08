@@ -1,0 +1,99 @@
+<div class="main-content">
+  <div class="checkbox">
+    <ion-checkbox labelPlacement="start" name="checkbox" [(ngModel)]="addPet" (ngModelChange)="onChangeAddPet()">
+      <img ngSrc="./assets/icons/addPetCircle.png" height="15" width="15" style="margin-right: 20px" alt="petCircle"/>
+      <span class="size14-600">Zelim da dodam ljubimca</span></ion-checkbox>
+  </div>
+  <form [formGroup]="form">
+    <div class="icon-class">
+      <img ngSrc="./assets/icons/petBone.png" height="14" width="21" style="margin-right: 20px" alt="petBone"/> <span
+      class="size16-600 text-color">Ime ljubimca</span>
+    </div>
+    <ion-input
+      formControlName="petName"
+      aria-label="Custom input"
+      class="custom"
+      fill="outline"
+      mode="md"
+      shape="round"></ion-input>
+
+    <div class="icon-class">
+      <img ngSrc="./assets/icons/calendar.png" height="20" width="20" style="margin-right: 20px" alt="calendar"/> <span
+      class="size16-600 text-color">Datum rodjenja ljubimca</span>
+    </div>
+    <div style="display: flex;justify-content: space-around">
+      <ion-item lines="none" shape="round" fill="outline" style="width: 23%"  mode="md">
+        <ion-select aria-label="Fruit" interface="popover" mode="ios" formControlName="birthdateDay">
+          <ion-select-option *ngFor="let day of days" [value]="day">{{ day }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item lines="none" shape="round" fill="outline" style="width: 25%"  mode="md">
+        <ion-select aria-label="Fruit" interface="popover" mode="ios" formControlName="birthdateMonth">
+          <ion-select-option *ngFor="let month of abbreviatedMonths; let i = index" [value]="months[i]">{{ month }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item lines="none" shape="round" fill="outline" style="width: 27%"  mode="md">
+        <ion-select aria-label="Fruit" interface="popover" mode="ios" formControlName="birthdateYear">
+          <ion-select-option *ngFor="let year of years" [value]="year">{{ year }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
+
+
+    <div class="icon-class">
+      <img ngSrc="./assets/icons/petLeg.png" height="20" width="20" style="margin-right: 20px" alt="calendar"/> <span
+      class="size16-600 text-color">Vrsta zivotinje?</span>
+    </div>
+    <div>
+      <ion-radio-group value="dog" formControlName="role" [disabled]="!addPet"  mode="md">
+        <ion-row>
+          <ion-col>
+            <ion-radio value="dog" labelPlacement="end" style="margin-right: 20px">Pas</ion-radio>
+          </ion-col>
+          <ion-col>
+            <ion-radio value="cat" labelPlacement="end">Macka</ion-radio>
+          </ion-col>
+          <ion-col>
+            <ion-radio value="rabit" labelPlacement="end">Zec</ion-radio>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col class="align-center" size="5">
+            <ion-radio value="papagaj" labelPlacement="end">Papagaj</ion-radio>
+          </ion-col>
+          <ion-col class="align-center">
+            <span style="margin-right: 5px">Nesto drugo:</span>
+            <ion-input
+              formControlName="elsePet"
+              (ionInput)="petChoose($event)"
+              aria-label="Custom input"
+              class="elsePetClass"
+              fill="outline"
+              shape="round"></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-radio-group>
+    </div>
+
+
+    <div class="icon-class">
+      <img ngSrc="./assets/icons/camera.png" height="20" width="22" style="margin-right: 20px" alt="user"/> <span
+      class="size16-600 text-color">Dodajte fotografiju ljubimca ili odaberite avatara</span>
+    </div>
+
+    <div class="center-content">
+      <div class="main-square" (click)="takePicture()">
+        <img *ngIf="selectedImage && selectedImage !== ''" [src]="selectedImage" class="selected-image"
+             alt="profileImg">
+        <div class="dotted-square" *ngIf="!selectedImage && selectedImage === ''">
+          <div class="center-icon">
+            <span class="primary-color">+</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

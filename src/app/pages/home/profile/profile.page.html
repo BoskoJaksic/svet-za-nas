@@ -1,0 +1,34 @@
+<app-menu-button></app-menu-button>
+<ion-content>
+  <app-our-world></app-our-world>
+  <div class="tree-class">
+    <div style="display: flex; width: 100%">
+      <ion-grid style="width: 100%;">
+        <ion-row style="padding-top: 50px;width: 100%;">
+          <ion-col style="width: 100%">
+            <div class="parent-div">
+              <app-avatar [personObj]="parent"></app-avatar>
+            </div>
+          </ion-col>
+          <ion-col>
+<!--            <app-avatar></app-avatar>-->
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+    <div>
+      <ion-row>
+        <ion-col size="3" *ngFor=" let child of children">
+          <div class="center-content">
+            <app-avatar [personObj]="child"></app-avatar>
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+  <div class="center-content">
+    <app-avatar [personObj]="pet"></app-avatar>
+  </div>
+</ion-content>
+

@@ -1,0 +1,47 @@
+<ion-split-pane contentId="main-content" when="md" class="custom-split-pane">
+  <ion-menu contentId="main-content">
+    <ion-content>
+      <div style="display: flex; flex-direction: column; height: 100%;">
+        <div>
+          <div>
+            <img ngSrc="./assets/images/logo.png" alt="" width="73" height="73"
+                 style="margin-top: 52px;margin-left: 53px"/>
+          </div>
+        </div>
+        <ion-list style="flex: 1;">
+          <ion-menu-toggle auto-hide="false" *ngFor="let sidebar of sidebarsUrl">
+            <ion-item lines="none" detail="false" [routerLink]="[sidebar.pageUrl]" class="ion-item-style"
+                      [ngClass]="{ 'selected-item': sidebar.pageUrl === selectedPageUrl }">
+              <ion-icon slot="start" [name]="sidebar.iconSrc" style="margin-right: 10px"></ion-icon>
+              {{ sidebar.name }}
+            </ion-item>
+          </ion-menu-toggle>
+
+        </ion-list>
+
+        <ion-button fill="clear" color="secondary" id="present-alert">
+          <ion-icon name="trash-bin-outline" slot="start" style="margin-right: 10px"></ion-icon>
+          <span class="checkout-text">  Obrisi nalog</span>
+        </ion-button>
+        <ion-alert
+          trigger="present-alert"
+          header="Upozorenje!"
+          subHeader="Da li ste sigurni da zelite da obrisete Vas nalog?"
+          message="Radeci ovo svi Vasi podaci bice obrisani iz nase baze!"
+          [buttons]="alertButtons"
+          (didDismiss)="deleteAccount($event)"
+        ></ion-alert>
+        <ion-button  fill="clear" (click)="logout()" class="logout-button">
+          <ion-icon name="log-out-outline" style="margin-right: 10px"  slot="start"></ion-icon>
+          Odjavi me
+        </ion-button>
+
+      </div>
+    </ion-content>
+  </ion-menu>
+
+  <div class="ion-page" id="main-content">
+    <ion-router-outlet id="main"></ion-router-outlet>
+  </div>
+</ion-split-pane>
+

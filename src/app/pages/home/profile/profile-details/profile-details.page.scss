@@ -1,0 +1,44 @@
+.main-content {
+  width: 100%;
+  padding: 20px 20px 0 20px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Postavlja minimalnu visinu na visinu ekrana */
+  background-color: white;
+}
+
+.button-content {
+  flex-grow: 1; /* Ostavlja prostor za ostali sadržaj da zauzme preostali prostor */
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+  margin-top: auto; /* Gura sadržaj na dno ekrana */
+}
+
+.backButton {
+  margin-bottom: 20px; /* Prilagodite marginu prema potrebi */
+  width: 100%;
+}
+
+.orange-avatar {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid orange;
+  padding: 5px;
+  margin-top: 50px;
+}
+
+.img-class {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.span-cake {
+  color: #1A154C;
+  padding-top: 11px;
+  padding-left: 12px;
+}

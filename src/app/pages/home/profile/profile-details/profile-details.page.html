@@ -1,0 +1,32 @@
+<div class="main-content" style="padding-top: 30px">
+  <app-our-world></app-our-world>
+  <div class="center-content" style="margin-top: 15px">
+    <span *ngIf="receivedObject?.parentRole === 'mom'" class="size24-900">MAMA</span>
+    <span *ngIf="receivedObject?.parentRole === 'dad'" class="size24-900">TATA</span>
+    <span *ngIf="receivedObject?.gender === 'boy'" class="size24-900">DECAK</span>
+    <span *ngIf="receivedObject?.gender === 'girl'" class="size24-900">DEVOJCICA</span>
+    <span *ngIf="receivedObject?.pets" class="size24-900">LJUBIMAC</span>
+  </div>
+  <div class="center-content" style="margin-bottom: 20px">
+    <div class="orange-avatar">
+      <img class="img-class"
+        [src]="(receivedObject.profilePicture && receivedObject.profilePicture !== '')? receivedObject.profilePicture : 'https://ionicframework.com/docs/img/demos/avatar.svg'" alt="user picture"/>
+    </div>
+  </div>
+
+  <div class="center-content" style="margin-bottom: 20px">
+    <span class="size16-900">{{ receivedObject.name }}</span>
+  </div>
+  <div class="center-content" style="margin-bottom: 20px">
+    <span class="size-16-400" style="color: #1A154C">{{ calculateYears() }} godina</span>
+  </div>
+  <div class="center-content">
+    <img ngSrc="./assets/images/cake.png" height="45" width="36"> <span class="size-16-400 span-cake">{{ receivedObject.dateOfBirth }}</span>
+  </div>
+  <div class="button-content">
+    <ion-button expand="full" type="submit" shape="round" mode="ios" class="backButton" (click)="goBack()">
+      <ion-icon name="chevron-back-outline" style="color: white"></ion-icon>
+      <span class="size20-800">Nazad</span></ion-button>
+  </div>
+</div>
+

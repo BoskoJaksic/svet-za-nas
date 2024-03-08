@@ -1,0 +1,18 @@
+.tree-class {
+  background-image: url('../../../../assets/images/drvo.png');
+  //background-size: cover;
+  background-repeat: no-repeat;
+  z-index: -1;
+  height: 48vh;
+}
+
+ion-col {
+  text-align: center;
+}
+
+.parent-div {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 20px;
+}
