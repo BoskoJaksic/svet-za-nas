@@ -19,7 +19,12 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+
             "assets": [
+              "src/.well-known/apple-developer-merchantid-domain-association",
+              { "glob": "apple-developer-merchantid-domain-association",
+                "input": "src/.well-known/",
+                "output": "/.well-known/" },
               {
                 "glob": "**/*",
                 "input": "src/assets",

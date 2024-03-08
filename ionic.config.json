@@ -1,0 +1,7 @@
+{
+  "name": "bebac",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
