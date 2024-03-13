@@ -70,6 +70,5 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'Bebac-front-mobile'
-          slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E6CC869E575B4066B7A0A747F751BA1C }}
-          package: .
+          package: ./www
