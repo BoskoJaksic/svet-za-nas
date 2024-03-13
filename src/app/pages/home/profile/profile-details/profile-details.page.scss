@@ -11,7 +11,7 @@
   flex-grow: 1; /* Ostavlja prostor za ostali sadržaj da zauzme preostali prostor */
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
   margin-top: auto; /* Gura sadržaj na dno ekrana */
 }

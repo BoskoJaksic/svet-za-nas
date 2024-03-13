@@ -2,8 +2,14 @@ import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'com.bebac.app',
-  appName: 'bebac',
+  appName: 'Svet za nas',
   webDir: 'www',
+  server: {
+    androidScheme: 'https',
+    // hostname: "localhost",
+    // cleartext: true,
+    // url: "http://localhost:8100",
+  },
   plugins:{
     GoogleAuth:{
       scopes:['profile',"email"],
@@ -12,13 +18,6 @@ const config: CapacitorConfig = {
       forceCodeForRefreshToken: true
     }
   },
-
-  server: {
-    androidScheme: 'https',
-    hostname: "localhost",
-    cleartext: true,
-    url: "http://localhost:8100",
-  }
 };
 
 export default config;
