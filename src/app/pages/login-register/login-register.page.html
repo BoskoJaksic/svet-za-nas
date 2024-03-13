@@ -19,8 +19,9 @@
           </div>
         </app-custom-stepper>
       <div>
-        <ion-button *ngIf="currentStep === 3" expand="full" type="submit" shape="round" mode="ios" class="login-button" (click)="register()"><span
-          class="size20-800">Registruj se</span>
+        <ion-button *ngIf="currentStep === 3" expand="full" type="submit" shape="round" mode="ios" class="login-button" (click)="register()">
+          <ion-spinner *ngIf="registerSpinner"></ion-spinner>
+          <span class="size20-800">Registruj se</span>
         </ion-button>
         <ion-button *ngIf="currentStep !== 3" expand="full" type="submit" shape="round" mode="ios" class="login-button" (click)="nextStep()"><span
           class="size20-800">Sledeci korak</span>
@@ -31,6 +32,9 @@
         </div>
         <div class="center-content" style="margin-top: 10px;">
           <span class="size14-900" (click)="goToLogin()">Vec imas nalog?</span>
+        </div>
+        <div>
+          {{errMessage}}
         </div>
       </div>
     </div>

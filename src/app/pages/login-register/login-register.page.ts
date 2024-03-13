@@ -21,6 +21,8 @@ export class LoginRegisterPage implements OnInit {
   currentStep: number = 1;
   stepCompleted: boolean[] = [false, false, false];
   login = true;
+  registerSpinner: boolean = false;
+  errMessage: string = '';
 
   constructor(private toasterService: ToasterService,
               private componentStepperSharedService: ComponentStepperSharedService,
@@ -85,6 +87,7 @@ export class LoginRegisterPage implements OnInit {
 
   register() {
     if (this.checkFormValidity(true)) {
+      this.registerSpinner = true;
       //do register here
       const step1Data = this.componentStepperSharedService.step1Data;
       const step2Data = this.componentStepperSharedService.step2Data;
@@ -118,9 +121,12 @@ export class LoginRegisterPage implements OnInit {
         next: (r) => {
           console.log('r', r)
           this.login = true;
-          this.toasterService.presentToast('Registracija uspesna', 'success')
+          this.toasterService.presentToast('Registracija uspesna', 'success');
+          this.registerSpinner = false
         }, error: (err) => {
           console.log('err', err)
+          this.registerSpinner = false;
+          this.errMessage = err.message
         }
       })
 
