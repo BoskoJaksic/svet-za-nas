@@ -17,6 +17,22 @@ export class LocalStorageService {
     return localStorage.getItem('userEmail');
   }
 
+  setUserToken(userToken: any) {
+    localStorage.setItem('userToken', userToken);
+  }
+
+  getUserToken() {
+    return localStorage.getItem('userToken');
+  }
+
+  setUserRefreshToken(userRefreshToken: any) {
+    localStorage.setItem('userRefreshToken', userRefreshToken);
+  }
+
+  getUserRefreshToken(): any {
+    return localStorage.getItem('userRefreshToken');
+  }
+
   clearLocalStorage() {
     localStorage.clear();
   }

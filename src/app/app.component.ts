@@ -3,7 +3,8 @@ import {Platform} from "@ionic/angular";
 import {LoaderService} from "./common/services/loader.service";
 import {App, URLOpenListenerEvent} from "@capacitor/app";
 import {AppPathService} from "./common/services/app-path.service";
-
+import {isPlatform} from "@ionic/angular";
+import {GoogleAuth} from "@codetrix-studio/capacitor-google-auth";
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -22,8 +23,10 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
+      if (!isPlatform('capacitor')){
+        GoogleAuth.initialize();
+      }
       // this.splashScreen.hide();
-      // GoogleAuth.initialize()
     });
   }
   deepLinkApp(){

@@ -13,7 +13,9 @@ import {GoogleAuth, User} from "@codetrix-studio/capacitor-google-auth";
 export class LoginComponent implements OnInit {
   email: string = ''
   password: string = ''
-  rememberMe: boolean = false
+  rememberMe: boolean = false;
+  loginSpinner: boolean = false;
+  errorMessage: string = ''
   @Output() loginChanged = new EventEmitter<boolean>();
 
   constructor(private commonService: CommonService,
@@ -34,25 +36,32 @@ export class LoginComponent implements OnInit {
     const formData = {
       username: this.email,
       password: this.password,
-      // rememberMe:this.rememberMe
+      rememberMe: this.rememberMe
     };
+    this.loginSpinner = true;
     console.log(formData)
     this.loginService.loginUser(formData).subscribe({
       next: (r) => {
         console.log('r', r)
         if (r.statusCode === 401) {
-          this.toasterService.presentToast('Pogresni kredencijali ili korisnik nije autorizovan', 'warning')
+          this.toasterService.presentToast('Pogresni kredencijali ili korisnik nije autorizovan', 'warning');
+          this.loginSpinner = false;
           return;
         }
         this.localStorageService.setUserEmail(this.email);
-        this.commonService.goToRoute('home')
+        this.localStorageService.setUserToken(r.token);
+        this.localStorageService.setUserRefreshToken(r.refreshToken);
+        this.commonService.goToRoute('home');
+        this.loginSpinner = false;
+
       }, error: (err) => {
         if (err.status === 500) {
           {
             this.toasterService.presentToast('Pogresni kredencijali ili korisnik nije autorizovan', 'warning')
-
           }
         }
+        this.loginSpinner = false;
+        this.errorMessage = err.message
         console.log('err', err)
       }
     })
@@ -68,15 +77,17 @@ export class LoginComponent implements OnInit {
       provider: "Google",
       idToken: user.authentication.idToken
     }
+    this.errorMessage = user.email
     this.loginService.googleLoginIn(dataToSend).subscribe({
         next: (r) => {
           console.log('loginresp', r)
-          if (r.statusCode === 200){
+          if (r.statusCode === 200) {
             this.commonService.goToRoute('home')
           }
 
         }, error: (err) => {
           console.log('login err', err)
+          this.errorMessage = err.message;
         }
       }
     )

@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {ApiService} from "../../core/api.service";
+import {LocalStorageService} from "./local-storage.service";
 
 
 @Injectable({
@@ -8,7 +9,9 @@ import {ApiService} from "../../core/api.service";
 })
 export class UserService {
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService,
+              private localStorageService: LocalStorageService
+              ) {
   }
 
   getUserDataByEmail(email: any): Observable<any> {
@@ -19,4 +22,12 @@ export class UserService {
     return this.apiService.delete(`ApplicationUsers/DeleteUser/${email}`);
   }
 
+  isUserLoggedIn() {
+    let userToken = this.localStorageService.getUserToken()
+    return !!userToken;
+  }
+
+  getRefreshToken(userRefreshToken:string){
+    return this.apiService.post('ApplicationUsers/GetrefreshToken',userRefreshToken);
+  }
 }
