@@ -9,8 +9,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "ios": "ionic capacitor run ios --livereload --ssl",
-    "android": "ionic capacitor run android --livereload --ssl"
+    "ios": "ionic capacitor run ios -l",
+    "android": "ionic capacitor run android -l --port=8100 --external"
   },
   "private": true,
   "dependencies": {

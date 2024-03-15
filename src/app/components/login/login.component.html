@@ -1,42 +1,48 @@
 <div class="main-content">
-  <div class="title center-content">
-    <img ngSrc="./assets/images/logo.png" height="73" width="73" alt="logo" priority>
+  <div>
+    <div class="title center-content">
+      <img ngSrc="./assets/images/logo.png" height="73" width="73" alt="logo" priority>
+    </div>
+    <div class="title center-content">
+      Prijava
+    </div>
+    <form (ngSubmit)="onSubmit()" class="login-form">
+      <ion-item style="margin-bottom: 30px">
+        <ion-input type="email" [(ngModel)]="email" name="email" placeholder="Unesite svoj mail..."></ion-input>
+        <ion-icon name="mail" slot="start"></ion-icon>
+      </ion-item>
+
+      <ion-item>
+        <ion-input type="password" name="password" [(ngModel)]="password"
+                   placeholder="Unesite svoju lozinku..."></ion-input>
+        <ion-icon name="lock-closed" slot="start"></ion-icon>
+      </ion-item>
+
+      <div class="checkbox">
+        <ion-checkbox labelPlacement="end" name="checkbox" [(ngModel)]="rememberMe">
+          <span class="size14-600">Zapamti me</span></ion-checkbox>
+      </div>
+
+      <div class="center-content" style="margin-top: 20px;margin-bottom: 20px">
+        <span class="size14-600"> Zaboravili ste lozinku?</span>
+      </div>
+
+      <div class="google-account-login start-content" (click)="googleLogin()">
+        <img ngSrc="./assets/icons/google.png" alt="" height="20" width="20" style="margin-right: 5px"/>
+        <span class="size16-600">Nastavite sa google nalogom</span>
+      </div>
+
+      <!--    <div class="google-account-login start-content" style="margin-top: 30px">-->
+      <!--      <img ngSrc="./assets/icons/fb.png" alt="" height="20" width="20" style="margin-right: 5px"/>-->
+      <!--      <span class="size16-600"> Nastavite sa facebook nalogom</span>-->
+      <!--    </div>-->
+      <ion-button expand="full" type="submit" shape="round" mode="ios" class="login-button">
+        <ion-spinner *ngIf="loginSpinner"></ion-spinner>
+        <span class="size20-800">Prijavi se</span></ion-button>
+      <div class="center-content" style="margin-top: 10px;">
+        <span class="size14-600"> Niste clan?</span> &nbsp; <span class="size14-900" (click)="showRegisterPage()">Registrujte se</span>
+      </div>
+      <div>{{ errorMessage }}</div>
+    </form>
   </div>
-  <div class="title center-content">
-    Prijava
-  </div>
-  <form (ngSubmit)="onSubmit()" class="login-form">
-    <ion-item style="margin-bottom: 30px">
-      <ion-input type="email" [(ngModel)]="email" name="email"  placeholder="Unesite svoj mail..."></ion-input>
-      <ion-icon name="mail" slot="start"></ion-icon>
-    </ion-item>
-
-    <ion-item>
-      <ion-input type="password" name="password"  [(ngModel)]="password" placeholder="Unesite svoju lozinku..."></ion-input>
-      <ion-icon name="lock-closed" slot="start"></ion-icon>
-    </ion-item>
-
-    <div class="checkbox">
-      <ion-checkbox labelPlacement="end" name="checkbox" [(ngModel)]="rememberMe">
-        <span class="size14-600">Zapamti me</span></ion-checkbox>
-    </div>
-
-    <div class="center-content" style="margin-top: 20px;margin-bottom: 20px">
-     <span class="size14-600"> Zaboravili ste lozinku?</span>
-    </div>
-
-<!--    <div class="google-account-login start-content" (click)="googleLogin()">-->
-<!--      <img ngSrc="./assets/icons/google.png" alt="" height="20" width="20" style="margin-right: 5px" />-->
-<!--      <span class="size16-600">Nastavite sa google nalogom</span>-->
-<!--    </div>-->
-
-    <div class="google-account-login start-content" style="margin-top: 30px">
-      <img ngSrc="./assets/icons/fb.png" alt="" height="20" width="20" style="margin-right: 5px"/>
-      <span class="size16-600"> Nastavite sa facebook nalogom</span>
-    </div>
-    <ion-button expand="full" type="submit" shape="round" mode="ios" class="login-button"><span class="size20-800">Prijavi se</span></ion-button>
-    <div class="center-content" style="margin-top: 10px;">
-      <span class="size14-600"> Niste clan?</span> &nbsp; <span class="size14-900" (click)="showRegisterPage()">Registrujte se</span>
-    </div>
-  </form>
 </div>
