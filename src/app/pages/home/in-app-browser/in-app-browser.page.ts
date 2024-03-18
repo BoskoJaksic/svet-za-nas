@@ -17,7 +17,7 @@ export class InAppBrowserPage implements OnInit {
   private destroy$: Subject<boolean> = new Subject<boolean>();
   children: any
   link: string = ''
-  baseLInk = 'https://wedosoftware.eu/svet-za-nas/'
+  baseLInk = 'http://playm61.sg-host.com/wp-admin/'
 
   constructor(private router: Router,
               private ngZone: NgZone,
@@ -129,6 +129,8 @@ export class InAppBrowserPage implements OnInit {
 
   async openBrowserPage(link:string) {
     await Browser.open({url: link});
+    this.commonService.goToRoute('home/profile')
+
   }
 
   loadData() {
