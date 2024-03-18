@@ -23,16 +23,21 @@ export class AvatarComponent implements OnInit {
       const dateOfBirth = new Date(+dobParts[0], dobParts[1] - 1, +dobParts[2]);
 
       let noOfYears = today.getFullYear() - dateOfBirth.getFullYear();
+      let noOfMonths = today.getMonth() - dateOfBirth.getMonth();
+      let totalMonths = (noOfYears * 12) + noOfMonths;
 
       // Check if the birthday for this year has passed
       if (today.getMonth() < dateOfBirth.getMonth() ||
         (today.getMonth() === dateOfBirth.getMonth() && today.getDate() < dateOfBirth.getDate())) {
         noOfYears--;
+        totalMonths -= 12; // Subtract 12 months if birthday hasn't passed yet
       }
-      return noOfYears;
+
+      return { years: noOfYears, months: totalMonths };
     }
-    return
+    return { years: 0, months: 0 }; // Return default values if date of birth is not available
   }
+
 
   goTo() {
     console.log('childobj', this.personObj)

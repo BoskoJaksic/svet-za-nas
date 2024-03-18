@@ -6,6 +6,7 @@ import {GoogleAuth} from "@codetrix-studio/capacitor-google-auth";
 import {LocalStorageService} from "../../common/services/local-storage.service";
 import {ToasterService} from "../../common/services/toaster.service";
 import {UserService} from "../../common/services/user.service";
+import {LoaderService} from "../../common/services/loader.service";
 
 @Component({
   selector: 'app-menu-component',
@@ -37,6 +38,7 @@ export class MenuComponentComponent implements OnInit {
   constructor(private router: Router,
               private localStorageService: LocalStorageService,
               private toasterService: ToasterService,
+              private loaderService: LoaderService,
               private userService: UserService,
               private commonService: CommonService
   ) {
@@ -72,9 +74,8 @@ export class MenuComponentComponent implements OnInit {
   }
 
   deleteAccount(ev: any) {
-    console.log(`Dismissed with role: ${ev.detail.role}`);
     if (ev.detail.role === 'confirm') {
-      // this.loaderService.showLoader();
+      this.loaderService.showLoader();
       let userEmail = this.localStorageService.getUserEmail()
 
       this.userService.deleteAccount(userEmail).subscribe({
@@ -83,9 +84,9 @@ export class MenuComponentComponent implements OnInit {
           this.localStorageService.clearLocalStorage();
           this.commonService.goToRoute('');
           this.toasterService.presentToast('Nalog uspesno obrisan', 'success');
-
+          this.loaderService.hideLoader();
         }, error: (err) => {
-          // this.loaderService.hideLoader();
+          this.loaderService.hideLoader();
           this.toasterService.presentToast('Doslo je do greske', 'danger');
         }
       })

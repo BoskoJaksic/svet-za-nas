@@ -4,6 +4,7 @@ import {LocalStorageService} from "../common/services/local-storage.service";
 import {catchError, Observable, switchMap, throwError} from "rxjs";
 import {CommonService} from "../common/services/common.service";
 import {UserService} from "../common/services/user.service";
+import {AppPathService} from "../common/services/app-path.service";
 
 @Injectable()
 export class HttpInterceptorService implements HttpInterceptor {
@@ -11,6 +12,7 @@ export class HttpInterceptorService implements HttpInterceptor {
   constructor(private localStorageService:LocalStorageService,
               private commonService:CommonService,
               private userService:UserService,
+              private appPathService:AppPathService,
 
               ) {
   }
@@ -40,10 +42,13 @@ export class HttpInterceptorService implements HttpInterceptor {
   }
 
   private handle401Error(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    let userRefreshToken = this.localStorageService.getUserRefreshToken()
-    return this.userService.getRefreshToken(userRefreshToken).pipe(
+    let dataToSend = {
+      accessToken: this.localStorageService.getUserToken(),
+      refreshToken: this.localStorageService.getUserRefreshToken()
+    }
+    return this.userService.getRefreshToken(dataToSend).pipe(
       switchMap((response: any) => {
-        const newToken = response.access_token;
+        const newToken = response.access_token; //todo check for this response how it looks like
         const newRefreshToken = response.refresh_token;
 
         if (newToken && newRefreshToken) {
@@ -52,7 +57,7 @@ export class HttpInterceptorService implements HttpInterceptor {
           const newRequest = this.addToken(request, newToken);
           return next.handle(newRequest);
         }
-        // this.appPathService.setAppPath('');todo
+        this.appPathService.setAppPath('');
         this.commonService.goToRoute('/')
         return throwError('Neuspjelo osvježavanje tokena');
       }),

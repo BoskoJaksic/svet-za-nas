@@ -16,18 +16,18 @@ export class ApiService {
   }
 
 
-  getApiUrl(): string {
-    if (this.platform.is('android')) {
-      // 192.168.0.17 real device
-      // 10.0.2.2 emulator
-      return 'https://192.168.8.37:7295/api/';
-    } else if (this.platform.is('ios')) {
-      return 'https://192.168.79.61:5001/api/';
-    } else {
-      // Default URL for other platforms or when running in the browser
-      return 'https://192.168.79.61:5001/api/';
-    }
-  }
+  // getApiUrl(): string {
+  //   if (this.platform.is('android')) {
+  //     // 192.168.0.17 real device
+  //     // 10.0.2.2 emulator
+  //     return 'http://10.0.2.2:5001/api/';
+  //   } else if (this.platform.is('ios')) {
+  //     return 'https://127.0.0.1:5001/api/';
+  //   } else {
+  //     // Default URL for other platforms or when running in the browser
+  //     return 'http://localhost:5001/api/';
+  //   }
+  // }
 
   get(path: string): Observable<any> {
     return this.http.get(this.baseUrl + path);

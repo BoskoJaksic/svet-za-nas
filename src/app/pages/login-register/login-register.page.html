@@ -1,7 +1,7 @@
 <ion-content>
   <ng-container *ngIf="!login">
     <div class="main-content">
-      <div>
+      <div style="height: 100%;">
         <div class="title center-content">
           <img ngSrc="./assets/images/logo.png" height="73" width="73" alt="logo" priority>
         </div>
@@ -35,9 +35,6 @@
           </div>
           <div class="center-content" style="margin-top: 10px;">
             <span class="size14-900" (click)="goToLogin()">Vec imas nalog?</span>
-          </div>
-          <div>
-            {{ errMessage }}
           </div>
         </div>
       </div>

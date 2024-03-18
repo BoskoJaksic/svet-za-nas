@@ -7,6 +7,7 @@ import {ComponentStepperSharedService} from "../../common/services/component-ste
 import {RegisterService} from "../../common/services/login-register/register.service";
 import {DatePipe} from "@angular/common";
 import {CommonService} from "../../common/services/common.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-login-register',
@@ -23,16 +24,22 @@ export class LoginRegisterPage implements OnInit {
   login = true;
   registerSpinner: boolean = false;
   errMessage: string = '';
+  showRegisterPartner: boolean = false
 
   constructor(private toasterService: ToasterService,
               private componentStepperSharedService: ComponentStepperSharedService,
               private registerService: RegisterService,
               private commonService: CommonService,
+              private route: ActivatedRoute,
               private datePipe: DatePipe,
   ) {
   }
 
   ngOnInit() {
+    this.route.params.subscribe(async params => {
+      const paramId = params['id'];
+      this.showRegisterPartner = paramId === 'true';
+    })
   }
 
   onLoginChanged(loginStatus: boolean) {

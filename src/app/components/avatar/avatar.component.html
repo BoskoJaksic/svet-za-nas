@@ -1,5 +1,10 @@
 <div class="orange-avatar" (click)="goTo()">
-  <img alt="Silhouette of a person's head" [src]="personObj?.profilePicture" class="img-class"/>
+  <img  class="img-class" alt="Silhouette of a person's head" [src]="(personObj?.profilePicture && personObj?.profilePicture !== '')? personObj.profilePicture : 'https://ionicframework.com/docs/img/demos/avatar.svg'" alt="user picture"/>
+ />
+
 </div>
 <div class="size12-900">{{personObj?.name}}</div>
-<div class="size12-400">{{ calculateYears()}} godina</div>
+<div class="size12-400">    {{ calculateYears().years > 1 ? calculateYears().years + ' godina' : calculateYears().years === 1 ? '1 godina' : calculateYears().months + ' meseci' }}
+
+</div>
+

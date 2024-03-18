@@ -27,7 +27,7 @@ export class UserService {
     return !!userToken;
   }
 
-  getRefreshToken(userRefreshToken:string){
-    return this.apiService.post('ApplicationUsers/GetrefreshToken',userRefreshToken);
+  getRefreshToken(userRefreshToken:any){
+    return this.apiService.post('ApplicationUsers/RefreshToken',userRefreshToken);
   }
 }

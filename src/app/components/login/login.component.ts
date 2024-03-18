@@ -49,8 +49,8 @@ export class LoginComponent implements OnInit {
           return;
         }
         this.localStorageService.setUserEmail(this.email);
-        this.localStorageService.setUserToken(r.token);
-        this.localStorageService.setUserRefreshToken(r.refreshToken);
+        this.localStorageService.setUserToken(r.value.accessToken);
+        this.localStorageService.setUserRefreshToken(r.value.refreshToken);
         this.commonService.goToRoute('home');
         this.loginSpinner = false;
 
