@@ -4,14 +4,16 @@
   <div class="tree-class">
     <div style="display: flex; width: 100%">
       <ion-grid style="width: 100%;">
-        <ion-row style="padding-top: 50px;width: 100%;">
+        <ion-row class="parent-class-row">
           <ion-col style="width: 100%">
             <div class="parent-div">
               <app-avatar [personObj]="parent"></app-avatar>
             </div>
           </ion-col>
-          <ion-col>
-<!--            <app-avatar></app-avatar>-->
+          <ion-col style="width: 100%">
+            <div class="second-parent-div">
+<!--              <app-avatar></app-avatar>-->
+            </div>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -19,16 +21,20 @@
 
     <div>
       <ion-row>
-        <ion-col size="3" *ngFor=" let child of children">
-          <div class="center-content">
+        <ion-col size="4" *ngFor=" let child of children; let i = index">
+          <div [ngClass]="{
+      'end-content': i % 3 === 0,
+        'center-content': i % 3 === 1,
+        'start-content': i % 3 === 2
+    }">
             <app-avatar [personObj]="child"></app-avatar>
           </div>
         </ion-col>
       </ion-row>
     </div>
-  </div>
-  <div class="center-content">
-    <app-avatar [personObj]="pet"></app-avatar>
+    <div class="center-content">
+      <app-avatar [personObj]="pet"></app-avatar>
+    </div>
   </div>
 </ion-content>
 
