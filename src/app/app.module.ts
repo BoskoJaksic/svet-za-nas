@@ -11,9 +11,10 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {HttpInterceptorService} from "./core/interceptor";
 import {LoaderComponent} from "./components/loader/loader.component";
 import {NgOptimizedImage} from "@angular/common";
+import {WebViewComponent} from "./components/web-view/web-view.component";
 
 @NgModule({
-  declarations: [AppComponent, LoaderComponent],
+  declarations: [AppComponent, LoaderComponent, WebViewComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, NgOptimizedImage],
   providers: [{
     provide: HTTP_INTERCEPTORS,

@@ -1,0 +1,60 @@
+.main-img {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.main-class {
+  background-color: var(--ion-color-primary);
+  height: 100vh;
+
+}
+.second-div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height:50%
+}
+
+.image-container img {
+  margin-bottom: 20px;
+}
+
+.text-container {
+  color: #1A3957;
+  text-align: center;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 120% */
+  letter-spacing: -0.24px;
+}
+
+.submit-button {
+  border-radius: 56px;
+  border: 1px solid #6A6AE2;
+  background: #6A6AE2;
+  width: 216px;
+  height: 70px;
+}
+
+.download-text-small {
+  color: #FFF;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  text-align: left;
+}
+
+.download-text-large {
+  color: #FFF;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  text-align: left;
+
+}

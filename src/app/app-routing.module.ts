@@ -3,7 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'login-register',
+    path: 'login-register/:id',
     loadChildren: () => import('./pages/login-register/login-register.module').then(m => m.LoginRegisterPageModule)
   },
   {
@@ -12,7 +12,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'login-register',
+    redirectTo: 'login-register/false',
     pathMatch: 'full'
   },
 ];

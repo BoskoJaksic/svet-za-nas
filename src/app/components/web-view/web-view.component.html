@@ -1,0 +1,37 @@
+<div class="main-class">
+  <div class="main-img">
+    <img ngSrc="./assets/images/logo.png" height="73" width="73" alt="web-img">
+  </div>
+  <div class="second-div">
+    <div class="image-container">
+      <img src="assets/images/Logo.svg" height="53" width="184" alt="">
+    </div>
+    <div class="text-container">
+      Experience is better<br/> through the app.
+    </div>
+
+    <div *ngIf="commonService.isIos()" (click)="downloadAppStore()" class="submit-button" style="margin-top: 100px">
+      <ion-row style="padding-left: 20px;padding-top: 11px">
+        <ion-col size="3">
+          <img src="assets/images/appStore.png" height="26" width="22" alt="">
+        </ion-col>
+        <ion-col>
+          <div class="download-text-small">Download on the</div>
+          <div class="download-text-large">App Store</div>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div *ngIf="!commonService.isIos()" (click)="downloadPlayStore()" class="submit-button" style="margin-top: 20px">
+      <ion-row style="padding-left: 20px;padding-top: 11px">
+        <ion-col size="3">
+          <img src="assets/images/playStore.png" height="28" width="25" alt="">
+        </ion-col>
+        <ion-col>
+          <div class="download-text-small">Get it on</div>
+          <div class="download-text-large">Google Play</div>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+</div>
