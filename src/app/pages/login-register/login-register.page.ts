@@ -39,6 +39,7 @@ export class LoginRegisterPage implements OnInit {
     this.route.params.subscribe(async params => {
       const paramId = params['id'];
       this.showRegisterPartner = paramId === 'true';
+
     })
   }
 
@@ -47,6 +48,7 @@ export class LoginRegisterPage implements OnInit {
   }
 
   goToLogin() {
+    this.resetFormValues();
     this.login = true;
   }
 
@@ -101,7 +103,7 @@ export class LoginRegisterPage implements OnInit {
       const step3Data = this.componentStepperSharedService.step3Data;
       const date1 = new Date(`${step1Data.birthdateMonth} ${step1Data.birthdateDay}, ${step1Data.birthdateYear}`);
       step1Data.dateOfBirth = this.datePipe.transform(date1, 'yyyy-MM-dd');
-      if (step3Data) {
+      if (step3Data && step3Data.role) {
         const date3 = new Date(`${step3Data.birthdateMonth} ${step3Data.birthdateDay}, ${step3Data.birthdateYear}`);
         step3Data.dateOfBirth = this.datePipe.transform(date3, 'yyyy-MM-dd');
       }
@@ -123,13 +125,17 @@ export class LoginRegisterPage implements OnInit {
         pets:
           [step3Data]
       }
+      if (step3Data.role === '' || step3Data.role === null){
+        dataToSend.pets = []
+      }
       console.log(dataToSend)
       this.registerService.registerUser(dataToSend).subscribe({
         next: (r) => {
           console.log('r', r)
-          this.login = true;
+          this.resetFormValues();
           this.toasterService.presentToast('Registracija uspesna', 'success');
-          this.registerSpinner = false
+          this.registerSpinner = false;
+          this.login = true;
         }, error: (err) => {
           console.log('err', err)
           this.registerSpinner = false;
@@ -140,5 +146,15 @@ export class LoginRegisterPage implements OnInit {
     } else {
       this.toasterService.presentToast('Forma nije validna', 'warning')
     }
+  }
+
+  resetFormValues(){
+    this.stepCompleted[3] = false;
+    this.stepCompleted[2] = false;
+    this.stepCompleted[1] = false;
+    this.currentStep = 1;
+    this.componentStepperSharedService.step1Data = null;
+    this.componentStepperSharedService.step2Data = null;
+    this.componentStepperSharedService.step3Data = null;
   }
 }

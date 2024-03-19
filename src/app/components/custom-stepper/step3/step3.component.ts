@@ -80,6 +80,15 @@ export class Step3Component implements OnInit {
       this.form.disable();
       this.clearValidators();
       this.form.reset();
+      this.form.patchValue({
+        birthdateDay: 31
+      });
+      this.form.patchValue({
+        birthdateMonth: 'January'
+      });
+      this.form.patchValue({
+        birthdateYear: 2024
+      });
     }
   }
 
