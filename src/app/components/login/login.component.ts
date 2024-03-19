@@ -88,7 +88,9 @@ export class LoginComponent implements OnInit {
             this.localStorageService.setUserEmail(decodedToken.email);
             this.localStorageService.setUserToken(r.value.accessToken);
             this.localStorageService.setUserRefreshToken(r.value.refreshToken);
+            setTimeout(()=>{
             this.commonService.goToRoute('home')
+            },200)
           }
 
         }, error: (err) => {
