@@ -4,6 +4,7 @@ import {LoginService} from "../../common/services/login-register/login.service";
 import {LocalStorageService} from "../../common/services/local-storage.service";
 import {ToasterService} from "../../common/services/toaster.service";
 import {GoogleAuth, User} from "@codetrix-studio/capacitor-google-auth";
+import {jwtDecode} from "jwt-decode";
 
 @Component({
   selector: 'app-login',
@@ -82,6 +83,11 @@ export class LoginComponent implements OnInit {
         next: (r) => {
           console.log('loginresp', r)
           if (r.statusCode === 200) {
+            const decodedToken = jwtDecode(r.value.accessToken);
+            // @ts-ignore
+            this.localStorageService.setUserEmail(decodedToken.email);
+            this.localStorageService.setUserToken(r.value.accessToken);
+            this.localStorageService.setUserRefreshToken(r.value.refreshToken);
             this.commonService.goToRoute('home')
           }
 

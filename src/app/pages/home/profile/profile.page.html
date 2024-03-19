@@ -32,7 +32,7 @@
         </ion-col>
       </ion-row>
     </div>
-    <div class="center-content">
+    <div class="center-content" *ngIf="pet">
       <app-avatar [personObj]="pet"></app-avatar>
     </div>
   </div>

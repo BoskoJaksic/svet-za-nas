@@ -62,12 +62,15 @@ export class ProfilePage implements OnInit {
           parentRole: r.value.parentRole,
 
         }
-        this.pet = {
-          name: r.value.pets[0].petName,
-          profilePicture: r.value.pets[0].profilePicture,
-          dateOfBirth: r.value.pets[0].dateOfBirth,
-          pets: true
+        if (r.value.pets.length > 0){
+          this.pet = {
+            name: r.value.pets[0]?.petName,
+            profilePicture: r.value.pets[0].profilePicture,
+            dateOfBirth: r.value.pets[0].dateOfBirth,
+            pets: true
+          }
         }
+
         this.loaderService.hideLoader();
       }, error: (err) => {
         console.log('err', err)
