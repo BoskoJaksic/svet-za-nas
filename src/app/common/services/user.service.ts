@@ -30,4 +30,7 @@ export class UserService {
   getRefreshToken(userRefreshToken:any){
     return this.apiService.post('ApplicationUsers/RefreshToken',userRefreshToken);
   }
+  changeUserImg(obj:any){
+    return this.apiService.post('ApplicationUsers/changeImg',obj);
+  }
 }

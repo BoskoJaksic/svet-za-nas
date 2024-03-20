@@ -8,7 +8,7 @@
     <span *ngIf="receivedObject?.pets" class="size24-900">LJUBIMAC</span>
   </div>
   <div class="center-content" style="margin-bottom: 20px">
-    <div class="orange-avatar">
+    <div class="orange-avatar" (click)="changeUserImg()">
       <img class="img-class"
         [src]="(receivedObject?.profilePicture && receivedObject?.profilePicture !== '')? receivedObject?.profilePicture : 'https://ionicframework.com/docs/img/demos/avatar.svg'" alt="user picture"/>
     </div>
@@ -18,7 +18,7 @@
     <span class="size16-900">{{ receivedObject?.name }}</span>
   </div>
   <div class="center-content" style="margin-bottom: 20px">
-    <span class="size-16-400" style="color: #1A154C">{{ calculateYears() }} godina</span>
+    <span class="size-16-400" style="color: #1A154C">{{message}}</span>
   </div>
   <div class="center-content">
     <img ngSrc="./assets/images/cake.png" height="45" width="36"> <span class="size-16-400 span-cake">{{ receivedObject?.dateOfBirth }}</span>

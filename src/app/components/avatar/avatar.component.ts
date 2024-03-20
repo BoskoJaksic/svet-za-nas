@@ -9,33 +9,40 @@ import {Router} from "@angular/router";
 export class AvatarComponent implements OnInit {
 
   @Input() personObj: any
-
+  age: number | null = null;
+  message: string = '';
   constructor(private router: Router) {
+
   }
 
   ngOnInit() {
+    if(this.personObj){
+      this.calculateAgeOrPregnancy(this.personObj.dateOfBirth);
+    }
   }
 
-  calculateYears() {
-    if (this.personObj?.dateOfBirth) {
-      const today = new Date();
-      const dobParts = this.personObj?.dateOfBirth.split('-');
-      const dateOfBirth = new Date(+dobParts[0], dobParts[1] - 1, +dobParts[2]);
+  private calculateAgeOrPregnancy(dateString: string): void {
+    const givenDate = new Date(dateString);
+    const currentDate = new Date();
+    const oneDay = 24 * 60 * 60 * 1000;
+    const oneWeek = 7 * oneDay;
+    const oneMonth = 30 * oneDay; // Aproksimacija
 
-      let noOfYears = today.getFullYear() - dateOfBirth.getFullYear();
-      let noOfMonths = today.getMonth() - dateOfBirth.getMonth();
-      let totalMonths = (noOfYears * 12) + noOfMonths;
-
-      // Check if the birthday for this year has passed
-      if (today.getMonth() < dateOfBirth.getMonth() ||
-        (today.getMonth() === dateOfBirth.getMonth() && today.getDate() < dateOfBirth.getDate())) {
-        noOfYears--;
-        totalMonths -= 12; // Subtract 12 months if birthday hasn't passed yet
+    if (givenDate > currentDate) {
+      // Datum je u budućnosti, izračunavamo broj nedelja trudnoće
+      const weeksPregnant = Math.floor((givenDate.getTime() - currentDate.getTime()) / oneWeek);
+      this.message = `${weeksPregnant} nedelja trudnaoce`;
+    } else {
+      // Izračunavamo starost u mesecima ako je osoba mlađa od godinu dana
+      const monthsOld = Math.floor((currentDate.getTime() - givenDate.getTime()) / oneMonth);
+      if (monthsOld < 12) {
+        this.message = `${monthsOld} meseci`;
+      } else {
+        // Izračunavamo starost u godinama ako je osoba starija od godinu dana
+        const ageYears = currentDate.getFullYear() - givenDate.getFullYear();
+        this.message = `${ageYears} godina`;
       }
-
-      return { years: noOfYears, months: totalMonths };
     }
-    return { years: 0, months: 0 }; // Return default values if date of birth is not available
   }
 
 
