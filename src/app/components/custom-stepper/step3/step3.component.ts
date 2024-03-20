@@ -14,7 +14,7 @@ export class Step3Component implements OnInit {
   days: number[] = Array.from({length: 31}, (_, i) => i + 1);
   months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   abbreviatedMonths: string[] = this.months.map(month => month.substring(0, 3));
-  years: number[] = Array.from({length: 51}, (_, i) => 1990 + i);
+  years: number[] = Array.from({length: 150}, (_, i) => 1920 + i);
   addPet = false
 
   constructor(public fb: FormBuilder, private componentStepperSharedService: ComponentStepperSharedService) {
