@@ -35,6 +35,13 @@
     <div class="center-content" *ngIf="pet">
       <app-avatar [personObj]="pet"></app-avatar>
     </div>
+    <div class="end-content">
+      <ion-fab style="margin-right: 20px">
+        <ion-fab-button (click)="openModal()">
+          <ion-icon name="add" style="color: white"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+    </div>
   </div>
 </ion-content>
 

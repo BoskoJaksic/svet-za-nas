@@ -10,7 +10,7 @@ import {provideAnimationsAsync} from '@angular/platform-browser/animations/async
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {HttpInterceptorService} from "./core/interceptor";
 import {LoaderComponent} from "./components/loader/loader.component";
-import {NgOptimizedImage} from "@angular/common";
+import {DatePipe, NgOptimizedImage} from "@angular/common";
 import {WebViewComponent} from "./components/web-view/web-view.component";
 
 @NgModule({
@@ -21,6 +21,7 @@ import {WebViewComponent} from "./components/web-view/web-view.component";
     useClass: HttpInterceptorService,
     multi: true
   },
+    DatePipe,
     {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}, provideAnimationsAsync()],
   bootstrap: [AppComponent],
 

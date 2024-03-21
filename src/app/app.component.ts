@@ -5,7 +5,6 @@ import {App, URLOpenListenerEvent} from "@capacitor/app";
 import {AppPathService} from "./common/services/app-path.service";
 import {isPlatform} from "@ionic/angular";
 import {GoogleAuth} from "@codetrix-studio/capacitor-google-auth";
-import { AlertController } from '@ionic/angular';
 import {CommonService} from "./common/services/common.service";
 
 @Component({
@@ -19,8 +18,7 @@ export class AppComponent {
               public loaderService: LoaderService,
               public appPathService: AppPathService,
               public commonService: CommonService,
-              private ngZone: NgZone,
-              private alertController: AlertController
+              private ngZone: NgZone
   ) {
     this.initializeApp();
     this.deepLinkApp();

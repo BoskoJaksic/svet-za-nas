@@ -31,6 +31,10 @@ export class UserService {
     return this.apiService.post('ApplicationUsers/RefreshToken',userRefreshToken);
   }
   changeUserImg(obj:any){
-    return this.apiService.post('ApplicationUsers/changeImg',obj);
+    return this.apiService.post('FileUpload/ChangeProfilePicture',obj);
+  }
+
+  addChild(obj:any){
+    return this.apiService.post('Children/AddChild',obj);
   }
 }

@@ -20,7 +20,7 @@ def capacitor_pods
   pod 'CodetrixStudioCapacitorGoogleAuth', :path => '../../node_modules/@codetrix-studio/capacitor-google-auth'
 end
 
-target 'app' do
+target 'Svet za nas' do
   capacitor_pods
   # Add your Pods here
 end

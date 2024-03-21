@@ -8,8 +8,9 @@
     <span *ngIf="receivedObject?.pets" class="size24-900">LJUBIMAC</span>
   </div>
   <div class="center-content" style="margin-bottom: 20px">
-    <div class="orange-avatar" (click)="changeUserImg()">
-      <img class="img-class"
+    <div class="orange-avatar" (click)="takePicture()">
+      <img *ngIf="newPicture" class="img-class" [src]="newPicture" alt=""/>
+      <img *ngIf="!newPicture" class="img-class"
         [src]="(receivedObject?.profilePicture && receivedObject?.profilePicture !== '')? receivedObject?.profilePicture : 'https://ionicframework.com/docs/img/demos/avatar.svg'" alt="user picture"/>
     </div>
   </div>
