@@ -4,6 +4,7 @@ import {NavController} from "@ionic/angular";
 import {LoaderService} from "../../../../common/services/loader.service";
 import {UserService} from "../../../../common/services/user.service";
 import {LocalStorageService} from "../../../../common/services/local-storage.service";
+import {Camera, CameraResultType} from "@capacitor/camera";
 
 @Component({
   selector: 'app-profile-details',
@@ -14,7 +15,7 @@ export class ProfileDetailsPage implements OnInit {
   receivedObject: any;
   age: number | null = null;
   message: string = '';
-  newPicture = null
+  newPicture:string | undefined
 
   constructor(private route: ActivatedRoute,
               private loaderService: LoaderService,
@@ -37,20 +38,34 @@ export class ProfileDetailsPage implements OnInit {
     });
   }
 
+  takePicture = async () => {
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: false,
+      resultType: CameraResultType.DataUrl
+    });
+    if (image.dataUrl){
+      this.newPicture = image.dataUrl;
+      this.changeUserImg();
+    }
+  };
   changeUserImg() {
-  //   const dataToSend  = {
-  //     parentEmail:this.localStorageService.getUserEmail(),
-  //     img:this.newPicture,
-  //     isPet:this.receivedObject.pets
-  //   }
-  //   this.userService.changeUserImg().subscribe({
-  //     next(r) {
-  //
-  //     }, error(err) {
-  //
-  //     }
-  //   })
-  //   console.log('received obj', this.receivedObject)
+   // @ts-ignore parentRole
+    const profilePicture =  this.newPicture.replace(/^data:image\/\w+;base64,/, '');
+    const dataToSend  = {
+      email:this.localStorageService.getUserEmail(),
+      name:this.receivedObject.name,
+      profilePicture:profilePicture,
+      person: this.receivedObject.pets ? 2 : (this.receivedObject.parentRole ? 0 : 1)
+    }
+    this.userService.changeUserImg(dataToSend).subscribe({
+      next(r) {
+
+      }, error(err) {
+        console.log('error while updating profile picture',err)
+      }
+    })
+    console.log('received obj', this.receivedObject)
   }
 
   // calculateYears() {

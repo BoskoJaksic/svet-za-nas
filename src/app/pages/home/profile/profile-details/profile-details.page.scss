@@ -5,6 +5,7 @@
   flex-direction: column;
   min-height: 100vh; /* Postavlja minimalnu visinu na visinu ekrana */
   background-color: white;
+  overflow-y: auto;
 }
 
 .button-content {

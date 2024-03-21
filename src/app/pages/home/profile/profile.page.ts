@@ -5,6 +5,8 @@ import {UserService} from "../../../common/services/user.service";
 import {LocalStorageService} from "../../../common/services/local-storage.service";
 import {Child} from "../../../models/child.model";
 import {LoaderService} from "../../../common/services/loader.service";
+import {ModalController} from '@ionic/angular';
+import {AddChildModalComponent} from "../../../components/modal/add-child-modal/add-child-modal.component";
 
 @Component({
   selector: 'app-profile',
@@ -20,8 +22,9 @@ export class ProfilePage implements OnInit {
 
   constructor(private router: Router,
               private userService: UserService,
-              private loaderService:LoaderService,
+              private loaderService: LoaderService,
               private localStorageService: LocalStorageService,
+              private modalCtrl: ModalController,
               private activatedRoute: ActivatedRoute) {
   }
 
@@ -62,7 +65,7 @@ export class ProfilePage implements OnInit {
           parentRole: r.value.parentRole,
 
         }
-        if (r.value.pets.length > 0){
+        if (r.value.pets.length > 0) {
           this.pet = {
             name: r.value.pets[0]?.petName,
             profilePicture: r.value.pets[0].profilePicture,
@@ -79,5 +82,23 @@ export class ProfilePage implements OnInit {
       }
     })
     console.log('loaded')
+  }
+
+
+  async openModal() {
+    const modal = await this.modalCtrl.create({
+      component: AddChildModalComponent,
+      mode: 'ios'
+    });
+    await modal.present();
+
+    const {data, role} = await modal.onWillDismiss();
+
+    if (role === 'confirm') {
+      console.log('data modal', data)
+      if (data){
+        this.loadData();
+      }
+    }
   }
 }

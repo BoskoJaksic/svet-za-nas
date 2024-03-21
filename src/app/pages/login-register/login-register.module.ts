@@ -27,9 +27,9 @@ import {Step3Component} from "../../components/custom-stepper/step3/step3.compon
 
 
   ],
-  providers: [
-    DatePipe
-  ],
+  // providers: [
+  //   DatePipe
+  // ],
   declarations: [LoginRegisterPage,CustomStepperComponent, LoginComponent, Step1Component,Step2Component,Step3Component]
 })
 export class LoginRegisterPageModule {}

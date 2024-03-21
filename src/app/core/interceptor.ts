@@ -8,6 +8,7 @@ import {AppPathService} from "../common/services/app-path.service";
 
 @Injectable()
 export class HttpInterceptorService implements HttpInterceptor {
+  private maxRetry: number = 2;
 
   constructor(private localStorageService:LocalStorageService,
               private commonService:CommonService,
@@ -41,7 +42,12 @@ export class HttpInterceptorService implements HttpInterceptor {
     });
   }
 
-  private handle401Error(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  private handle401Error(request: HttpRequest<any>, next: HttpHandler, retryCount: number = 0): Observable<HttpEvent<any>> {
+    if (retryCount >= this.maxRetry) {
+      this.appPathService.setAppPath('');
+      this.commonService.goToRoute('/');
+      return throwError('Neuspjelo osvježavanje tokena, preusmeravanje na prijavu.');
+    }
     let dataToSend = {
       accessToken: this.localStorageService.getUserToken(),
       refreshToken: this.localStorageService.getUserRefreshToken()
@@ -62,9 +68,7 @@ export class HttpInterceptorService implements HttpInterceptor {
         return throwError('Neuspjelo osvježavanje tokena');
       }),
       catchError((error) => {
-        // this.appPathService.setAppPath('');
-        this.commonService.goToRoute('/')
-        return throwError(error);
+        return this.handle401Error(request, next, retryCount + 1);
       })
     );
   }
