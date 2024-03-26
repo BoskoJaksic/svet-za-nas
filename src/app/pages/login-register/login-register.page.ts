@@ -7,7 +7,7 @@ import {ComponentStepperSharedService} from "../../common/services/component-ste
 import {RegisterService} from "../../common/services/login-register/register.service";
 import {DatePipe} from "@angular/common";
 import {CommonService} from "../../common/services/common.service";
-import {ActivatedRoute, Route} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {AppPathService} from "../../common/services/app-path.service";
 
 @Component({
@@ -40,13 +40,14 @@ export class LoginRegisterPage implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(async params => {
-      const paramId = params['id'];
-      this.showRegisterPartner = paramId !== 'false';
-      // this.showRegisterPartner = true;
-      if (this.showRegisterPartner ){
-        this.partnerId = paramId;
+      if (this.appPathService.getAppPath()){
+        this.showRegisterPartner = true
+        this.partnerId = this.appPathService.getAppPath();
       }
-      console.log('partnerId', this.partnerId)
+      // const paramId = params['id'];
+      // this.showRegisterPartner = paramId !== 'false';
+      // this.showRegisterPartner = true;
+      console.log('getAppPath', this.appPathService.getAppPath())
       console.log('showRegisterPartner', this.showRegisterPartner)
 
     })
