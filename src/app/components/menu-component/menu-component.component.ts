@@ -14,22 +14,6 @@ import {LoaderService} from "../../common/services/loader.service";
   styleUrls: ['./menu-component.component.scss'],
 })
 export class MenuComponentComponent implements OnInit {
-  public alertButtons = [
-    {
-      text: 'Ponisti',
-      role: 'cancel',
-      handler: () => {
-        console.log('Alert canceled');
-      },
-    },
-    {
-      text: 'Obrisi',
-      role: 'confirm',
-      handler: () => {
-        console.log('Alert confirmed');
-      },
-    },
-  ];
 
   pageTitle: string = '';
   @Input() sidebarsUrl: any;
@@ -37,9 +21,6 @@ export class MenuComponentComponent implements OnInit {
 
   constructor(private router: Router,
               private localStorageService: LocalStorageService,
-              private toasterService: ToasterService,
-              private loaderService: LoaderService,
-              private userService: UserService,
               private commonService: CommonService
   ) {
 
@@ -73,25 +54,7 @@ export class MenuComponentComponent implements OnInit {
     this.commonService.goToRoute('');
   }
 
-  deleteAccount(ev: any) {
-    if (ev.detail.role === 'confirm') {
-      this.loaderService.showLoader();
-      let userEmail = this.localStorageService.getUserEmail()
 
-      this.userService.deleteAccount(userEmail).subscribe({
-        next: (r) => {
-          GoogleAuth.signOut();
-          this.localStorageService.clearLocalStorage();
-          this.commonService.goToRoute('');
-          this.toasterService.presentToast('Nalog uspesno obrisan', 'success');
-          this.loaderService.hideLoader();
-        }, error: (err) => {
-          this.loaderService.hideLoader();
-          this.toasterService.presentToast('Doslo je do greske', 'danger');
-        }
-      })
-    }
-  }
 
   toggleNav() {
     const splitPane = document.querySelector('ion-split-pane')

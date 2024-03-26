@@ -1,0 +1,15 @@
+<app-menu-button></app-menu-button>
+<ion-content>
+  <ion-button fill="clear" color="secondary" id="present-alert">
+    <ion-icon name="trash-bin-outline" slot="start" style="margin-right: 10px"></ion-icon>
+    <span class="checkout-text">  Obrisi nalog</span>
+  </ion-button>
+  <ion-alert
+    trigger="present-alert"
+    header="Upozorenje!"
+    subHeader="Da li ste sigurni da zelite da obrisete Vas nalog?"
+    message="Radeci ovo svi Vasi podaci bice obrisani iz nase baze!"
+    [buttons]="alertButtons"
+    (didDismiss)="deleteAccount($event)"
+  ></ion-alert>
+</ion-content>

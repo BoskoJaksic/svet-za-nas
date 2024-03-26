@@ -15,7 +15,7 @@ export class RegisterService {
     return this.apiService.post('ApplicationUsers/RegisterUser', data);
   }
   registerPartner(data: any): Observable<any> {
-    return this.apiService.post('ApplicationUsers/RegisterPartner', data);
+    return this.apiService.post('ApplicationUsers/AddOtherParent', data);
   }
 
 }

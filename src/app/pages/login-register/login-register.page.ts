@@ -44,7 +44,7 @@ export class LoginRegisterPage implements OnInit {
       this.showRegisterPartner = paramId !== 'false';
       // this.showRegisterPartner = true;
       if (this.showRegisterPartner ){
-        this.partnerId = this.appPathService.getAppPath();
+        this.partnerId = paramId;
       }
       console.log('partnerId', this.partnerId)
       console.log('showRegisterPartner', this.showRegisterPartner)
@@ -169,7 +169,7 @@ export class LoginRegisterPage implements OnInit {
       dateOfBirth: step1Data.dateOfBirth,
       profilePicture: step1Data.profilePicture,
       parentRole: step1Data.parentRole,
-      partnerId: this.partnerId
+      firstParentId: this.partnerId
     }
 
     console.log('register p', dataToSend)

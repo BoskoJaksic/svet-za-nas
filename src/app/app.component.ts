@@ -39,12 +39,12 @@ export class AppComponent {
   deepLinkApp(){
     App.addListener('appUrlOpen', (event: URLOpenListenerEvent) => {
       this.ngZone.run(async () => {
-        this.commonService.goToRoute('login-register/true')
-        // const slug = event.url.split(".net");
-        // const appPath = slug.pop()
+        const slug = event.url.split(".eu/");
+        const appPath = slug.pop()
         // if (appPath) {
         //   this.appPathService.setAppPath(appPath)
         // }
+        this.commonService.goToRoute(`login-register/${appPath}`)
       });
     });
   }

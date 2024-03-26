@@ -13,21 +13,29 @@ const routes: Routes = [
         redirectTo: 'profile',
         pathMatch: "full",
         data: {
-          title: 'Profile',
+          title: 'Profil',
         }
       },
       {
         path: 'profile',
         loadChildren: () => import('./profile/profile.module').then(m => m.ProfilePageModule),
         data: {
-          title: 'Profile',
+          title: 'Profil',
         }
       },
       {
         path: 'in-app-browser',
         loadChildren: () => import('./in-app-browser/in-app-browser.module').then(m => m.InAppBrowserPageModule),
         data: {
-          title: 'In App',
+          title: 'Porodica',
+        }
+      },
+
+      {
+        path: 'settings',
+        loadChildren: () => import('./settings/settings.module').then( m => m.SettingsPageModule),
+        data: {
+          title: 'Podesavanja',
         }
       },
     ]
