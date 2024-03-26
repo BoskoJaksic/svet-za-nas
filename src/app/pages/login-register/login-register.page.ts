@@ -7,7 +7,8 @@ import {ComponentStepperSharedService} from "../../common/services/component-ste
 import {RegisterService} from "../../common/services/login-register/register.service";
 import {DatePipe} from "@angular/common";
 import {CommonService} from "../../common/services/common.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Route} from "@angular/router";
+import {AppPathService} from "../../common/services/app-path.service";
 
 @Component({
   selector: 'app-login-register',
@@ -25,11 +26,13 @@ export class LoginRegisterPage implements OnInit {
   registerSpinner: boolean = false;
   errMessage: string = '';
   showRegisterPartner: boolean = false
+  partnerId: any
 
   constructor(private toasterService: ToasterService,
               private componentStepperSharedService: ComponentStepperSharedService,
               private registerService: RegisterService,
               private commonService: CommonService,
+              private appPathService: AppPathService,
               private route: ActivatedRoute,
               private datePipe: DatePipe,
   ) {
@@ -38,7 +41,13 @@ export class LoginRegisterPage implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(async params => {
       const paramId = params['id'];
-      this.showRegisterPartner = paramId === 'true';
+      this.showRegisterPartner = paramId !== 'false';
+      // this.showRegisterPartner = true;
+      if (this.showRegisterPartner ){
+        this.partnerId = this.appPathService.getAppPath();
+      }
+      console.log('partnerId', this.partnerId)
+      console.log('showRegisterPartner', this.showRegisterPartner)
 
     })
   }
@@ -125,7 +134,7 @@ export class LoginRegisterPage implements OnInit {
         pets:
           [step3Data]
       }
-      if (step3Data.role === '' || step3Data.role === null){
+      if (step3Data.role === '' || step3Data.role === null) {
         dataToSend.pets = []
       }
       console.log(dataToSend)
@@ -148,7 +157,40 @@ export class LoginRegisterPage implements OnInit {
     }
   }
 
-  resetFormValues(){
+  registerPartner() {
+    const step1Data = this.step1Component.form.value;
+    const date1 = new Date(`${step1Data.birthdateMonth} ${step1Data.birthdateDay}, ${step1Data.birthdateYear}`);
+    step1Data.dateOfBirth = this.datePipe.transform(date1, 'yyyy-MM-dd');
+
+    const dataToSend = {
+      fullName: step1Data.fullName,
+      email: step1Data.email,
+      password: step1Data.password,
+      dateOfBirth: step1Data.dateOfBirth,
+      profilePicture: step1Data.profilePicture,
+      parentRole: step1Data.parentRole,
+      partnerId: this.partnerId
+    }
+
+    console.log('register p', dataToSend)
+
+    this.registerService.registerPartner(dataToSend).subscribe({
+      next: (r) => {
+        console.log('r', r)
+        this.resetFormValues();
+        this.toasterService.presentToast('Registracija uspesna', 'success');
+        this.registerSpinner = false;
+        this.login = true;
+        this.showRegisterPartner = false;
+      }, error: (err) => {
+        console.log('err', err)
+        this.registerSpinner = false;
+        this.errMessage = err.message
+      }
+    })
+  }
+
+  resetFormValues() {
     this.stepCompleted[3] = false;
     this.stepCompleted[2] = false;
     this.stepCompleted[1] = false;
@@ -158,3 +200,4 @@ export class LoginRegisterPage implements OnInit {
     this.componentStepperSharedService.step3Data = null;
   }
 }
+

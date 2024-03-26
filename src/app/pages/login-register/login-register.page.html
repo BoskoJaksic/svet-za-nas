@@ -1,9 +1,9 @@
 <ion-content>
-  <ng-container *ngIf="!login">
+  <ng-container *ngIf="!login && !showRegisterPartner">
     <div class="main-content">
       <div style="height: 100%;">
         <div class="title center-content">
-          <img ngSrc="./assets/images/logo.png" height="73" width="73" alt="logo" priority>
+          <img ngsrc="./assets/images/logo.png" height="73" width="73" alt="logo" priority="">
         </div>
         <div class="title center-content">
           Registracija
@@ -20,17 +20,14 @@
           </div>
         </app-custom-stepper>
         <div>
-          <ion-button *ngIf="currentStep === 3" expand="full" type="submit" shape="round" mode="ios"
-                      class="login-button" (click)="register()">
+          <ion-button *ngIf="currentStep === 3" expand="full" type="submit" shape="round" mode="ios" class="login-button" (click)="register()">
             <ion-spinner *ngIf="registerSpinner"></ion-spinner>
             <span class="size20-800">Registruj se</span>
           </ion-button>
-          <ion-button *ngIf="currentStep !== 3" expand="full" type="submit" shape="round" mode="ios"
-                      class="login-button" (click)="nextStep()"><span
-            class="size20-800">Sledeci korak</span>
+          <ion-button *ngIf="currentStep !== 3" expand="full" type="submit" shape="round" mode="ios" class="login-button" (click)="nextStep()"><span class="size20-800">Sledeci korak</span>
             <ion-icon name="chevron-forward-outline" size="large" style="color: white"></ion-icon>
           </ion-button>
-          <div class="center-content" style="margin-top: 10px;" *ngIf="currentStep != 1">
+          <div class="center-content" style="margin-top: 10px;" *ngif="currentStep != 1">
             <span class="size14-900" (click)="prevStep()">Prethodni korak</span>
           </div>
           <div class="center-content" style="margin-top: 10px;">
@@ -41,7 +38,18 @@
     </div>
   </ng-container>
 
-  <ng-container *ngIf="login">
+  <ng-container *ngIf="login && !showRegisterPartner">
     <app-login (loginChanged)="onLoginChanged($event)"></app-login>
+  </ng-container>
+
+  <ng-container *ngIf="showRegisterPartner">
+    <app-our-world></app-our-world>
+    <div class="div-component-partner">
+      <app-step1></app-step1>
+    </div>
+    <ion-button expand="full" type="submit" shape="round" mode="ios" class="login-button" (click)="registerPartner()">
+      <ion-spinner *ngIf="registerSpinner"></ion-spinner>
+      <span class="size20-800">Registruj se</span>
+    </ion-button>
   </ng-container>
 </ion-content>

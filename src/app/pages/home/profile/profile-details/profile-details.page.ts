@@ -68,21 +68,6 @@ export class ProfileDetailsPage implements OnInit {
     console.log('received obj', this.receivedObject)
   }
 
-  // calculateYears() {
-  //   const today = new Date();
-  //   const dobParts = this.receivedObject.dateOfBirth.split('-');
-  //   const dateOfBirth = new Date(+dobParts[0], dobParts[1] - 1, +dobParts[2]);
-  //
-  //   let noOfYears = today.getFullYear() - dateOfBirth.getFullYear();
-  //
-  //   // Check if the birthday for this year has passed
-  //   if (today.getMonth() < dateOfBirth.getMonth() ||
-  //     (today.getMonth() === dateOfBirth.getMonth() && today.getDate() < dateOfBirth.getDate())) {
-  //     noOfYears--;
-  //   }
-  //   return noOfYears;
-  // }
-
   private calculateAgeOrPregnancy(dateString: string): void {
     const givenDate = new Date(dateString);
     const currentDate = new Date();
@@ -91,16 +76,13 @@ export class ProfileDetailsPage implements OnInit {
     const oneMonth = 30 * oneDay; // Aproksimacija
 
     if (givenDate > currentDate) {
-      // Datum je u budućnosti, izračunavamo broj nedelja trudnoće
       const weeksPregnant = Math.floor((givenDate.getTime() - currentDate.getTime()) / oneWeek);
       this.message = `${weeksPregnant} nedelja trudnaoce`;
     } else {
-      // Izračunavamo starost u mesecima ako je osoba mlađa od godinu dana
       const monthsOld = Math.floor((currentDate.getTime() - givenDate.getTime()) / oneMonth);
       if (monthsOld < 12) {
         this.message = `${monthsOld} meseci`;
       } else {
-        // Izračunavamo starost u godinama ako je osoba starija od godinu dana
         const ageYears = currentDate.getFullYear() - givenDate.getFullYear();
         this.message = `${ageYears} godina`;
       }

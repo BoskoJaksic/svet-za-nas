@@ -1,3 +1,4 @@
+
 import {Injectable} from '@angular/core';
 
 @Injectable({
@@ -8,6 +9,13 @@ export class LocalStorageService {
   constructor() {
   }
 
+  setUserId(userId: any) {
+    localStorage.setItem('userId', userId);
+  }
+
+  getUserId() {
+    return localStorage.getItem('userId');
+  }
 
   setUserEmail(userEmail: any) {
     localStorage.setItem('userEmail', userEmail);
@@ -37,3 +45,4 @@ export class LocalStorageService {
     localStorage.clear();
   }
 }
+
