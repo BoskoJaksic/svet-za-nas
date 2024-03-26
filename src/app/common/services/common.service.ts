@@ -17,6 +17,7 @@ export class CommonService {
   }
 
   determinePlatform(){
+    console.log('platform is',Capacitor.getPlatform())
     return Capacitor.getPlatform();
   }
   isIos() {

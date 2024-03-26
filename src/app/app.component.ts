@@ -40,6 +40,7 @@ export class AppComponent {
   //   this.isWebPlatform = this.commonService.determinePlatform() === 'web';
   // }
   deepLinkApp(){
+    console.log('from deepLInk beggiing',this.commonService.determinePlatform())
     App.addListener('appUrlOpen', (event: URLOpenListenerEvent) => {
       this.ngZone.run( () => {
         const slug = event.url.split(".eu");
