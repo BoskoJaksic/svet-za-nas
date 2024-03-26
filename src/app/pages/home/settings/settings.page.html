@@ -1,15 +1,44 @@
 <app-menu-button></app-menu-button>
-<ion-content>
-  <ion-button fill="clear" color="secondary" id="present-alert">
-    <ion-icon name="trash-bin-outline" slot="start" style="margin-right: 10px"></ion-icon>
-    <span class="checkout-text">  Obrisi nalog</span>
-  </ion-button>
-  <ion-alert
-    trigger="present-alert"
-    header="Upozorenje!"
-    subHeader="Da li ste sigurni da zelite da obrisete Vas nalog?"
-    message="Radeci ovo svi Vasi podaci bice obrisani iz nase baze!"
-    [buttons]="alertButtons"
-    (didDismiss)="deleteAccount($event)"
-  ></ion-alert>
+<ion-content class="container">
+  <div class="center-content">
+    <div class="orange-avatar">
+      <img *ngIf="avatarImg" class="img-class" [src]="avatarImg" alt=""/>
+    </div>
+  </div>
+
+  <ion-item>
+    <ion-label position="floating">Ime i prezime</ion-label>
+    <ion-input [ngModel]="userInfo?.fullName" placeholder="Ime i prezime" aria-label="fullName"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Datum rođenja</ion-label>
+    <ion-input type="date" [ngModel]="userInfo?.dateOfBirth" aria-label="dateOfBirth"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Roditelj</ion-label>
+    <ion-input [ngModel]="userInfo?.parentRole" placeholder="Parent Role" aria-label="parentRole"></ion-input>
+  </ion-item>
+
+  <div class="margin-top">
+    <ion-button fill="clear" color="secondary" (click)="addPartner()">
+      <ion-icon name="add" slot="start" style="margin-right: 10px"></ion-icon>
+      <span class="checkout-text">  Dodaj roditelja</span>
+    </ion-button>
+    <br>
+    <ion-button fill="clear" color="secondary" id="present-alert">
+      <ion-icon name="trash-bin-outline" slot="start" style="margin-right: 10px"></ion-icon>
+      <span class="checkout-text">  Obrisi nalog</span>
+    </ion-button>
+    <ion-alert
+      trigger="present-alert"
+      header="Upozorenje!"
+      subHeader="Da li ste sigurni da zelite da obrisete Vas nalog?"
+      message="Radeci ovo svi Vasi podaci bice obrisani iz nase baze!"
+      [buttons]="alertButtons"
+      (didDismiss)="deleteAccount($event)"
+    ></ion-alert>
+  </div>
+
 </ion-content>
