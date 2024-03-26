@@ -47,20 +47,18 @@ export class AppComponent {
       console.log('appPath', appPath)
 
       if (appPath !== 'login-register/false') {
-
         this.router.navigate([`login-register/${appPath}`]);
       }
 
     } else {
       App.addListener('appUrlOpen', (event: URLOpenListenerEvent) => {
         this.ngZone.run(() => {
-          const slug = event.url.split(".eu");
+          const slug = event.url.split(".eu/");
           let appPath = slug.pop()
           console.log('appPath', appPath)
 
-          if (appPath) {
-            this.appPathService.setAppPath(appPath)
-            this.router.navigate(['']);
+          if (appPath !== 'login-register/false') {
+            this.router.navigate([`login-register/${appPath}`]);
           }
         });
       });
