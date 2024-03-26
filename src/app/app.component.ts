@@ -41,7 +41,7 @@ export class AppComponent {
   deepLinkApp() {
     if (this.commonService.determinePlatform() === 'web') {
       let url = window.location.href;
-      let slug = url.split(".eu");
+      let slug = url.split(".eu/");
       let appPath = slug.pop()
       console.log('appPath', appPath)
 
