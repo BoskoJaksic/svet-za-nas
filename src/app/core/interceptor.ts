@@ -1,14 +1,13 @@
 import {Injectable} from '@angular/core';
 import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {LocalStorageService} from "../common/services/local-storage.service";
-import {catchError, Observable, switchMap, throwError} from "rxjs";
+import {catchError, Observable, of, switchMap, throwError} from "rxjs";
 import {CommonService} from "../common/services/common.service";
 import {UserService} from "../common/services/user.service";
 import {AppPathService} from "../common/services/app-path.service";
 
 @Injectable()
 export class HttpInterceptorService implements HttpInterceptor {
-  private maxRetry: number = 2;
 
   constructor(private localStorageService:LocalStorageService,
               private commonService:CommonService,
@@ -42,15 +41,20 @@ export class HttpInterceptorService implements HttpInterceptor {
     });
   }
 
-  private handle401Error(request: HttpRequest<any>, next: HttpHandler, retryCount: number = 0): Observable<HttpEvent<any>> {
-    if (retryCount >= this.maxRetry) {
-      this.appPathService.setAppPath('');
-      this.commonService.goToRoute('/');
-      return throwError('Neuspjelo osvježavanje tokena, preusmeravanje na prijavu.');
-    }
+  private handle401Error(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    // if (retryCount >= this.maxRetry) {
+    //   this.appPathService.setAppPath('');
+    //   this.commonService.goToRoute('/');
+    //   return throwError('Neuspjelo osvježavanje tokena, preusmeravanje na prijavu.');
+    // }
+
     let dataToSend = {
       accessToken: this.localStorageService.getUserToken(),
       refreshToken: this.localStorageService.getUserRefreshToken()
+    }
+    if (!dataToSend.accessToken || !dataToSend.refreshToken) {
+      this.commonService.goToRoute('/');
+      return throwError(() => new Error('Tokeni nisu dostupni, preusmeravanje na prijavu.'));
     }
     return this.userService.getRefreshToken(dataToSend).pipe(
       switchMap((response: any) => {
@@ -65,10 +69,11 @@ export class HttpInterceptorService implements HttpInterceptor {
         }
         this.appPathService.setAppPath('');
         this.commonService.goToRoute('/')
-        return throwError('Neuspjelo osvježavanje tokena');
+        return throwError(() => new Error('Neuspjelo osvježavanje tokena'));
       }),
-      catchError((error) => {
-        return this.handle401Error(request, next, retryCount + 1);
+      catchError((err) => {
+        this.commonService.goToRoute('/');
+        return of(null as unknown as HttpEvent<any>);
       })
     );
   }

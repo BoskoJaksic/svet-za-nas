@@ -12,7 +12,7 @@
           </ion-col>
           <ion-col style="width: 100%">
             <div class="second-parent-div">
-<!--              <app-avatar></app-avatar>-->
+              <app-avatar *ngIf="otherParent"  [personObj]="otherParent"></app-avatar>
             </div>
           </ion-col>
         </ion-row>

@@ -17,6 +17,7 @@ export class ApiService {
 
 
   // 2E:4B:E3:F3:2A:9D:4E:C4:E5:0C:56:11:02:8F:D6:A7:C9:4D:29:08 production sha key
+  // 5D:8C:97:54:F1:EA:67:71:14:BA:96:75:DB:2C:97:59:C5:78:87:6C test sha key
 
   getApiUrl(): string {
     if (this.platform.is('android')) {

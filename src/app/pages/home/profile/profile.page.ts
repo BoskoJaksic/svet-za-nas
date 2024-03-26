@@ -18,6 +18,7 @@ export class ProfilePage implements OnInit {
   private destroy$: Subject<boolean> = new Subject<boolean>();
   children: Child[] = []
   parent: any;
+  otherParent: any;
   pet: any;
 
   constructor(private router: Router,
@@ -65,6 +66,15 @@ export class ProfilePage implements OnInit {
           parentRole: r.value.parentRole,
 
         }
+        if (r.value.otherParent) {
+          this.otherParent = {
+            name: r.value.otherParent.fullName,
+            profilePicture: r.value.otherParent.profilePicture,
+            dateOfBirth: r.value.otherParent.dateOfBirth,
+            parentRole: r.value.otherParent.parentRole,
+          }
+        }
+
         if (r.value.pets.length > 0) {
           this.pet = {
             name: r.value.pets[0]?.petName,
@@ -96,7 +106,7 @@ export class ProfilePage implements OnInit {
 
     if (role === 'confirm') {
       console.log('data modal', data)
-      if (data){
+      if (data) {
         this.loadData();
       }
     }
