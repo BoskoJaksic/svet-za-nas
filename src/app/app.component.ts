@@ -6,6 +6,8 @@ import {AppPathService} from "./common/services/app-path.service";
 import {isPlatform} from "@ionic/angular";
 import {GoogleAuth} from "@codetrix-studio/capacitor-google-auth";
 import {CommonService} from "./common/services/common.service";
+import {Router} from "@angular/router";
+import {Capacitor} from "@capacitor/core";
 
 @Component({
   selector: 'app-root',
@@ -18,6 +20,7 @@ export class AppComponent {
               public loaderService: LoaderService,
               public appPathService: AppPathService,
               public commonService: CommonService,
+              private router: Router,
               private ngZone: NgZone
   ) {
     this.initializeApp();
@@ -38,13 +41,21 @@ export class AppComponent {
   // }
   deepLinkApp(){
     App.addListener('appUrlOpen', (event: URLOpenListenerEvent) => {
-      this.ngZone.run(async () => {
-        const slug = event.url.split(".eu/");
-        const appPath = slug.pop()
-        // if (appPath) {
-        //   this.appPathService.setAppPath(appPath)
-        // }
-        this.commonService.goToRoute(`login-register/${appPath}`)
+      this.ngZone.run( () => {
+        const slug = event.url.split(".eu");
+        let appPath = slug.pop()
+        console.log('appPath',appPath)
+
+        if (this.commonService.determinePlatform() === 'web') {
+          console.log('isWeb')
+          // If the app is running on the web, add the '/log-register/' segment to the URL
+          appPath = '/login-register' + appPath;
+        }
+
+        if (appPath) {
+          this.appPathService.setAppPath(appPath)
+          this.router.navigate(['']);
+        }
       });
     });
   }

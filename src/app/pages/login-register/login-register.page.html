@@ -3,7 +3,7 @@
     <div class="main-content">
       <div style="height: 100%;">
         <div class="title center-content">
-          <img ngsrc="./assets/images/logo.png" height="73" width="73" alt="logo" priority="">
+          <img ngSrc="./assets/images/logo.png" height="73" width="73" alt="logo" priority="">
         </div>
         <div class="title center-content">
           Registracija
@@ -27,7 +27,7 @@
           <ion-button *ngIf="currentStep !== 3" expand="full" type="submit" shape="round" mode="ios" class="login-button" (click)="nextStep()"><span class="size20-800">Sledeci korak</span>
             <ion-icon name="chevron-forward-outline" size="large" style="color: white"></ion-icon>
           </ion-button>
-          <div class="center-content" style="margin-top: 10px;" *ngif="currentStep != 1">
+          <div class="center-content" style="margin-top: 10px;" *ngIf="currentStep != 1">
             <span class="size14-900" (click)="prevStep()">Prethodni korak</span>
           </div>
           <div class="center-content" style="margin-top: 10px;">
