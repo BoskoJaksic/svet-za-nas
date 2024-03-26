@@ -41,13 +41,14 @@ export class AppComponent {
   deepLinkApp() {
     if (this.commonService.determinePlatform() === 'web') {
       let url = window.location.href;
-      let slug = url.split(".eu");
+      let slug = url.split(".eu/");
+      // let slug = url.split("localhost:8100/");
       let appPath = slug.pop()
       console.log('appPath', appPath)
 
-      if (appPath) {
-        this.appPathService.setAppPath(appPath)
-        this.router.navigate(['']);
+      if (appPath !== 'login-register/false') {
+
+        this.router.navigate([`login-register/${appPath}`]);
       }
 
     } else {

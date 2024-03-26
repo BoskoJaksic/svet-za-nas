@@ -40,14 +40,13 @@ export class LoginRegisterPage implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(async params => {
-      if (this.appPathService.getAppPath()){
-        this.showRegisterPartner = true
-        this.partnerId = this.appPathService.getAppPath();
-      }
-      // const paramId = params['id'];
-      // this.showRegisterPartner = paramId !== 'false';
+      const paramId = params['id'];
+      this.showRegisterPartner = paramId !== 'false';
       // this.showRegisterPartner = true;
-      console.log('getAppPath', this.appPathService.getAppPath())
+      if (this.showRegisterPartner ){
+        this.partnerId = paramId;
+      }
+      console.log('partnerId', paramId)
       console.log('showRegisterPartner', this.showRegisterPartner)
 
     })
