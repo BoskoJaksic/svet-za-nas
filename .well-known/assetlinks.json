@@ -1,5 +1,8 @@
 [{
   "relation": ["delegate_permission/common.handle_all_urls"],
   "target" : { "namespace": "android_app", "package_name": "com.bebac.app",
-    "sha256_cert_fingerprints": ["03:D9:BA:FE:2B:39:1A:1D:73:95:F6:2E:40:03:A1:EB:3E:2C:75:BD:83:13:DB:82:CB:7A:54:FF:B1:31:56:54"] }
+    "sha256_cert_fingerprints": [
+      "03:D9:BA:FE:2B:39:1A:1D:73:95:F6:2E:40:03:A1:EB:3E:2C:75:BD:83:13:DB:82:CB:7A:54:FF:B1:31:56:54",
+      "1C:01:C7:01:12:0A:0F:51:83:0B:4A:D6:21:C9:34:BD:E1:AB:C8:AB:7E:23:F6:09:C6:AA:88:97:C1:46:29:CE"
+    ] }
 }]
