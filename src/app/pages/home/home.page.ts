@@ -16,6 +16,11 @@ export class HomePage implements OnInit {
       pageUrl:'profile',
       name:"Profil",
       iconSrc:"person-outline"
+    },
+    {
+      pageUrl:'settings',
+      name:"Podesavanja",
+      iconSrc:"settings-outline"
     }
   ]
   constructor() { }
