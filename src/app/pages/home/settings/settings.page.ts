@@ -89,13 +89,18 @@ export class SettingsPage implements OnInit {
     }
   }
   async addPartner() {
+    const canShare = await Share.canShare();
     let partnerId = this.localStorageService.getUserId();
-    await Share.share({
-      title: 'Svet za nas',
-      text: 'Hej, zelim da koristis svet za nas aplikaciju zajedno sa mnom',
-      url: `https://svet-za-nas.wedosoftware.eu/${partnerId}`,
-      dialogTitle: 'Svet za nas',
-    });
+    if (canShare.value) {
+      await Share.share({
+        title: 'Svet za nas',
+        text: 'Hej, zelim da koristis svet za nas aplikaciju zajedno sa mnom',
+        url: `https://svet-za-nas.wedosoftware.eu/${partnerId}`,
+        dialogTitle: 'Svet za nas',
+      });
+    } else {
+      this.toasterService.presentToast('Nije moguce korsititi ovaj feature na ovoj platformi','warning')
+    }
   }
   goBack() {
     this.commonService.goToRoute('home/profile');
