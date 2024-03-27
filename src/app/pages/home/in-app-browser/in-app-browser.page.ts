@@ -1,11 +1,16 @@
-import {Component, NgZone, OnInit} from '@angular/core';
-import {filter, Subject, takeUntil} from "rxjs";
-import {ActivatedRoute, Event as NavigationEvent, NavigationEnd, Router,} from "@angular/router";
-import {Browser} from "@capacitor/browser";
-import {CommonService} from "../../../common/services/common.service";
-import {UserService} from "../../../common/services/user.service";
-import {LocalStorageService} from "../../../common/services/local-storage.service";
-import {LoaderService} from "../../../common/services/loader.service";
+import { Component, NgZone, OnInit } from '@angular/core';
+import { filter, Subject, takeUntil } from 'rxjs';
+import {
+  ActivatedRoute,
+  Event as NavigationEvent,
+  NavigationEnd,
+  Router,
+} from '@angular/router';
+import { Browser } from '@capacitor/browser';
+import { CommonService } from '../../../common/services/common.service';
+import { UserService } from '../../../common/services/user.service';
+import { LocalStorageService } from '../../../common/services/local-storage.service';
+import { LoaderService } from '../../../common/services/loader.service';
 
 @Component({
   selector: 'app-in-app-browser',
@@ -15,44 +20,57 @@ import {LoaderService} from "../../../common/services/loader.service";
 export class InAppBrowserPage implements OnInit {
   private firstLoad: boolean = true;
   private destroy$: Subject<boolean> = new Subject<boolean>();
-  children: any
-  link: string = ''
-  baseLInk = 'http://playm61.sg-host.com/wp-admin/'
+  children: any;
+  link: string = '';
+  baseLInk = 'http://playm61.sg-host.com/wp-admin/';
 
-  constructor(private router: Router,
-              private ngZone: NgZone,
-              private commonService: CommonService,
-              private loaderService: LoaderService,
-              private localStorageService: LocalStorageService,
-              private userService: UserService,
-              private activatedRoute: ActivatedRoute) {
-  }
+  constructor(
+    private router: Router,
+    private ngZone: NgZone,
+    private commonService: CommonService,
+    private loaderService: LoaderService,
+    private localStorageService: LocalStorageService,
+    private userService: UserService,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    this.router.events.pipe(
-      filter((event: NavigationEvent): event is NavigationEnd => event instanceof NavigationEnd),
-      takeUntil(this.destroy$)
-    ).subscribe((event: NavigationEnd) => {
-      if (event.urlAfterRedirects.includes('/in-app-browser')) {
-        const hasQueryParam = this.activatedRoute.snapshot.queryParamMap.has('hasData');
-        if (this.firstLoad) {
-          this.firstLoad = false;
-        } else {
-          if (!hasQueryParam) {
-            this.loadData();
+    this.router.events
+      .pipe(
+        filter(
+          (event: NavigationEvent): event is NavigationEnd =>
+            event instanceof NavigationEnd
+        ),
+        takeUntil(this.destroy$)
+      )
+      .subscribe((event: NavigationEnd) => {
+        if (event.urlAfterRedirects.includes('/in-app-browser')) {
+          const hasQueryParam =
+            this.activatedRoute.snapshot.queryParamMap.has('hasData');
+          if (this.firstLoad) {
+            this.firstLoad = false;
+          } else {
+            if (!hasQueryParam) {
+              this.loadData();
+            }
           }
         }
-      }
-    });
-    const hasQueryParam = this.activatedRoute.snapshot.queryParamMap.has('hasData');
+      });
+    const hasQueryParam =
+      this.activatedRoute.snapshot.queryParamMap.has('hasData');
     if (!hasQueryParam) {
       this.loadData();
     }
   }
 
-  generateLink(isPregnant: boolean, isMonth?: boolean, isYear?: boolean, date?: any) {
+  generateLink(
+    isPregnant: boolean,
+    isMonth?: boolean,
+    isYear?: boolean,
+    date?: any
+  ) {
     if (isPregnant) {
-      this.link = `${this.baseLInk}trudnoca/`
+      this.link = `${this.baseLInk}trudnoca/`;
     } else {
       if (isMonth) {
         if (date >= 0 && date <= 3) {
@@ -107,11 +125,11 @@ export class InAppBrowserPage implements OnInit {
     var monthDiff = diff / (1000 * 3600 * 24 * 30);
 
     if (monthDiff <= 36) {
-      var mmm = Math.floor(monthDiff)
-      this.generateLink(false, true, false, mmm)
+      var mmm = Math.floor(monthDiff);
+      this.generateLink(false, true, false, mmm);
     } else {
       var yyy = Math.floor(yearDiff);
-      this.generateLink(false, false, true, yyy)
+      this.generateLink(false, false, true, yyy);
     }
   }
 
@@ -126,17 +144,15 @@ export class InAppBrowserPage implements OnInit {
     return false;
   }
 
-
-  async openBrowserPage(link:string) {
-    await Browser.open({url: link});
-    this.commonService.goToRoute('home/profile')
-
+  async openBrowserPage(link: string) {
+    await Browser.open({ url: link });
+    this.commonService.goToRoute('home/profile');
   }
 
   loadData() {
     Browser.addListener('browserFinished', () => {
       this.ngZone.run(() => {
-        this.commonService.goToRoute('home/profile')
+        this.commonService.goToRoute('home/profile');
       });
     });
     this.getChildren();
@@ -147,19 +163,19 @@ export class InAppBrowserPage implements OnInit {
     const userEmail = this.localStorageService.getUserEmail();
     this.userService.getUserDataByEmail(userEmail).subscribe({
       next: (r) => {
-        this.children = r.value.children
+        this.children = r.children;
         if (this.isPregnant()) {
-          this.generateLink(true)
+          this.generateLink(true);
         } else {
-          this.calculateBabyYears()
+          this.calculateBabyYears();
         }
         this.loaderService.hideLoader();
-
-      }, error: (err) => {
-        console.log('err', err)
+      },
+      error: (err) => {
+        console.log('err', err);
         this.loaderService.hideLoader();
-      }
-    })
+      },
+    });
   }
 
   // ionRefreshPage(event: any) {
@@ -168,5 +184,4 @@ export class InAppBrowserPage implements OnInit {
   //     event.target.complete();
   //   }, 2000);
   // }
-
 }
