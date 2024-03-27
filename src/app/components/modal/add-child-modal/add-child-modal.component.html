@@ -61,13 +61,14 @@
         </div>
       </div>
     </div>
+    <div class="buttons">
+      <ion-buttons>
+        <ion-button color="medium" (click)="cancel()">Ponisti</ion-button>
+      </ion-buttons>
+      <ion-buttons>
+        <ion-button (click)="confirm()" [strong]="true">Potvrdi</ion-button>
+      </ion-buttons>
+    </div>
   </div>
 </ion-content>
-<ion-footer class="between-content" style="background-color: #f7f7f7">
-  <ion-buttons>
-    <ion-button color="medium" (click)="cancel()">Ponisti</ion-button>
-  </ion-buttons>
-  <ion-buttons>
-    <ion-button (click)="confirm()" [strong]="true">Potvrdi</ion-button>
-  </ion-buttons>
-</ion-footer>
+

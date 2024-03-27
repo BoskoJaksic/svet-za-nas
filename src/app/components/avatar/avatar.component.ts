@@ -26,20 +26,22 @@ export class AvatarComponent implements OnInit {
     const currentDate = new Date();
     const oneDay = 24 * 60 * 60 * 1000;
     const oneWeek = 7 * oneDay;
-    const oneMonth = 30 * oneDay; // Aproksimacija
 
     if (givenDate > currentDate) {
-      // Datum je u budućnosti, izračunavamo broj nedelja trudnoće
-      const weeksPregnant = Math.floor((givenDate.getTime() - currentDate.getTime()) / oneWeek);
+      const daysUntilDueDate = Math.floor((givenDate.getTime() - currentDate.getTime()) / oneDay);
+      const weeksUntilDueDate = Math.floor(daysUntilDueDate / 7);
+      const weeksPregnant = 40 - weeksUntilDueDate;
       this.message = `${weeksPregnant} nedelja trudnaoce`;
     } else {
-      // Izračunavamo starost u mesecima ako je osoba mlađa od godinu dana
-      const monthsOld = Math.floor((currentDate.getTime() - givenDate.getTime()) / oneMonth);
+      const monthsOld = Math.floor((currentDate.getTime() - givenDate.getTime()) / (30 * oneDay));
       if (monthsOld < 12) {
         this.message = `${monthsOld} meseci`;
       } else {
-        // Izračunavamo starost u godinama ako je osoba starija od godinu dana
-        const ageYears = currentDate.getFullYear() - givenDate.getFullYear();
+        let ageYears = currentDate.getFullYear() - givenDate.getFullYear();
+        if (currentDate.getMonth() < givenDate.getMonth() ||
+          (currentDate.getMonth() == givenDate.getMonth() && currentDate.getDate() < givenDate.getDate())) {
+          ageYears--;
+        }
         this.message = `${ageYears} godina`;
       }
     }
