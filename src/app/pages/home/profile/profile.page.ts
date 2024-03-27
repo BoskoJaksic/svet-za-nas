@@ -65,6 +65,7 @@ export class ProfilePage implements OnInit {
           profilePicture: r.value.profilePicture,
           dateOfBirth: r.value.dateOfBirth,
           parentRole: r.value.parentRole,
+          email:r.value.email
 
         }
         if (r.value.otherParent) {
@@ -73,6 +74,7 @@ export class ProfilePage implements OnInit {
             profilePicture: r.value.otherParent.profilePicture,
             dateOfBirth: r.value.otherParent.dateOfBirth,
             parentRole: r.value.otherParent.parentRole,
+            email:r.value.otherParent.email
           }
         }
 
