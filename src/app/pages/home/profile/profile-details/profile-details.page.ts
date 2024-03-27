@@ -15,7 +15,7 @@ export class ProfileDetailsPage implements OnInit {
   receivedObject: any;
   age: number | null = null;
   message: string = '';
-  newPicture:string | undefined
+  newPicture: string | undefined
 
   constructor(private route: ActivatedRoute,
               private loaderService: LoaderService,
@@ -44,25 +44,36 @@ export class ProfileDetailsPage implements OnInit {
       allowEditing: false,
       resultType: CameraResultType.DataUrl
     });
-    if (image.dataUrl){
+    if (image.dataUrl) {
       this.newPicture = image.dataUrl;
       this.changeUserImg();
     }
   };
+
+  getEmailToSend() {
+    if (this.receivedObject.parentRole){
+      return this.receivedObject.email
+    }else{
+      return this.localStorageService.getUserEmail()
+    }
+
+  }
+
   changeUserImg() {
-   // @ts-ignore parentRole
-    const profilePicture =  this.newPicture.replace(/^data:image\/\w+;base64,/, '');
-    const dataToSend  = {
-      email:this.localStorageService.getUserEmail(),
-      name:this.receivedObject.name,
-      profilePicture:profilePicture,
-      person: this.receivedObject.pets ? 2 : (this.receivedObject.parentRole ? 0 : 1)
+
+    // @ts-ignore parentRole
+    const profilePicture = this.newPicture.replace(/^data:image\/\w+;base64,/, '');
+    const dataToSend = {
+      email: this.getEmailToSend(),
+      name: this.receivedObject.name,
+      profilePicture: profilePicture,
+      person: this.receivedObject.pets ? 2 : (this.receivedObject.parentRole ? 0 : 1),
     }
     this.userService.changeUserImg(dataToSend).subscribe({
       next(r) {
 
       }, error(err) {
-        console.log('error while updating profile picture',err)
+        console.log('error while updating profile picture', err)
       }
     })
     console.log('received obj', this.receivedObject)
@@ -90,6 +101,29 @@ export class ProfileDetailsPage implements OnInit {
           ageYears--;
         }
         this.message = `${ageYears} godina`;
+      }
+    }
+  }
+
+
+  generateImg() {
+    if (this.receivedObject?.profilePicture) {
+      return this.receivedObject.profilePicture
+    } else {
+      if (this.receivedObject?.parentRole) {
+        if (this.receivedObject?.parentRole === 'mom') {
+          return './assets/images/mom.png'
+        } else {
+          return '/assets/images/dad.png'
+        }
+      } else if (this.receivedObject.gender) {
+        if (this.receivedObject.gender === 'boy'){
+          return '/assets/images/boy.png'
+        }else{
+          return '/assets/images/girl.png'
+        }
+      }else{
+        return '/assets/images/pet.png'
       }
     }
   }

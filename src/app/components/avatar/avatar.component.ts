@@ -11,12 +11,14 @@ export class AvatarComponent implements OnInit {
   @Input() personObj: any
   age: number | null = null;
   message: string = '';
+
   constructor(private router: Router) {
 
   }
 
   ngOnInit() {
-    if(this.personObj){
+    if (this.personObj) {
+      console.log('personObj', this.personObj)
       this.calculateAgeOrPregnancy(this.personObj.dateOfBirth);
     }
   }
@@ -43,6 +45,29 @@ export class AvatarComponent implements OnInit {
           ageYears--;
         }
         this.message = `${ageYears} godina`;
+      }
+    }
+  }
+
+
+  generateImg() {
+    if (this.personObj?.profilePicture) {
+      return this.personObj.profilePicture
+    } else {
+      if (this.personObj?.parentRole) {
+        if (this.personObj?.parentRole === 'mom') {
+          return './assets/images/mom.png'
+        } else {
+          return '/assets/images/dad.png'
+        }
+      } else if (this.personObj.gender) {
+        if (this.personObj.gender === 'boy'){
+          return '/assets/images/boy.png'
+        }else{
+          return '/assets/images/girl.png'
+        }
+      }else{
+        return '/assets/images/pet.png'
       }
     }
   }

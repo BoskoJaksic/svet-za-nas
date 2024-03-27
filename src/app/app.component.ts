@@ -40,7 +40,7 @@ export class AppComponent {
   // }
   deepLinkApp() {
     if (this.commonService.determinePlatform() === 'web') {
-      //todo uncomment this for production
+      // todo uncomment this for production
       let url = window.location.href;
       let slug = url.split(".eu/");
       // let slug = url.split("localhost:4200/");
