@@ -42,12 +42,14 @@ export class AppComponent {
     if (this.commonService.determinePlatform() === 'web') {
       let url = window.location.href;
       let slug = url.split(".eu/");
-      // let slug = url.split("localhost:8100/");
+      // let slug = url.split("localhost:4200/"); todo this is for testing locally, change port if needed
       let appPath = slug.pop()
       console.log('appPath', appPath)
 
-      if (appPath !== 'login-register/false') {
+      if (appPath !== '') {
         this.router.navigate([`login-register/${appPath}`]);
+      }else{
+        this.router.navigate([`login-register/false`]);
       }
 
     } else {
@@ -57,8 +59,10 @@ export class AppComponent {
           let appPath = slug.pop()
           console.log('appPath', appPath)
 
-          if (appPath !== 'login-register/false') {
+          if (appPath !== '') {
             this.router.navigate([`login-register/${appPath}`]);
+          }else{
+            this.router.navigate([`login-register/false`]);
           }
         });
       });
