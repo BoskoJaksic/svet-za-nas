@@ -1,6 +1,4 @@
-.main-content {
-  padding:40px
-}
+
 
 .custom {
   text-align: left;
@@ -74,3 +72,24 @@
   margin-top: 20px;
 }
 
+.main-content {
+  padding:40px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Postavite visinu na 100% visine prozora pregledača */
+}
+
+.child-form {
+  flex: 1; /* Prostor za formu popunjava preostali prostor */
+  overflow-y: auto; /* Omogućuje scroll ako je sadržaj forme veći od ekrana */
+}
+
+.footer {
+  margin-top: auto; /* Premešta footer na dno */
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between; /* Podeli gumbe na dva kraja */
+  padding: 20px; /* Dodajte malo prostora oko gumba */
+}

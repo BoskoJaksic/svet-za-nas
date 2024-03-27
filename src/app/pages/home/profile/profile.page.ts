@@ -57,6 +57,7 @@ export class ProfilePage implements OnInit {
     const userEmail = this.localStorageService.getUserEmail();
     this.userService.getUserDataByEmail(userEmail).subscribe({
       next: (r) => {
+        this.localStorageService.setUserId(r.value.id);
         this.children = r.value.children
         console.log('get user', r)
         this.parent = {

@@ -40,9 +40,11 @@ export class AppComponent {
   // }
   deepLinkApp() {
     if (this.commonService.determinePlatform() === 'web') {
+      //todo uncomment this for production
       let url = window.location.href;
       let slug = url.split(".eu/");
-      // let slug = url.split("localhost:4200/"); todo this is for testing locally, change port if needed
+      // let slug = url.split("localhost:4200/");
+
       let appPath = slug.pop()
       console.log('appPath', appPath)
 
