@@ -64,11 +64,9 @@ export class SettingsPage implements OnInit {
     this.userService.getUserDataByEmail(email).subscribe({
       next: (r) => {
         console.log('r', r);
-        this.userInfo = r.value;
-        if (r.value.profilePicture) {
-          this.avatarImg = r.value.profilePicture;
-        } else {
-          this.generateImg(r.value)
+        this.userInfo = r;
+        if (r.profilePicture) {
+          this.avatarImg = r.profilePicture;
         }
         this.loaderService.hideLoader();
       },
@@ -98,7 +96,6 @@ export class SettingsPage implements OnInit {
       });
     }
   }
-
   async addPartner() {
     const canShare = await Share.canShare();
     let partnerId = this.localStorageService.getUserId();
@@ -110,10 +107,12 @@ export class SettingsPage implements OnInit {
         dialogTitle: 'Svet za nas',
       });
     } else {
-      this.toasterService.presentToast('Nije moguce korsititi ovaj feature na ovoj platformi', 'warning')
+      this.toasterService.presentToast(
+        'Nije moguce korsititi ovaj feature na ovoj platformi',
+        'warning'
+      );
     }
   }
-
   goBack() {
     this.commonService.goToRoute('home/profile');
   }
