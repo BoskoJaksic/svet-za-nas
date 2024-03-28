@@ -67,6 +67,8 @@ export class SettingsPage implements OnInit {
         this.userInfo = r;
         if (r.profilePicture) {
           this.avatarImg = r.profilePicture;
+        } else {
+          this.generateImg(r);
         }
         this.loaderService.hideLoader();
       },
@@ -96,6 +98,7 @@ export class SettingsPage implements OnInit {
       });
     }
   }
+
   async addPartner() {
     const canShare = await Share.canShare();
     let partnerId = this.localStorageService.getUserId();
@@ -113,6 +116,7 @@ export class SettingsPage implements OnInit {
       );
     }
   }
+
   goBack() {
     this.commonService.goToRoute('home/profile');
   }

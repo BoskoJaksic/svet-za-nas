@@ -89,7 +89,7 @@ export class ProfilePage implements OnInit {
           };
         }
 
-        if (r.pets.length > 0) {
+        if (r.pets?.length > 0) {
           this.pet = {
             name: r.pets[0]?.petName,
             profilePicture: r.pets[0].profilePicture,
