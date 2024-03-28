@@ -5,6 +5,7 @@ import {Camera, CameraResultType} from "@capacitor/camera";
 import {DatePipe} from "@angular/common";
 import {LocalStorageService} from "../../../common/services/local-storage.service";
 import {UserService} from "../../../common/services/user.service";
+import {LoaderService} from "../../../common/services/loader.service";
 
 @Component({
   selector: 'app-add-child-modal',
@@ -27,6 +28,7 @@ export class AddChildModalComponent implements OnInit {
   constructor(private modalCtrl: ModalController,
               private localStorageService: LocalStorageService,
               private userService: UserService,
+              private loaderService:LoaderService,
               private datePipe: DatePipe,) {
   }
 
@@ -59,12 +61,16 @@ export class AddChildModalComponent implements OnInit {
       profilePicture: profilePicture,
       gender: this.gender
     }
+    this.loaderService.showLoader()
     console.log('add child data', dataToSend)
     this.userService.addChild(dataToSend).subscribe({
       next: () => {
         this.modalCtrl.dismiss(true, 'confirm');
+        this.loaderService.hideLoader()
       }, error: (err) => {
         console.log('err while adding child', err)
+        this.loaderService.hideLoader()
+
       }
     })
   }

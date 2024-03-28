@@ -49,6 +49,12 @@ export class AvatarComponent implements OnInit {
     }
   }
 
+  isFutureDate(dateOfBirth:any): boolean {
+    const currentDate = new Date();
+    const targetDate = new Date(dateOfBirth);
+    return targetDate > currentDate;
+  }
+
 
   generateImg() {
     if (this.personObj?.profilePicture) {
@@ -61,12 +67,19 @@ export class AvatarComponent implements OnInit {
           return '/assets/images/dad.png'
         }
       } else if (this.personObj.gender) {
-        if (this.personObj.gender === 'boy'){
-          return '/assets/images/boy.png'
-        }else{
-          return '/assets/images/girl.png'
+        if (this.isFutureDate(this.personObj.dateOfBirth)) {
+          return '/assets/images/baby.png'
+        } else {
+
+          if (this.personObj.gender === 'boy') {
+            return '/assets/images/boy.png'
+          } else if (this.personObj.gender === 'girl') {
+            return '/assets/images/girl.png'
+          } else {
+            return '/assets/images/baby.png'
+          }
         }
-      }else{
+      } else {
         return '/assets/images/pet.png'
       }
     }
