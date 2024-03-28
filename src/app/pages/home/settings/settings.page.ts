@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { UserService } from '../../../common/services/user.service';
-import { LocalStorageService } from '../../../common/services/local-storage.service';
-import { LoaderService } from '../../../common/services/loader.service';
-import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
-import { ToasterService } from '../../../common/services/toaster.service';
-import { CommonService } from '../../../common/services/common.service';
-import { Share } from '@capacitor/share';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {UserService} from '../../../common/services/user.service';
+import {LocalStorageService} from '../../../common/services/local-storage.service';
+import {LoaderService} from '../../../common/services/loader.service';
+import {GoogleAuth} from '@codetrix-studio/capacitor-google-auth';
+import {ToasterService} from '../../../common/services/toaster.service';
+import {CommonService} from '../../../common/services/common.service';
+import {Share} from '@capacitor/share';
 
 @Component({
   selector: 'app-settings',
@@ -41,7 +41,6 @@ export class SettingsPage implements OnInit {
     private commonService: CommonService,
     private localStorageService: LocalStorageService
   ) {
-    this.avatarImg = 'https://ionicframework.com/docs/img/demos/avatar.svg';
   }
 
   ngOnInit() {
@@ -50,15 +49,26 @@ export class SettingsPage implements OnInit {
     });
   }
 
+  generateImg(data: any) {
+    if (data?.parentRole === 'mom') {
+      this.avatarImg = './assets/images/mom.png'
+    } else {
+      this.avatarImg = '/assets/images/dad.png'
+    }
+
+  }
+
   getUserData() {
     this.loaderService.showLoader();
     let email = this.localStorageService.getUserEmail();
     this.userService.getUserDataByEmail(email).subscribe({
       next: (r) => {
         console.log('r', r);
-        this.userInfo = r.value;
-        if (r.value.profilePicture) {
-          this.avatarImg = r.value.profilePicture;
+        this.userInfo = r;
+        if (r.profilePicture) {
+          this.avatarImg = r.profilePicture;
+        } else {
+          this.generateImg(r);
         }
         this.loaderService.hideLoader();
       },
@@ -88,6 +98,7 @@ export class SettingsPage implements OnInit {
       });
     }
   }
+
   async addPartner() {
     const canShare = await Share.canShare();
     let partnerId = this.localStorageService.getUserId();
@@ -99,9 +110,13 @@ export class SettingsPage implements OnInit {
         dialogTitle: 'Svet za nas',
       });
     } else {
-      this.toasterService.presentToast('Nije moguce korsititi ovaj feature na ovoj platformi','warning')
+      this.toasterService.presentToast(
+        'Nije moguce korsititi ovaj feature na ovoj platformi',
+        'warning'
+      );
     }
   }
+
   goBack() {
     this.commonService.goToRoute('home/profile');
   }
