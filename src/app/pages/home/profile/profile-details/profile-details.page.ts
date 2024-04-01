@@ -121,41 +121,55 @@ export class ProfileDetailsPage implements OnInit {
   }
 
   async generateLink() {
-    // if (this.weekPregnant && this.weekPregnant > 0) {
-    //   this.link = `${this.baseLInk}trudnoca/`
-    //   //todo here goes else ifs for nedelje trudnoce
-    // } else if (this.monthsOld && this.monthsOld > 0) {
-    //   if (this.monthsOld >= 0 && this.monthsOld <= 3) {
-    //     this.link = `${this.baseLInk}razvojna-mapa-0-3-meseca/`;
-    //   } else if (this.monthsOld >= 4 && this.monthsOld <= 6) {
-    //     this.link = `${this.baseLInk}razvojna-mapa-4-6-meseci/`;
-    //   } else if (this.monthsOld >= 7 && this.monthsOld <= 9) {
-    //     this.link = `${this.baseLInk}razvojna-mapa-7-9-meseci/`;
-    //   } else if (this.monthsOld >= 10 && this.monthsOld <= 12) {
-    //     this.link = `${this.baseLInk}razvojna-mapa-10-12-meseci/`;
-    //   } else if (this.monthsOld >= 13 && this.monthsOld <= 18) {
-    //     this.link = `${this.baseLInk}razvojna-mapa-13-18-meseci/`;
-    //   } else if (this.monthsOld >= 19 && this.monthsOld <= 24) {
-    //     this.link = `${this.baseLInk}razvojna-mapa-19-24-meseca/`;
-    //   } else if (this.monthsOld >= 25 && this.monthsOld <= 36) {
-    //     this.link = `${this.baseLInk}razvojna-mapa-25-36-meseci/`;
-    //   } else {
-    //     this.link = '';
-    //   }
-    // } else if (this.yearOld &&) {
-    //   if (date >= 3 && date <= 4) {
-    //     this.link = `${this.baseLInk}razvojna-mapa-3-4-godine/`;
-    //   } else if (date >= 4 && date <= 5) {
-    //     this.link = `${this.baseLInk}razvojna-mapa-4-5-godina/`;
-    //   } else if (date >= 5 && date <= 6) {
-    //     this.link = `${this.baseLInk}razvojna-mapa-5-6-godina/`;
-    //   } else if (date >= 6 && date <= 7) {
-    //     this.link = `${this.baseLInk}razvojna-mapa-6-7-godina/`;
-    //   } else {
-    //     this.link = '';
-    //   }
-    // }
-    this.link = 'https://www.vijesti.me/'
+    if (this.weekPregnant && this.weekPregnant > 0) {
+      if (this.weekPregnant >= 0 && this.weekPregnant <= 3) {
+        this.link = `${this.baseLInk}razvojna-mapa-0-3-meseca/`;
+      } else if (this.weekPregnant >= 4 && this.weekPregnant <= 6) {
+        this.link = `${this.baseLInk}razvojna-mapa-4-6-meseci/`;
+      } else if (this.weekPregnant >= 7 && this.weekPregnant <= 9) {
+        this.link = `${this.baseLInk}razvojna-mapa-7-9-meseci/`;
+      } else if (this.weekPregnant >= 10 && this.weekPregnant <= 12) {
+        this.link = `${this.baseLInk}razvojna-mapa-10-12-meseci/`;
+      } else if (this.weekPregnant >= 13 && this.weekPregnant <= 18) {
+        this.link = `${this.baseLInk}razvojna-mapa-13-18-meseci/`;
+      } else if (this.weekPregnant >= 19 && this.weekPregnant <= 24) {
+        this.link = `${this.baseLInk}razvojna-mapa-19-24-meseca/`;
+      } else if (this.weekPregnant >= 25 && this.weekPregnant <= 36) {
+        this.link = `${this.baseLInk}razvojna-mapa-25-36-meseci/`;
+      } else {
+        this.link = this.baseLInk;
+      }
+    } else {
+      if (this.monthsOld && this.monthsOld > 0) {
+        if (this.monthsOld >= 3 && this.monthsOld <= 4) {
+          this.link = `${this.baseLInk}razvojna-mapa-3-4-meseca/`;
+        } else if (this.monthsOld >= 4 && this.monthsOld <= 5) {
+          this.link = `${this.baseLInk}razvojna-mapa-4-5-meseci/`;
+        } else if (this.monthsOld >= 5 && this.monthsOld <= 6) {
+          this.link = `${this.baseLInk}razvojna-mapa-5-6-meseci/`;
+        } else if (this.monthsOld >= 6 && this.monthsOld <= 7) {
+          this.link = `${this.baseLInk}razvojna-mapa-6-7-meseci/`;
+        } else if (this.monthsOld >= 7 && this.monthsOld <= 8) {
+          this.link = `${this.baseLInk}razvojna-mapa-7-8-meseci/`;
+        } else if (this.monthsOld >= 8 && this.monthsOld <= 12) {
+          this.link = `${this.baseLInk}razvojna-mapa-8-12-meseci/`;
+        } else {
+          this.link = this.baseLInk;
+        }
+      } else {
+        if (this.yearOld >= 3 && this.yearOld <= 4) {
+          this.link = `${this.baseLInk}razvojna-mapa-3-4-godine/`;
+        } else if (this.yearOld >= 4 && this.yearOld <= 5) {
+          this.link = `${this.baseLInk}razvojna-mapa-4-5-godina/`;
+        } else if (this.yearOld >= 5 && this.yearOld <= 6) {
+          this.link = `${this.baseLInk}razvojna-mapa-5-6-godina/`;
+        } else if (this.yearOld >= 6 && this.yearOld <= 7) {
+          this.link = `${this.baseLInk}razvojna-mapa-6-7-godina/`;
+        } else {
+          this.link = '';
+        }
+      }
+    }
     const queryParams = encodeURIComponent(JSON.stringify(this.link));
     await this.router.navigate(['home/in-app-browser'], {queryParams: {data: queryParams}});
   }
