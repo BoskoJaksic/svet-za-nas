@@ -1,9 +1,5 @@
-import {Component, Input, NgZone, OnInit} from '@angular/core';
-import {filter, Subject, takeUntil} from "rxjs";
-import {ActivatedRoute, Event as NavigationEvent, NavigationEnd, Router,} from "@angular/router";
-import {CommonService} from "../../../common/services/common.service";
-import {UserService} from "../../../common/services/user.service";
-import {LocalStorageService} from "../../../common/services/local-storage.service";
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
 import {LoaderService} from "../../../common/services/loader.service";
 import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 
@@ -13,20 +9,16 @@ import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
   styleUrls: ['./in-app-browser.page.scss'],
 })
 export class InAppBrowserPage implements OnInit {
-  private firstLoad: boolean = true;
-  private destroy$: Subject<boolean> = new Subject<boolean>();
   children: any
   vidUrl!: SafeResourceUrl
-  baseUrl = 'https://promo.maxbet.rs/?tm=tt&ap=gads&aaid=ada5EZi66u4ZQ&gclid=Cj0KCQjwqpSwBhClARIsADlZ_TltatqhSBSQtwF96VbdqnmXcb4C51noNp5NGjaicWnRuO5aqR1o0aEaArl0EALw_wcB'
+  // baseUrl = 'https://svetzanas.rs/kategorija-nezno-doba/'
 
-  constructor(private router: Router,
-              private ngZone: NgZone,
-              private commonService: CommonService,
-              private loaderService: LoaderService,
-              private localStorageService: LocalStorageService,
-              private userService: UserService,
-              private domSanitizer: DomSanitizer,
-              private activatedRoute: ActivatedRoute) {
+  baseUrl = 'https://www.vijesti.me/'
+
+  constructor(
+    private loaderService: LoaderService,
+    private domSanitizer: DomSanitizer,
+    private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -47,10 +39,9 @@ export class InAppBrowserPage implements OnInit {
         // Handle if 'data' parameter is missing
         this.vidUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.baseUrl);
       }
-      console.log('link to host:', this.vidUrl);
       setTimeout(() => {
         this.loaderService.hideLoader();
-      }, 100);
+      }, 200);
     });
   }
 }
