@@ -6,6 +6,7 @@ import {AppPathService} from "./common/services/app-path.service";
 import {GoogleAuth} from "@codetrix-studio/capacitor-google-auth";
 import {CommonService} from "./common/services/common.service";
 import {Router} from "@angular/router";
+import {FacebookLogin} from "@capacitor-community/facebook-login";
 
 @Component({
   selector: 'app-root',
@@ -30,6 +31,7 @@ export class AppComponent {
     this.platform.ready().then(() => {
       if (!isPlatform('capacitor')) {
         GoogleAuth.initialize();
+        FacebookLogin.initialize({ appId: '1160818081589095' });
       }
       // this.splashScreen.hide();
     });
@@ -43,7 +45,7 @@ export class AppComponent {
       // todo uncomment this for production
       let url = window.location.href;
       let slug = url.split(".eu/");
-      // let slug = url.split("localhost:4200/");
+      // let slug = url.split("localhost:8101/");
 
       let appPath = slug.pop()
       console.log('appPath', appPath)

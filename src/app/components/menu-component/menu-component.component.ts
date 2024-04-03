@@ -4,9 +4,7 @@ import {NavigationEnd, Router} from "@angular/router";
 import {CommonService} from "../../common/services/common.service";
 import {GoogleAuth} from "@codetrix-studio/capacitor-google-auth";
 import {LocalStorageService} from "../../common/services/local-storage.service";
-import {ToasterService} from "../../common/services/toaster.service";
-import {UserService} from "../../common/services/user.service";
-import {LoaderService} from "../../common/services/loader.service";
+import {FacebookLogin} from "@capacitor-community/facebook-login";
 
 @Component({
   selector: 'app-menu-component',
@@ -48,8 +46,9 @@ export class MenuComponentComponent implements OnInit {
   }
 
 
-  logout() {
-    GoogleAuth.signOut();
+  async logout() {
+    await GoogleAuth.signOut();
+    await FacebookLogin.logout();
     this.localStorageService.clearLocalStorage();
     this.commonService.goToRoute('');
   }

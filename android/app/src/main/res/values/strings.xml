@@ -5,4 +5,6 @@
   <string name="package_name">com.bebac.app</string>
   <string name="custom_url_scheme">io.ionic.starter</string>
   <string name="server_client_id">211967449887-99mtov0ld9urj5hl0oksi2579k7u8jt5.apps.googleusercontent.com</string>
+  <string name="facebook_app_id">1160818081589095</string>
+  <string name="facebook_client_token">94d29e5420c4d7812a7d8295f36032a5</string>
 </resources>

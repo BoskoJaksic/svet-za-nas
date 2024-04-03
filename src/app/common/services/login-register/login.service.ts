@@ -15,4 +15,8 @@ export class LoginService {
   googleLoginIn(data: any): Observable<any> {
     return this.apiService.post('ApplicationUsers/GoogleLogin', data);
   }
+
+  facebookLoginIn(token: any): Observable<any> {
+    return this.apiService.post(`ApplicationUsers/FacebookLogin/${token}`, token);
+  }
 }
