@@ -137,23 +137,4 @@ export class LoginComponent implements OnInit {
     }
     console.log('result', result)
   }
-
-  // async getCurrentToken() {
-  //   const result = await FacebookLogin.getCurrentAccessToken();
-  //
-  //   if (result.accessToken) {
-  //     this.token = result.accessToken;
-  //     await this.loadUserData();
-  //   } else {
-  //     // Not logged in.
-  //   }
-  // }
-  //
-  // async loadUserData() {
-  //   console.log('load user data', this.token)
-  //   const url = `https://graph.facebook.com/${this.token.userId}?fields=id,email&access_token=${this.token.token}`;
-  //   this.http.get(url).subscribe(res => {
-  //     console.log('user',res)
-  //   });
-  // }
 }
