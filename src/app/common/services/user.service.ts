@@ -11,7 +11,7 @@ export class UserService {
 
   constructor(private apiService: ApiService,
               private localStorageService: LocalStorageService
-              ) {
+  ) {
   }
 
   getUserDataByEmail(email: any): Observable<any> {
@@ -27,14 +27,16 @@ export class UserService {
     return !!userToken;
   }
 
-  getRefreshToken(userRefreshToken:any){
-    return this.apiService.post('ApplicationUsers/RefreshToken',userRefreshToken);
-  }
-  changeUserImg(obj:any){
-    return this.apiService.post('FileUpload/ChangeProfilePicture',obj);
+  getRefreshToken(userRefreshToken: any) {
+    return this.apiService.post('ApplicationUsers/RefreshToken', userRefreshToken);
   }
 
-  addChild(obj:any){
-    return this.apiService.post('Children/AddChild',obj);
+  changeUserImg(obj: any) {
+    return this.apiService.post('FileUpload/ChangeProfilePicture', obj);
   }
+
+  addChild(obj: any) {
+    return this.apiService.post('Children/AddChild', obj);
+  }
+
 }

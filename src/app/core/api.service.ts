@@ -9,8 +9,8 @@ import {environment} from "../../environments/environment";
 })
 export class ApiService {
 
-  // baseUrl = environment.baseURL
-  baseUrl = this.getApiUrl();
+  baseUrl = environment.baseURL
+  // baseUrl = this.getApiUrl();
 
   constructor(private http: HttpClient, private platform: Platform) {
   }
@@ -25,7 +25,7 @@ export class ApiService {
       // 10.0.2.2 emulator
       return 'http://10.0.2.2:5001/api/';
     } else if (this.platform.is('ios')) {
-      return 'http://127.0.0.1:5001/api/';
+      return 'http://localhost:5001/api/';
     } else {
       // Default URL for other platforms or when running in the browser
       return 'http://localhost:5001/api/';
