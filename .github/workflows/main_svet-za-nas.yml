@@ -22,7 +22,7 @@ jobs:
           node-version: '18.18.0'
 
       - name: Install npm
-        run: npm install
+        run: npm install 
       - name: Install Angular CLI
         run: npm install @angular/cli
       - name: Install Ionic CLI
@@ -33,11 +33,11 @@ jobs:
       - name: Copy .well-known directory
         run: |
           cp .well-known/assetlinks.json www/ |
-           cp .well-known/apple-app-site-association www/
+          cp .well-known/apple-app-site-association www/
       - name: Copy staticwebapp.config.json to www folder
         run: |
-         cp staticwebapp.config.json www/staticwebapp.config.json
-
+         cp staticwebapp.config.json www/staticwebapp.config.json 
+      
 
       - name: Zip artifact for deployment
         run:  zip -r release.zip ./www/*
