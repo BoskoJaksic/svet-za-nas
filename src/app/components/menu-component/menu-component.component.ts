@@ -48,7 +48,9 @@ export class MenuComponentComponent implements OnInit {
 
   async logout() {
     await GoogleAuth.signOut();
-    await FacebookLogin.logout();
+    if (this.localStorageService.getIsFromFacebookLoggedIn() === 'true'){
+      await FacebookLogin.logout();
+    }
     this.localStorageService.clearLocalStorage();
     this.commonService.goToRoute('');
   }

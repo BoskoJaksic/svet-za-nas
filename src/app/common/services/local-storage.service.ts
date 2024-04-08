@@ -44,5 +44,13 @@ export class LocalStorageService {
   clearLocalStorage() {
     localStorage.clear();
   }
+
+  setIsFromFacebookLoggedIn(isFromFb: any) {
+    localStorage.setItem('isFromFb', isFromFb);
+  }
+
+  getIsFromFacebookLoggedIn() {
+    return localStorage.getItem('isFromFb');
+  }
 }
 

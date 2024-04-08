@@ -21,7 +21,7 @@
   <div class="center-content">
     <span class="size-16-400" style="color: #1A154C">{{message}}</span>
   </div>
-  <div *ngIf="!receivedObject.parentRole" class="center-content" style="margin-bottom: 20px;margin-top: 20px">
+  <div *ngIf="!receivedObject.parentRole && !receivedObject.pets" class="center-content" style="margin-bottom: 20px;margin-top: 20px">
     <ion-button (click)="generateLink()" fill="outline">Saznajte vise...</ion-button>
   </div>
   <div class="center-content">
