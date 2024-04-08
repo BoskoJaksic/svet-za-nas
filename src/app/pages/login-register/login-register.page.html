@@ -27,10 +27,10 @@
           <ion-button *ngIf="currentStep !== 3" expand="full" type="submit" shape="round" mode="ios" class="login-button" (click)="nextStep()"><span class="size20-800">Sledeci korak</span>
             <ion-icon name="chevron-forward-outline" size="large" style="color: white"></ion-icon>
           </ion-button>
-          <div class="center-content" style="margin-top: 10px;" *ngIf="currentStep != 1">
+          <div class="center-content cursor-pointer" style="margin-top: 10px;" *ngIf="currentStep != 1">
             <span class="size14-900" (click)="prevStep()">Prethodni korak</span>
           </div>
-          <div class="center-content" style="margin-top: 10px;">
+          <div class="center-content cursor-pointer" style="margin-top: 10px;">
             <span class="size14-900" (click)="goToLogin()">Vec imas nalog?</span>
           </div>
         </div>
@@ -47,7 +47,7 @@
     <div class="div-component-partner">
       <app-step1></app-step1>
     </div>
-    <ion-button expand="full" type="submit" shape="round" mode="ios" class="login-button" (click)="registerPartner()">
+    <ion-button expand="full" type="submit" shape="round" mode="ios" class="login-button cursor-pointer" (click)="registerPartner()">
       <ion-spinner *ngIf="registerSpinner"></ion-spinner>
       <span class="size20-800">Registruj se</span>
     </ion-button>
