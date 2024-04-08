@@ -37,3 +37,7 @@
   justify-content: center;
 
 }
+.div-component::-webkit-scrollbar {
+  width: 0;
+  background: transparent; /* Optional: Hide scrollbar track */
+}
