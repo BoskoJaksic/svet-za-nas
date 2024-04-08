@@ -6,6 +6,7 @@ import {DatePipe} from "@angular/common";
 import {LocalStorageService} from "../../../common/services/local-storage.service";
 import {UserService} from "../../../common/services/user.service";
 import {LoaderService} from "../../../common/services/loader.service";
+import {ToasterService} from "../../../common/services/toaster.service";
 
 @Component({
   selector: 'app-add-child-modal',
@@ -29,6 +30,7 @@ export class AddChildModalComponent implements OnInit {
               private localStorageService: LocalStorageService,
               private userService: UserService,
               private loaderService:LoaderService,
+              private toasterService:ToasterService,
               private datePipe: DatePipe,) {
   }
 
@@ -49,6 +51,10 @@ export class AddChildModalComponent implements OnInit {
   }
 
   confirm() {
+    if (!this.gender || !this.name){
+      this.toasterService.presentToast('Forma nije validna','warning');
+      return;
+    }
     const date2 = new Date(`${(this.birthMonth)} ${this.birthDate}, ${this.birthYear}`);
     let dateOfBirth = this.datePipe.transform(date2, 'yyyy-MM-dd');
     // @ts-ignore

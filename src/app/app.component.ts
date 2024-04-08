@@ -31,7 +31,7 @@ export class AppComponent {
     this.platform.ready().then(() => {
       if (!isPlatform('capacitor')) {
         GoogleAuth.initialize();
-        FacebookLogin.initialize({ appId: '1160818081589095' });
+        FacebookLogin.initialize({appId: '1160818081589095'});
       }
       // this.splashScreen.hide();
     });
@@ -45,14 +45,17 @@ export class AppComponent {
       // todo uncomment this for production
       let url = window.location.href;
       let slug = url.split(".eu/");
-      // let slug = url.split("localhost:8101/");
+      // let slug = url.split("localhost:8100/");
 
       let appPath = slug.pop()
       console.log('appPath', appPath)
-
+      if (appPath === 'login-register/false') {
+        this.router.navigate([`login-register/false`]);
+        return;
+      }
       if (appPath !== '') {
         this.router.navigate([`login-register/${appPath}`]);
-      }else{
+      } else {
         this.router.navigate([`login-register/false`]);
       }
 
@@ -65,7 +68,7 @@ export class AppComponent {
 
           if (appPath !== '') {
             this.router.navigate([`login-register/${appPath}`]);
-          }else{
+          } else {
             this.router.navigate([`login-register/false`]);
           }
         });

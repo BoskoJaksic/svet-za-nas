@@ -67,6 +67,8 @@ export class LoginComponent implements OnInit {
         this.localStorageService.setUserEmail(this.email);
         this.localStorageService.setUserToken(r.accessToken);
         this.localStorageService.setUserRefreshToken(r.refreshToken);
+        this.localStorageService.setIsFromFacebookLoggedIn(false);
+
         this.commonService.goToRoute('home');
         this.loginSpinner = false;
       },
@@ -100,6 +102,7 @@ export class LoginComponent implements OnInit {
         this.localStorageService.setUserEmail(decodedToken.email);
         this.localStorageService.setUserToken(r.accessToken);
         this.localStorageService.setUserRefreshToken(r.refreshToken);
+        this.localStorageService.setIsFromFacebookLoggedIn(false);
         setTimeout(() => {
           this.commonService.goToRoute('home');
         }, 200);
@@ -124,6 +127,7 @@ export class LoginComponent implements OnInit {
           this.localStorageService.setUserEmail(decodedToken.email);
           this.localStorageService.setUserToken(r.accessToken);
           this.localStorageService.setUserRefreshToken(r.refreshToken);
+          this.localStorageService.setIsFromFacebookLoggedIn(true);
           setTimeout(() => {
             this.commonService.goToRoute('home');
           }, 200);
