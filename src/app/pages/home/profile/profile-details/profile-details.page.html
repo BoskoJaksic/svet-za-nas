@@ -1,3 +1,5 @@
+<!--<app-menu-button pageTitle="Detalji"></app-menu-button>-->
+
 <div class="main-content" style="padding-top: 30px">
   <app-our-world></app-our-world>
   <div class="center-content" style="margin-top: 15px">
@@ -28,7 +30,7 @@
     <img ngSrc="./assets/images/cake.png" height="45" width="36"> <span class="size-16-400 span-cake">{{ receivedObject?.dateOfBirth }}</span>
   </div>
   <div class="button-content">
-    <ion-button expand="full" type="submit" shape="round" mode="ios" class="backButton" (click)="goBack()">
+    <ion-button expand="full" type="submit" shape="round" mode="ios" class="backButton" (click)="goBack()" style="width: 50%">
       <ion-icon name="chevron-back-outline" style="color: white"></ion-icon>
       <span class="size20-800">Nazad</span></ion-button>
   </div>

@@ -1,14 +1,13 @@
-.selected-item {
+
+.item-clicked {
   --ion-item-background: var(--ion-color-primary) !important;
-  color: var(--ion-color-background) !important;
+  color: white;
 }
-
-
 
 .ion-item-style {
   --border-radius: 20px;
   width: 77%;
-  color: var(--ion-color-secondary);
+  //color: var(--ion-color-secondary);
   margin-bottom: 2em;
 }
 
@@ -31,7 +30,7 @@ ion-avatar {
   margin-top: 2em;
 }
 
-.logout-button{
+.logout-button {
   width: 70%;
   --background-hover: var(--background);
 

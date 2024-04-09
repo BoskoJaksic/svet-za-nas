@@ -1,4 +1,4 @@
-<app-menu-button></app-menu-button>
+<app-menu-button pageTitle="Podesavanja"></app-menu-button>
 <ion-content class="container">
   <app-our-world></app-our-world>
   <div class="center-content">
@@ -12,15 +12,18 @@
   </div>
 
   <div class="margin-top">
-    <ion-button fill="clear" color="secondary" (click)="addPartner()">
-      <ion-icon name="add" slot="start" style="margin-right: 10px"></ion-icon>
-      <span class="checkout-text">  Dodaj partnera</span>
-    </ion-button>
-    <br>
-    <ion-button fill="clear" color="secondary" id="present-alert">
-      <ion-icon name="trash-bin-outline" slot="start" style="margin-right: 10px"></ion-icon>
-      <span class="checkout-text">  Obrisi nalog</span>
-    </ion-button>
+    <div class="center-content">
+      <ion-button fill="outline" color="secondary" (click)="addPartner()" >
+        <ion-icon name="add" slot="start" style="margin-right: 10px"></ion-icon>
+        <span class="checkout-text">  Dodaj partnera</span>
+      </ion-button>
+    </div>
+    <div class="center-content">
+      <ion-button fill="clear" color="secondary" id="present-alert" >
+        <ion-icon name="trash-bin-outline" slot="start" style="margin-right: 10px"></ion-icon>
+        <span class="checkout-text">  Obrisi nalog</span>
+      </ion-button>
+    </div>
     <ion-alert
       trigger="present-alert"
       header="Upozorenje!"

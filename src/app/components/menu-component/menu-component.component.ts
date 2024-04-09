@@ -15,7 +15,6 @@ export class MenuComponentComponent implements OnInit {
 
   pageTitle: string = '';
   @Input() sidebarsUrl: any;
-  selectedPageUrl: string = '';
 
   constructor(private router: Router,
               private localStorageService: LocalStorageService,
@@ -23,14 +22,6 @@ export class MenuComponentComponent implements OnInit {
   ) {
 
   }
-
-  SIZE_TO_MEDIA: any = {
-    'xs': '(min-width: 0px)',
-    'sm': '(min-width: 576px)',
-    'md': '(min-width: 768px)',
-    'lg': '(min-width: 992px)',
-    'xl': '(min-width: 1200px)',
-  };
 
   ngOnInit() {
     this.router.events.pipe(
@@ -41,7 +32,6 @@ export class MenuComponentComponent implements OnInit {
       route.data.subscribe((data: any) => {
         this.pageTitle = data['title'];
       });
-      this.selectedPageUrl = this.router.url;
     });
   }
 
@@ -53,26 +43,6 @@ export class MenuComponentComponent implements OnInit {
     }
     this.localStorageService.clearLocalStorage();
     this.commonService.goToRoute('');
-  }
-
-
-
-  toggleNav() {
-    const splitPane = document.querySelector('ion-split-pane')
-    const matchBreakpoint = (breakpoint: string | undefined) => {
-      if (breakpoint === undefined || breakpoint === '') {
-        return true;
-      }
-      if ((window as any).matchMedia) {
-        const mediaQuery = this.SIZE_TO_MEDIA[breakpoint];
-        return window.matchMedia(mediaQuery).matches;
-      }
-      return false;
-    };
-    if (matchBreakpoint('md')) {
-      // @ts-ignore
-      splitPane.classList.toggle('split-pane-visible')
-    }
   }
 
 }
