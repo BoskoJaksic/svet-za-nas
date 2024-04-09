@@ -11,15 +11,16 @@
         <ion-list style="flex: 1;">
           <ion-menu-toggle auto-hide="false" *ngFor="let sidebar of sidebarsUrl">
             <ion-item lines="none" detail="false" [routerLink]="[sidebar.pageUrl]" class="ion-item-style"
-                      [ngClass]="{ 'selected-item': sidebar.pageUrl === selectedPageUrl }">
-              <ion-icon slot="start" [name]="sidebar.iconSrc" style="margin-right: 10px"></ion-icon>
+                      routerLinkActive="item-clicked"
+                      >
+              <ion-icon slot="start" [name]="sidebar.iconSrc" style="margin-right: 10px;"  routerLinkActive="item-clicked"></ion-icon>
               {{ sidebar.name }}
             </ion-item>
           </ion-menu-toggle>
         </ion-list>
 
-        <ion-button  fill="clear" (click)="logout()" class="logout-button">
-          <ion-icon name="log-out-outline" style="margin-right: 10px"  slot="start"></ion-icon>
+        <ion-button fill="clear" (click)="logout()" class="logout-button">
+          <ion-icon name="log-out-outline" style="margin-right: 10px" slot="start"></ion-icon>
           Odjavi me
         </ion-button>
 
