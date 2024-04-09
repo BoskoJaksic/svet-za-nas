@@ -39,7 +39,8 @@ export class AppComponent {
 
   // determinePlatform() {
   //   this.isWebPlatform = this.commonService.determinePlatform() === 'web';
-  // }
+  // } todo login-register/false  login-register/id  home/profile home/in-app-browser home/settings
+
   deepLinkApp() {
     if (this.commonService.determinePlatform() === 'web') {
       // todo uncomment this for production
@@ -53,10 +54,14 @@ export class AppComponent {
         this.router.navigate([`login-register/false`]);
         return;
       }
+      if (appPath?.startsWith('home')){
+        this.router.navigate([appPath]);
+        return;
+      }
+
       if (appPath !== '') {
         this.router.navigate([`login-register/${appPath}`]);
-      } else {
-        this.router.navigate([`login-register/false`]);
+        return;
       }
 
     } else {
