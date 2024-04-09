@@ -20,11 +20,13 @@
           </div>
         </app-custom-stepper>
         <div>
-          <ion-button *ngIf="currentStep === 3" expand="full" type="submit" shape="round" mode="ios" class="login-button" (click)="register()">
+          <ion-button *ngIf="currentStep === 3" expand="full" type="submit" shape="round" mode="ios"
+                      class="login-button" (click)="register()">
             <ion-spinner *ngIf="registerSpinner"></ion-spinner>
             <span class="size20-800">Registruj se</span>
           </ion-button>
-          <ion-button *ngIf="currentStep !== 3" expand="full" type="submit" shape="round" mode="ios" class="login-button" (click)="nextStep()"><span class="size20-800">Sledeci korak</span>
+          <ion-button *ngIf="currentStep !== 3" expand="full" type="submit" shape="round" mode="ios"
+                      class="login-button" (click)="nextStep()"><span class="size20-800">Sledeci korak</span>
             <ion-icon name="chevron-forward-outline" size="large" style="color: white"></ion-icon>
           </ion-button>
           <div class="center-content cursor-pointer" style="margin-top: 10px;" *ngIf="currentStep != 1">
@@ -47,9 +49,12 @@
     <div class="div-component-partner">
       <app-step1></app-step1>
     </div>
-    <ion-button expand="full" type="submit" shape="round" mode="ios" class="login-button cursor-pointer" (click)="registerPartner()">
-      <ion-spinner *ngIf="registerSpinner"></ion-spinner>
-      <span class="size20-800">Registruj se</span>
-    </ion-button>
+    <div class="center-content">
+      <ion-button expand="full" type="submit" shape="round" mode="ios" class="login-button cursor-pointer" style="width: 50%"
+                  (click)="registerPartner()">
+        <ion-spinner *ngIf="registerSpinner"></ion-spinner>
+        <span class="size20-800">Registruj se</span>
+      </ion-button>
+    </div>
   </ng-container>
 </ion-content>
