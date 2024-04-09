@@ -18,14 +18,14 @@ export class SettingsPage implements OnInit {
   userInfo: any;
   public alertButtons = [
     {
-      text: 'Ponisti',
+      text: 'Poništi',
       role: 'cancel',
       handler: () => {
         console.log('Alert canceled');
       },
     },
     {
-      text: 'Obrisi',
+      text: 'Obriši',
       role: 'confirm',
       handler: () => {
         console.log('Alert confirmed');
