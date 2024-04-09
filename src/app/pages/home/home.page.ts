@@ -19,7 +19,7 @@ export class HomePage implements OnInit {
     },
     {
       pageUrl:'settings',
-      name:"Podesavanja",
+      name:"Podešavanja",
       iconSrc:"settings-outline"
     }
   ]

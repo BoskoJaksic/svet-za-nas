@@ -1,4 +1,4 @@
-<app-menu-button pageTitle="Podesavanja"></app-menu-button>
+<app-menu-button pageTitle="Podesšavanja"></app-menu-button>
 <ion-content class="container">
   <app-our-world></app-our-world>
   <div class="center-content">
@@ -21,14 +21,14 @@
     <div class="center-content">
       <ion-button fill="clear" color="secondary" id="present-alert" >
         <ion-icon name="trash-bin-outline" slot="start" style="margin-right: 10px"></ion-icon>
-        <span class="checkout-text">  Obrisi nalog</span>
+        <span class="checkout-text">  Obriši nalog</span>
       </ion-button>
     </div>
     <ion-alert
       trigger="present-alert"
       header="Upozorenje!"
-      subHeader="Da li ste sigurni da zelite da obrisete Vas nalog?"
-      message="Radeci ovo svi Vasi podaci bice obrisani iz nase baze!"
+      subHeader="Da li ste sigurni da želite da obrišete nalog?"
+      message="Radeci ovo svi Vaši podaci bice obrisani iz naše baze!"
       [buttons]="alertButtons"
       (didDismiss)="deleteAccount($event)"
     ></ion-alert>
