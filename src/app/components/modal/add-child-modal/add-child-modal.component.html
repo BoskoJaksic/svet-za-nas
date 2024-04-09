@@ -1,5 +1,5 @@
 <ion-content>
-  <div class="center-content ion-padding-top size16-900">Dodaj dete</div>
+  <div class="center-content ion-padding-top size16-900" [ngClass]="{'margin-top':commonService.isIos()}">Dodaj dete</div>
   <div class="main-content">
     <div class="child-form">
       <div class="icon-class">
@@ -7,20 +7,20 @@
         <span class="size16-600 text-color">VTP/Datum rodjenja deteta</span>
       </div>
       <div style="display: flex;justify-content: space-around">
-        <ion-item lines="none" shape="round" fill="outline" style="width: 23%" mode="md">
+        <ion-item lines="none" shape="round" fill="outline" style="width: 30%" mode="md">
           <ion-select aria-label="birthDay" interface="popover" mode="ios" [(ngModel)]="birthDate">
             <ion-select-option *ngFor="let day of days" [value]="day">{{ day }}</ion-select-option>
           </ion-select>
         </ion-item>
 
-        <ion-item lines="none" shape="round" fill="outline" style="width: 25%" mode="md">
+        <ion-item lines="none" shape="round" fill="outline" style="width: 33%" mode="md">
           <ion-select aria-label="birthMonth" interface="popover" mode="ios" [(ngModel)]="birthMonth">
             <ion-select-option *ngFor="let month of abbreviatedMonths; let i = index" [value]="months[i]">{{ month }}
             </ion-select-option>
           </ion-select>
         </ion-item>
 
-        <ion-item lines="none" shape="round" fill="outline" style="width: 27%" mode="md">
+        <ion-item lines="none" shape="round" fill="outline" style="width: 35%" mode="md">
           <ion-select aria-label="birthYear" interface="popover" mode="ios" [(ngModel)]="birthYear">
             <ion-select-option *ngFor="let year of years" [value]="year">{{ year }}</ion-select-option>
           </ion-select>

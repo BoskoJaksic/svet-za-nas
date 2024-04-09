@@ -7,6 +7,7 @@ import {LocalStorageService} from "../../../common/services/local-storage.servic
 import {UserService} from "../../../common/services/user.service";
 import {LoaderService} from "../../../common/services/loader.service";
 import {ToasterService} from "../../../common/services/toaster.service";
+import {CommonService} from "../../../common/services/common.service";
 
 @Component({
   selector: 'app-add-child-modal',
@@ -30,6 +31,7 @@ export class AddChildModalComponent implements OnInit {
               private localStorageService: LocalStorageService,
               private userService: UserService,
               private loaderService:LoaderService,
+              public commonService:CommonService,
               private toasterService:ToasterService,
               private datePipe: DatePipe,) {
   }
