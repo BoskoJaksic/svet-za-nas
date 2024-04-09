@@ -76,7 +76,6 @@
   padding:40px;
   display: flex;
   flex-direction: column;
-  height: 100vh; /* Postavite visinu na 100% visine prozora pregledača */
 }
 
 .child-form {
@@ -92,4 +91,7 @@
   display: flex;
   justify-content: space-between; /* Podeli gumbe na dva kraja */
   padding: 20px; /* Dodajte malo prostora oko gumba */
+}
+.margin-top{
+  margin-top:25px
 }
