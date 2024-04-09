@@ -26,14 +26,14 @@
             <span class="size20-800">Registruj se</span>
           </ion-button>
           <ion-button *ngIf="currentStep !== 3" expand="full" type="submit" shape="round" mode="ios"
-                      class="login-button" (click)="nextStep()"><span class="size20-800">Sledeci korak</span>
+                      class="login-button" (click)="nextStep()"><span class="size20-800">Sledeći korak</span>
             <ion-icon name="chevron-forward-outline" size="large" style="color: white"></ion-icon>
           </ion-button>
           <div class="center-content cursor-pointer" style="margin-top: 10px;" *ngIf="currentStep != 1">
             <span class="size14-900" (click)="prevStep()">Prethodni korak</span>
           </div>
           <div class="center-content cursor-pointer" style="margin-top: 10px;">
-            <span class="size14-900" (click)="goToLogin()">Vec imas nalog?</span>
+            <span class="size14-900" (click)="goToLogin()">Već imaš nalog?</span>
           </div>
         </div>
       </div>
