@@ -45,8 +45,8 @@ export class AppComponent {
     if (this.commonService.determinePlatform() === 'web') {
       // todo uncomment this for production
       let url = window.location.href;
-      let slug = url.split(".eu/");
-      // let slug = url.split("localhost:8100/");
+      // let slug = url.split(".eu/");
+      let slug = url.split("localhost:8100/");
 
       let appPath = slug.pop()
       console.log('appPath', appPath)

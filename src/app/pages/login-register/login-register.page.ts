@@ -46,8 +46,6 @@ export class LoginRegisterPage implements OnInit {
       if (this.showRegisterPartner ){
         this.partnerId = paramId;
       }
-      console.log('partnerId', paramId)
-      console.log('showRegisterPartner', this.showRegisterPartner)
 
     })
   }
@@ -137,10 +135,8 @@ export class LoginRegisterPage implements OnInit {
       if (step3Data.role === '' || step3Data.role === null) {
         dataToSend.pets = []
       }
-      console.log(dataToSend)
       this.registerService.registerUser(dataToSend).subscribe({
         next: (r) => {
-          console.log('r', r)
           this.resetFormValues();
           this.toasterService.presentToast('Registracija uspesna', 'success');
           this.registerSpinner = false;
@@ -172,11 +168,8 @@ export class LoginRegisterPage implements OnInit {
       firstParentId: this.partnerId
     }
 
-    console.log('register p', dataToSend)
-
     this.registerService.registerPartner(dataToSend).subscribe({
       next: (r) => {
-        console.log('r', r)
         this.resetFormValues();
         this.toasterService.presentToast('Registracija uspesna', 'success');
         this.registerSpinner = false;

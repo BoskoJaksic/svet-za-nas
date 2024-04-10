@@ -54,18 +54,8 @@ export class LoginComponent implements OnInit {
       rememberMe: this.rememberMe,
     };
     this.loginSpinner = true;
-    console.log(formData);
     this.loginService.loginUser(formData).subscribe({
       next: (r) => {
-        console.log('r', r);
-        // if (r.statusCode === 401) {
-        //   this.toasterService.presentToast(
-        //     'Pogresni kredencijali ili korisnik nije autorizovan',
-        //     'warning'
-        //   );
-        //   this.loginSpinner = false;
-        //   return;
-        // }
         this.localStorageService.setUserEmail(this.email);
         this.localStorageService.setUserToken(r.accessToken);
         this.localStorageService.setUserRefreshToken(r.refreshToken);
@@ -75,15 +65,8 @@ export class LoginComponent implements OnInit {
         this.loginSpinner = false;
       },
       error: (err) => {
-        // if (err.status === 500) {
-        //   {
-        //     this.toasterService.presentToast('Pogresni kredencijali ili korisnik nije autorizovan', 'warning')
-        //   }
-        // }
-        // this.toasterService.presentToast(err.error[0], 'warning');
         this.loginSpinner = false;
         this.errorMessage = err.message;
-        console.log('err', err);
       },
     });
   }
@@ -91,7 +74,6 @@ export class LoginComponent implements OnInit {
   async googleLogin() {
     this.loaderService.showLoader()
     GoogleAuth.signIn().then(r => {
-      console.log('user', r)
       const user = r
       let dataToSend = {
         email: user.email,
@@ -101,7 +83,6 @@ export class LoginComponent implements OnInit {
       this.errorMessage = user.email;
       this.loginService.googleLoginIn(dataToSend).subscribe({
         next: (r) => {
-          console.log('loginresp', r);
           const decodedToken = jwtDecode(r.accessToken);
           // @ts-ignore
           this.localStorageService.setUserEmail(decodedToken.email);
@@ -114,14 +95,11 @@ export class LoginComponent implements OnInit {
           }, 200);
         },
         error: (err) => {
-          console.log('login err', err);
           this.errorMessage = err.message;
           this.loaderService.hideLoader()
         },
       });
-      console.log('gogle user', user);
     }, (e: any) => {
-      console.log('rejected', e)
       this.loaderService.hideLoader()
     })
   }
@@ -132,7 +110,6 @@ export class LoginComponent implements OnInit {
       if (result.accessToken) {
         this.loginService.facebookLoginIn(result.accessToken.token).subscribe({
           next: (r) => {
-            console.log('fb login resp', r);
             const decodedToken = jwtDecode(r.accessToken);
             // @ts-ignore
             this.localStorageService.setUserEmail(decodedToken.email);
@@ -147,7 +124,6 @@ export class LoginComponent implements OnInit {
           },
           error: (err) => {
             this.loaderService.hideLoader()
-            console.log('login err', err);
             this.errorMessage = err.message;
             this.toasterService.presentToast(err.error[0], 'warning')
           },
@@ -156,7 +132,6 @@ export class LoginComponent implements OnInit {
         this.loaderService.hideLoader()
       }
     }, (e: any) => {
-      console.log('fb err', e)
       this.loaderService.hideLoader()
     })
   }

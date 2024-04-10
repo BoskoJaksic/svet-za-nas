@@ -63,7 +63,6 @@ export class SettingsPage implements OnInit {
     let email = this.localStorageService.getUserEmail();
     this.userService.getUserDataByEmail(email).subscribe({
       next: (r) => {
-        console.log('r', r);
         this.userInfo = r;
         if (r.profilePicture) {
           this.avatarImg = r.profilePicture;
