@@ -8,7 +8,7 @@
       <app-avatar *ngIf="otherParent" [personObj]="otherParent"></app-avatar>
     </div>
     <div class="avatar-container">
-      <div class="avatar-row">
+      <div [ngClass]="{ 'single-child': children.length === 1, 'avatar-row': children.length > 1 }">
         <app-avatar *ngFor="let child of children.slice(0, 3)" [personObj]="child"></app-avatar>
       </div>
       <div class="avatar-row">
