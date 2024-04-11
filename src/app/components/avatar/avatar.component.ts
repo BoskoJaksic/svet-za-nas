@@ -32,7 +32,7 @@ export class AvatarComponent implements OnInit {
       const daysUntilDueDate = Math.floor((givenDate.getTime() - currentDate.getTime()) / oneDay);
       const weeksUntilDueDate = Math.floor(daysUntilDueDate / 7);
       const weeksPregnant = 40 - weeksUntilDueDate;
-      this.message = `${weeksPregnant} nedelja trudnaoce`;
+      this.message = `${weeksPregnant} nedelja trudnoće`;
     } else {
       const monthsOld = Math.floor((currentDate.getTime() - givenDate.getTime()) / (30 * oneDay));
       if (monthsOld < 12) {
