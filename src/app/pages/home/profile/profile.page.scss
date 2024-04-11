@@ -71,6 +71,11 @@
   width: 100%;
 }
 
+.single-child{
+  display: flex;
+  justify-content: flex-start;
+}
+
 .avatar-row {
   display: flex;
   justify-content: space-around;
