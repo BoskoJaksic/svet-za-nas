@@ -1,50 +1,5 @@
 <app-menu-button pageTitle="Profil"></app-menu-button>
 <ion-content>
-  <!--  <app-our-world></app-our-world>-->
-  <!--  <div class="tree-class">-->
-  <!--    <div style="display: flex; width: 100%">-->
-  <!--      <ion-grid style="width: 100%;">-->
-  <!--        <ion-row class="parent-class-row">-->
-  <!--          <ion-col style="width: 100%">-->
-  <!--            <div class="parent-div">-->
-  <!--              <app-avatar *ngIf="parent" [personObj]="parent"></app-avatar>-->
-  <!--            </div>-->
-  <!--          </ion-col>-->
-  <!--          <ion-col style="width: 100%">-->
-  <!--            <div class="second-parent-div">-->
-  <!--              <app-avatar *ngIf="otherParent"  [personObj]="otherParent"></app-avatar>-->
-  <!--            </div>-->
-  <!--          </ion-col>-->
-  <!--        </ion-row>-->
-  <!--      </ion-grid>-->
-  <!--    </div>-->
-
-  <!--    <div>-->
-  <!--      <ion-row>-->
-  <!--        <ion-col size="4" *ngFor=" let child of children; let i = index">-->
-  <!--          <div [ngClass]="{-->
-  <!--      'end-content': i % 3 === 0,-->
-  <!--        'center-content': i % 3 === 1,-->
-  <!--        'start-content': i % 3 === 2-->
-  <!--    }">-->
-  <!--            <app-avatar [personObj]="child"></app-avatar>-->
-  <!--          </div>-->
-  <!--        </ion-col>-->
-  <!--      </ion-row>-->
-  <!--    </div>-->
-  <!--    <div class="center-content" *ngIf="pet">-->
-  <!--      <app-avatar [personObj]="pet"></app-avatar>-->
-  <!--    </div>-->
-  <!--    <div class="end-content">-->
-  <!--      <ion-fab style="margin-right: 20px">-->
-  <!--        <ion-fab-button (click)="openModal()">-->
-  <!--          <ion-icon name="add" style="color: white"></ion-icon>-->
-  <!--        </ion-fab-button>-->
-  <!--      </ion-fab>-->
-  <!--    </div>-->
-  <!--  </div>-->
-
-
   <app-our-world></app-our-world>
   <div class="tree-container">
     <img src="./assets/images/drvo.png" class="tree-image" alt="Drvo">
@@ -62,7 +17,6 @@
       <div class="avatar-row">
         <app-avatar *ngFor="let child of children.slice(6, 9)" [personObj]="child"></app-avatar>
       </div>
-      <!-- Dodajte dodatne avatar-redove prema potrebi -->
     </div>
     <div class="pet-avatar" *ngIf="pet">
       <app-avatar [personObj]="pet"></app-avatar>
