@@ -1,51 +1,110 @@
-.tree-class {
-  background-image: url('../../../../assets/images/drvo.png');
-  //background-size: cover;
-  background-repeat: no-repeat;
-  background-position: top;
-  z-index: -1;
-  height: 100%;
-}
+//.tree-class {
+//  background-image: url('../../../../assets/images/drvo.png');
+//  //background-size: cover;
+//  background-repeat: no-repeat;
+//  background-position: top;
+//  z-index: -1;
+//  height: 100%;
+//}
+//
+//ion-col {
+//  text-align: center;
+//}
+//
+//.parent-div {
+//  width: 100%;
+//  display: flex;
+//  justify-content: flex-end;
+//  padding-right: 20px;
+//}
+//
+//.second-parent-div {
+//  width: 100%;
+//  display: flex;
+//  justify-content: flex-start;
+//  padding-right: 20px;
+//}
+//.parent-class-row{
+//  padding-top: 50px;
+//  width: 100%;
+//}
+//
+//@media screen and (max-width: 1500px) {
+//  .tree-class {
+//    background-size: 100%;
+//  }
+//}
+//
+//@media screen and (min-width: 1500px) {
+//  .tree-class{
+//    background-size: 58%;
+//  }
+//  .parent-class-row{
+//    padding-top: 150px;
+//  }
+//}
+//
+//@media screen and (min-width: 1000px) {
+//  .parent-class-row{
+//    padding-top: 150px;
+//  }
+//}
 
-ion-col {
-  text-align: center;
-}
 
-.parent-div {
+.tree-container {
+  position: relative;
   width: 100%;
+  max-width: 600px; /* Prilagodite maksimalnu širinu prema potrebi */
+  margin: auto;
+}
+
+.tree-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.avatar-container {
+  position: absolute;
+  top: 132px;
+  left: 0;
+  width: 100%;
+}
+
+.avatar-row {
   display: flex;
-  justify-content: flex-end;
-  padding-right: 20px;
+  justify-content: space-around;
 }
 
-.second-parent-div {
-  width: 100%;
+.parent-avatar {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
-  justify-content: flex-start;
-  padding-right: 20px;
-}
-.parent-class-row{
-  padding-top: 50px;
-  width: 100%;
+  justify-content: space-around;
+  width: 300px;
 }
 
-@media screen and (max-width: 1500px) {
-  .tree-class {
-    background-size: 100%;
-  }
+.pet-avatar {
+  position: absolute;
+  bottom: -89px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-@media screen and (min-width: 1500px) {
-  .tree-class{
-    background-size: 58%;
-  }
-  .parent-class-row{
-    padding-top: 150px;
-  }
+.button-content {
+  position: absolute;
+  bottom: 20px;
+  right: 100px;
+
 }
 
-@media screen and (min-width: 1000px) {
-  .parent-class-row{
-    padding-top: 150px;
+@media screen and  (max-width: 380px) {
+  .pet-avatar {
+    bottom: -156px;
+  }
+  .button-content{
+    bottom: -50px;
   }
 }

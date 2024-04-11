@@ -71,7 +71,6 @@ export class ProfilePage implements OnInit {
       next: (r) => {
         this.localStorageService.setUserId(r.id);
         this.children = r.children;
-        console.log('get user', r);
         this.parent = {
           name: r.fullName,
           profilePicture: r.profilePicture,
@@ -105,7 +104,6 @@ export class ProfilePage implements OnInit {
         this.loaderService.hideLoader();
       },
     });
-    console.log('loaded');
   }
 
   async openModal() {
@@ -118,7 +116,6 @@ export class ProfilePage implements OnInit {
     const { data, role } = await modal.onWillDismiss();
 
     if (role === 'confirm') {
-      console.log('data modal', data);
       if (data) {
         this.loadData();
       }

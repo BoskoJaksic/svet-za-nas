@@ -35,7 +35,6 @@ export class Step2Component  implements OnInit {
   }
 
   addChild() {
-    console.log(this.children);
     this.children.push({
       birthDate: 31,
       birthMonth: 'January',

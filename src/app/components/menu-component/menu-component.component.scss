@@ -44,3 +44,8 @@ ion-avatar {
   }
 }
 
+
+
+:host(.split-pane-visible) .split-pane-side {
+  box-shadow: 10px 10px 10px #FFF;
+}

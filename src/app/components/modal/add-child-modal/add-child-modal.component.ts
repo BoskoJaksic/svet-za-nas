@@ -70,13 +70,11 @@ export class AddChildModalComponent implements OnInit {
       gender: this.gender
     }
     this.loaderService.showLoader()
-    console.log('add child data', dataToSend)
     this.userService.addChild(dataToSend).subscribe({
       next: () => {
         this.modalCtrl.dismiss(true, 'confirm');
         this.loaderService.hideLoader()
       }, error: (err) => {
-        console.log('err while adding child', err)
         this.loaderService.hideLoader()
 
       }

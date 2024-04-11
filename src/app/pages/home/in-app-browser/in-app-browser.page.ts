@@ -28,7 +28,6 @@ export class InAppBrowserPage implements OnInit {
         try {
           const encodedObject = params['data'];
           const urlToUse = JSON.parse(decodeURIComponent(encodedObject));
-          console.log('urlToUse', urlToUse);
           this.vidUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(urlToUse);
         } catch (error) {
           console.error('Error parsing or sanitizing URL:', error);

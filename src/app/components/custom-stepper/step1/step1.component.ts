@@ -75,7 +75,6 @@ export class Step1Component implements OnInit {
       // @ts-ignore
       var base64String = fullBase64String.replace(/^data:image\/\w+;base64,/, '');
       this.form.patchValue({profilePicture: base64String});
-      console.log(this.form)
     } else {
       console.error('Nije odabrana slika.');
     }

@@ -18,7 +18,6 @@ export class AvatarComponent implements OnInit {
 
   ngOnInit() {
     if (this.personObj) {
-      console.log('personObj', this.personObj)
       this.calculateAgeOrPregnancy(this.personObj.dateOfBirth);
     }
   }
@@ -87,7 +86,6 @@ export class AvatarComponent implements OnInit {
 
 
   goTo() {
-    console.log('childobj', this.personObj)
     const queryParams = encodeURIComponent(JSON.stringify(this.personObj));
     this.router.navigate(['home/profile/profile-details'], {queryParams: {data: queryParams}});
   }

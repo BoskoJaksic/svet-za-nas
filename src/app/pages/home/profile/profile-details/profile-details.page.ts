@@ -46,7 +46,6 @@ export class ProfileDetailsPage implements OnInit {
       }, 100)
       this.receivedObject = JSON.parse(decodeURIComponent(encodedObject));
       this.calculateAgeOrPregnancy(this.receivedObject.dateOfBirth);
-      console.log('received', this.receivedObject)
     });
   }
 
@@ -88,7 +87,6 @@ export class ProfileDetailsPage implements OnInit {
         console.log('error while updating profile picture', err)
       }
     })
-    console.log('received obj', this.receivedObject)
   }
 
   private calculateAgeOrPregnancy(dateString: string): void {
