@@ -27,7 +27,7 @@ const routes: Routes = [
         path: 'in-app-browser',
         loadChildren: () => import('./in-app-browser/in-app-browser.module').then(m => m.InAppBrowserPageModule),
         data: {
-          title: 'Porodica',
+          title: 'Naš Svet',
         }
       },
 

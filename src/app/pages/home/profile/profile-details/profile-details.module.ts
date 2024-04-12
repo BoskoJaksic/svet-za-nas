@@ -8,16 +8,18 @@ import { ProfileDetailsPageRoutingModule } from './profile-details-routing.modul
 
 import { ProfileDetailsPage } from './profile-details.page';
 import {SharedModule} from "../../../../shared/shared.module";
+import {ProfilePageModule} from "../profile.module";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    ProfileDetailsPageRoutingModule,
-    NgOptimizedImage,
-    SharedModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        ProfileDetailsPageRoutingModule,
+        NgOptimizedImage,
+        SharedModule,
+        ProfilePageModule
+    ],
   declarations: [ProfileDetailsPage]
 })
 export class ProfileDetailsPageModule {}

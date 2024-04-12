@@ -11,8 +11,6 @@ import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 export class InAppBrowserPage implements OnInit {
   children: any
   vidUrl!: SafeResourceUrl
-  // baseUrl = 'https://svetzanas.rs/kategorija-nezno-doba/'
-
   baseUrl = 'https://www.vijesti.me/'
 
   constructor(
@@ -40,6 +38,7 @@ export class InAppBrowserPage implements OnInit {
       }
       setTimeout(() => {
         this.loaderService.hideLoader();
+        console.log('vidUrl',this.vidUrl)
       }, 200);
     });
   }

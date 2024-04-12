@@ -13,7 +13,7 @@
     <div class="orange-avatar" (click)="takePicture()">
       <img *ngIf="newPicture" class="img-class" [src]="newPicture" alt=""/>
       <img *ngIf="!newPicture" class="img-class"
-        [src]="generateImg()" alt="user picture"/>
+           [src]="generateImg()" alt="user picture"/>
     </div>
   </div>
 
@@ -21,18 +21,93 @@
     <span class="size16-900">{{ receivedObject?.name }}</span>
   </div>
   <div class="center-content">
-    <span class="size-16-400" style="color: #1A154C">{{message}}</span>
+    <span class="size-16-400" style="color: #1A154C">{{ message }}</span>
   </div>
-  <div *ngIf="!receivedObject.parentRole && !receivedObject.pets" class="center-content" style="margin-bottom: 20px;margin-top: 20px">
+  <div *ngIf="!receivedObject.parentRole && !receivedObject.pets" class="center-content"
+       style="margin-bottom: 20px;margin-top: 20px">
     <ion-button (click)="generateLink()" fill="outline">Saznajte više...</ion-button>
   </div>
   <div class="center-content">
-    <img ngSrc="./assets/images/cake.png" height="45" width="36"> <span class="size-16-400 span-cake">{{ receivedObject?.dateOfBirth }}</span>
+    <img ngSrc="./assets/images/cake.png" height="45" width="36"/>
+    <span class="size-16-400 span-cake">
+      {{ receivedObject?.dateOfBirth }}
+      <ion-icon id="open-modal" *ngIf="isFutureDate(receivedObject.dateOfBirth)" name="create-outline"
+                size="medium" style=" margin-left: 15px;cursor: pointer; font-size: 23px;"></ion-icon>
+    </span>
+
+  </div>
+  <div *ngIf="!receivedObject.parentRole && !receivedObject.pets" class="center-content"
+       style="margin-bottom: 20px;margin-top: 20px">
+    <ion-button fill="clear" color="secondary" id="present-alert1">
+      <ion-icon name="trash-bin-outline" slot="start" style="margin-right: 10px"></ion-icon>
+      <span class="checkout-text">  Obriši podatke</span>
+    </ion-button>
   </div>
   <div class="button-content">
-    <ion-button expand="full" type="submit" shape="round" mode="ios" class="backButton" (click)="goBack()" style="width: 50%">
+    <ion-button expand="full" type="submit" shape="round" mode="ios" class="backButton" (click)="goBack()"
+                style="width: 50%">
       <ion-icon name="chevron-back-outline" style="color: white"></ion-icon>
       <span class="size20-800">Nazad</span></ion-button>
   </div>
+  <ion-alert mode="ios"
+             trigger="present-alert1"
+             header="Upozorenje!"
+             subHeader="Da li ste sigurni da želite da obrišete podatke?"
+             message="Radeći ovo, svi podaci vezani za ovo dete, biće obrisani iz naše baze!"
+             [buttons]="alertButtons"
+             (didDismiss)="deleteChild($event)"
+  ></ion-alert>
+
+  <ion-modal (willDismiss)="onWillDismiss($event)" trigger="open-modal" mode="ios">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>
+           <span class="text-black">Izmeni datum rodjenja</span> </ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <div class="main-content-modal">
+          <div class="child-form">
+            <div class="icon-class" style="margin-bottom: 10px">
+              <img src="./assets/icons/calendar.png" height="20" width="20" style="margin-right: 20px" alt="calendar"/>
+              <span class="size16-600 text-black">VTP/Datum rodjenja deteta</span>
+            </div>
+            <div style="display: flex;justify-content: space-around">
+              <ion-item lines="none" shape="round" fill="outline" style="width: 30%" mode="md">
+                <ion-select aria-label="birthDay" interface="popover" mode="ios" [(ngModel)]="birthDate">
+                  <ion-select-option *ngFor="let day of days" [value]="day">{{ day }}</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item lines="none" shape="round" fill="outline" style="width: 33%" mode="md">
+                <ion-select aria-label="birthMonth" interface="popover" mode="ios" [(ngModel)]="birthMonth">
+                  <ion-select-option *ngFor="let month of abbreviatedMonths; let i = index"
+                                     [value]="months[i]">{{ month }}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item lines="none" shape="round" fill="outline" style="width: 35%" mode="md">
+                <ion-select aria-label="birthYear" interface="popover" mode="ios" [(ngModel)]="birthYear">
+                  <ion-select-option *ngFor="let year of years" [value]="year">{{ year }}</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </div>
+          </div>
+        </div>
+      </ion-content>
+      <ion-footer>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()"> <span class="text-black">Poništi</span></ion-button>
+          </ion-buttons>
+          <ion-buttons slot="end">
+            <ion-button (click)="confirm()" [strong]="true">Potvrdi</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-footer>
+    </ng-template>
+  </ion-modal>
 </div>
 

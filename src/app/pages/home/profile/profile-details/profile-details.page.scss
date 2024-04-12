@@ -43,3 +43,16 @@
   padding-top: 11px;
   padding-left: 12px;
 }
+
+
+ion-modal ion-toolbar {
+  --background: rgb(223, 226, 229);
+  --color: white;
+}
+
+.main-content-modal {
+  padding:40px;
+  display: flex;
+  //flex-direction: column;
+  justify-content: center;
+}

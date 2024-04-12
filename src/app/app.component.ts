@@ -46,7 +46,7 @@ export class AppComponent {
       // todo uncomment this for production
       let url = window.location.href;
       let slug = url.split(".eu/");
-      // let slug = url.split("localhost:8100/");
+      // let slug = url.split("localhost:4200/");
 
       let appPath = slug.pop()
       console.log('appPath', appPath)

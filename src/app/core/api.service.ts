@@ -47,7 +47,10 @@ export class ApiService {
     return this.http.patch(this.baseUrl + path, data);
   }
 
-  delete(path: string): Observable<any> {
-    return this.http.delete(this.baseUrl + path);
+  delete(path: string, data?:any): Observable<any> {
+    const options = {
+      body: data // Assuming you want to send data in the request body
+    };
+    return this.http.delete(this.baseUrl + path,options);
   }
 }
