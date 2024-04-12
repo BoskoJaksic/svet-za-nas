@@ -9,7 +9,7 @@ import {SideBarModel} from "../../models/sideBar.model";
 export class HomePage implements OnInit {
   sidebarsUrl: SideBarModel[] = [{
     pageUrl:'in-app-browser',
-    name:"Naš svet",
+    name:"Naš Svet",
     iconSrc: "people-outline"
   },
     {

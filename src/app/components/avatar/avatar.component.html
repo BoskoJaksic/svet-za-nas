@@ -1,12 +1,14 @@
 <div class="orange-avatar" (click)="goTo()">
-  <img  class="img-class" alt="Person" [src]="generateImg()"/>
- />
+  <img class="img-class" alt="Person" [src]="generateImg()"/>
+  />
 
 </div>
-<div class="size12-900">{{personObj?.name}}</div>
+<div class="center-content" style="background: white;border-radius: 12px">
+  <div class="size12-900">{{ personObj?.name }}
+  </div>
+</div>
+
+<div class="center-content" style="background: white;border-radius: 12px">
 <div class="size12-400">   {{message }}
-
 </div>
-
-
-
+</div>

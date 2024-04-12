@@ -35,7 +35,7 @@ export class AvatarComponent implements OnInit {
       this.message = `${weeksPregnant} nedelja trudnoće`;
     } else {
       const monthsOld = Math.floor((currentDate.getTime() - givenDate.getTime()) / (30 * oneDay));
-      if (monthsOld < 12) {
+      if (monthsOld <= 36) {
         this.message = `${monthsOld} meseci`;
       } else {
         let ageYears = currentDate.getFullYear() - givenDate.getFullYear();
