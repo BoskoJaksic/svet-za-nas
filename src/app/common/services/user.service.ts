@@ -35,8 +35,6 @@ export class UserService {
     return this.apiService.post('FileUpload/ChangeProfilePicture', obj);
   }
 
-  addChild(obj: any) {
-    return this.apiService.post('Children/AddChild', obj);
-  }
+
 
 }

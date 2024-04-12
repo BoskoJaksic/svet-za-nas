@@ -8,17 +8,19 @@ import { ProfilePageRoutingModule } from './profile-routing.module';
 
 import { ProfilePage } from './profile.page';
 import {SharedModule} from "../../../shared/shared.module";
-import {AddChildModalComponent} from "../../../components/modal/add-child-modal/add-child-modal.component";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    ProfilePageRoutingModule,
-    SharedModule,
-    NgOptimizedImage
-  ],
-  declarations: [ProfilePage, AddChildModalComponent]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        ProfilePageRoutingModule,
+        SharedModule,
+        NgOptimizedImage
+    ],
+    exports: [
+
+    ],
+    declarations: [ProfilePage]
 })
 export class ProfilePageModule {}

@@ -7,6 +7,7 @@ import {GoogleAuth} from '@codetrix-studio/capacitor-google-auth';
 import {ToasterService} from '../../../common/services/toaster.service';
 import {CommonService} from '../../../common/services/common.service';
 import {Share} from '@capacitor/share';
+import {Camera, CameraResultType} from "@capacitor/camera";
 
 @Component({
   selector: 'app-settings',
@@ -16,6 +17,7 @@ import {Share} from '@capacitor/share';
 export class SettingsPage implements OnInit {
   avatarImg: string | undefined;
   userInfo: any;
+
   public alertButtons = [
     {
       text: 'Poništi',
@@ -49,6 +51,36 @@ export class SettingsPage implements OnInit {
     });
   }
 
+  takePicture = async () => {
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: false,
+      resultType: CameraResultType.DataUrl
+    });
+    if (image.dataUrl) {
+      this.avatarImg = image.dataUrl;
+      this.changeUserImg();
+    }
+  };
+
+  changeUserImg() {
+    // @ts-ignore parentRole
+    const profilePicture = this.avatarImg.replace(/^data:image\/\w+;base64,/, '');
+    const dataToSend = {
+      email: this.localStorageService.getUserEmail(),
+      name: this.userInfo.fullName,
+      profilePicture: profilePicture,
+      person: 0,
+    }
+    this.userService.changeUserImg(dataToSend).subscribe({
+      next(r) {
+
+      }, error(err) {
+        console.log('error while updating profile picture', err)
+      }
+    })
+  }
+
   generateImg(data: any) {
     if (data?.parentRole === 'mom') {
       this.avatarImg = './assets/images/mom.png'
@@ -64,6 +96,7 @@ export class SettingsPage implements OnInit {
     this.userService.getUserDataByEmail(email).subscribe({
       next: (r) => {
         this.userInfo = r;
+        console.log('user info',r)
         if (r.profilePicture) {
           this.avatarImg = r.profilePicture;
         } else {

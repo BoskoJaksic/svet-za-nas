@@ -1,11 +1,16 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {NavController} from "@ionic/angular";
+import {IonModal, ModalController, NavController} from "@ionic/angular";
 import {LoaderService} from "../../../../common/services/loader.service";
 import {UserService} from "../../../../common/services/user.service";
 import {LocalStorageService} from "../../../../common/services/local-storage.service";
 import {Camera, CameraResultType} from "@capacitor/camera";
 import {CommonService} from "../../../../common/services/common.service";
+import {ToasterService} from "../../../../common/services/toaster.service";
+import {ChildService} from "../../../../common/services/child.service";
+import { OverlayEventDetail } from '@ionic/core/components';
+import {Child} from "../../../../models/child.model";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-profile-details',
@@ -22,14 +27,43 @@ export class ProfileDetailsPage implements OnInit {
   weekPregnant: any
   link = ''
   baseLInk = ''
+  @ViewChild(IonModal) modal!: IonModal;
+  children: Child[] = [];
+  days: number[] = Array.from({length: 31}, (_, i) => i + 1);
+  months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  abbreviatedMonths: string[] = this.months.map(month => month.substring(0, 3));
+  years: number[] = Array.from({length: 150}, (_, i) => 1920 + i);
+  birthDate = 31
+  birthMonth = 'January'
+  birthYear = 2024
 
+  public alertButtons = [
+    {
+      text: 'Poništi',
+      role: 'cancel',
+      handler: () => {
+        console.log('Alert canceled');
+      },
+    },
+    {
+      text: 'Obriši',
+      role: 'confirm',
+      handler: () => {
+        console.log('Alert confirmed');
+      },
+    },
+  ];
 
   constructor(private route: ActivatedRoute,
               private loaderService: LoaderService,
               private localStorageService: LocalStorageService,
               private userService: UserService,
-              private commonService: CommonService,
+              public commonService: CommonService,
+              private modalCtrl: ModalController,
+              private childService: ChildService,
+              private toasterService: ToasterService,
               private router: Router,
+              private datePipe: DatePipe,
               private navController: NavController
   ) {
   }
@@ -45,6 +79,16 @@ export class ProfileDetailsPage implements OnInit {
         this.loaderService.hideLoader();
       }, 100)
       this.receivedObject = JSON.parse(decodeURIComponent(encodedObject));
+      console.log('received',this.receivedObject)
+      const dobDate = new Date(this.receivedObject.dateOfBirth);
+      const year = dobDate.getFullYear();
+      const month = dobDate.getMonth() + 1; // Adding 1 because getMonth() returns 0-based index
+      const day = dobDate.getDate();
+      this.birthDate = day;
+      this.birthYear = year;
+      const numericMonth = month
+      const monthName = this.months[numericMonth - 1];
+      this.birthMonth = monthName
       this.calculateAgeOrPregnancy(this.receivedObject.dateOfBirth);
     });
   }
@@ -207,6 +251,55 @@ export class ProfileDetailsPage implements OnInit {
     }
   }
 
+  deleteChild(ev: any) {
+    if (ev.detail.role === 'confirm') {
+      this.loaderService.showLoader();
+      let dataToSend = {
+        parentId:this.localStorageService.getUserId(),
+        childName:this.receivedObject.name
+      }
+      this.childService.deleteChild(dataToSend).subscribe((r)=>{
+        this.toasterService.presentToast('Podaci uspešno obrisani','success');
+        this.navController.navigateBack('home/profile')
+      },error => {
+        this.toasterService.presentToast('Greška prilikom brisanja','danger');
+        this.loaderService.hideLoader();
+        console.log(error);
+      })
+    }
+  }
+
+  cancel() {
+    this.modal.dismiss(null, 'cancel');
+  }
+
+  confirm() {
+    const date2 = new Date(`${(this.birthMonth)} ${this.birthDate}, ${this.birthYear}`);
+    let dateOfBirth:string | null= this.datePipe.transform(date2, 'yyyy-MM-dd');
+    const dataToSend = {
+      parentId: this.localStorageService.getUserId(),
+      dateOfBirth: dateOfBirth,
+      childName: this.receivedObject.name
+    }
+    this.childService.editChild(dataToSend).subscribe({
+      next: () => {
+        this.modalCtrl.dismiss(true, 'confirm');
+        this.receivedObject.dateOfBirth = dateOfBirth;
+        // @ts-ignore
+        this.calculateAgeOrPregnancy(dateOfBirth)
+        this.toasterService.presentToast('Uspešno ažurirani podaci','success');
+
+      }, error: (err) => {
+        this.toasterService.presentToast('Došlo je do greške', 'danger')
+      }
+    })
+  }
+
+  onWillDismiss(event: Event) {
+    const ev = event as CustomEvent<OverlayEventDetail<string>>;
+    if (ev.detail.role === 'confirm') {
+    }
+  }
 
   goBack() {
     this.navController.navigateBack('home/profile')

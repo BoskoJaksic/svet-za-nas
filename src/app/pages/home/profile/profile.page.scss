@@ -113,3 +113,100 @@
     bottom: -50px;
   }
 }
+
+
+.custom {
+  text-align: left;
+  width: 100%;
+  --background: white;
+  --color: black;
+}
+
+.input-fill-outline.input-shape-round {
+  --border-color: rgba(26, 21, 76, 0.50);
+  --border-radius: 14px;
+
+}
+
+.always-flip {
+  width: 70px;
+}
+
+.icon-class {
+  padding-top: 30px;
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.main-square {
+  width: 170px;
+  height: 170px;
+  border: 2px solid #1A154C; /* Možete promeniti boju granice po potrebi */
+  position: relative;
+  padding: 20px;
+  border-radius: 25px;
+
+}
+
+.dotted-square {
+  width: 100%;
+  height: 100%;
+  border: 2px dotted #1A154C;
+  border-radius: 25px;
+
+}
+
+.center-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+}
+
+.selected-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 2px dotted #1A154C;
+  border-radius: 25px;
+}
+
+.birth-class {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.login-button {
+  margin-top: 30px;
+}
+
+.orange-dot {
+  border: 2px dashed var(--ion-color-primary);
+  margin-top: 20px;
+}
+
+.main-content {
+  padding:40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.child-form {
+  flex: 1; /* Prostor za formu popunjava preostali prostor */
+  overflow-y: auto; /* Omogućuje scroll ako je sadržaj forme veći od ekrana */
+}
+
+.footer {
+  margin-top: auto; /* Premešta footer na dno */
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between; /* Podeli gumbe na dva kraja */
+  padding: 20px; /* Dodajte malo prostora oko gumba */
+}
+.margin-top{
+  margin-top:25px
+}
