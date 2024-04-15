@@ -36,7 +36,7 @@
     </span>
 
   </div>
-  <div *ngIf="(!receivedObject.parentRole || receivedObject.otherParent) && !receivedObject.pets" class="center-content"
+  <div *ngIf="receivedObject.otherParent || receivedObject.children || receivedObject.pets" class="center-content"
        style="margin-bottom: 20px;margin-top: 20px">
     <ion-button fill="clear" color="secondary" id="present-alert1">
       <ion-icon name="trash-bin-outline" slot="start" style="margin-right: 10px"></ion-icon>
@@ -55,7 +55,7 @@
              subHeader="Da li ste sigurni da želite da obrišete podatke?"
              message="Radeći ovo, svi podaci vezani za ovog avatara, biće obrisani iz naše baze!"
              [buttons]="alertButtons"
-             (didDismiss)="deleteChild($event)"
+             (didDismiss)="deleteEntity($event)"
   ></ion-alert>
 
   <ion-modal (willDismiss)="onWillDismiss($event)" trigger="open-modal" mode="ios">

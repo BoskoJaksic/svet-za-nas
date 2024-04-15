@@ -18,8 +18,10 @@
         <app-avatar *ngFor="let child of children.slice(6, 9)" [personObj]="child"></app-avatar>
       </div>
     </div>
-    <div class="pet-avatar" *ngFor=" let pet of mappedPets">
-      <app-avatar [personObj]="pet"></app-avatar>
+    <div class="pet-avatar-container">
+      <div [ngClass]="{ 'pet-avatar': mappedPets?.length === 1, 'avatar-row': mappedPets?.length > 1 }">
+        <app-avatar *ngFor="let pet of mappedPets" [personObj]="pet"></app-avatar>
+      </div>
     </div>
 
     <div class="button-content">

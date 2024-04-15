@@ -1,18 +1,16 @@
-import {Injectable} from '@angular/core';
-import {Observable} from "rxjs";
-import {ApiService} from "../../core/api.service";
-import {LocalStorageService} from "./local-storage.service";
-
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ApiService } from '../../core/api.service';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
-
-  constructor(private apiService: ApiService,
-              private localStorageService: LocalStorageService
-  ) {
-  }
+  constructor(
+    private apiService: ApiService,
+    private localStorageService: LocalStorageService
+  ) {}
 
   getUserDataByEmail(email: any): Observable<any> {
     return this.apiService.get(`ApplicationUsers/GetByEmail/${email}`);
@@ -23,18 +21,22 @@ export class UserService {
   }
 
   isUserLoggedIn() {
-    let userToken = this.localStorageService.getUserToken()
+    let userToken = this.localStorageService.getUserToken();
     return !!userToken;
   }
 
   getRefreshToken(userRefreshToken: any) {
-    return this.apiService.post('ApplicationUsers/RefreshToken', userRefreshToken);
+    return this.apiService.post(
+      'ApplicationUsers/RefreshToken',
+      userRefreshToken
+    );
   }
 
   changeUserImg(obj: any) {
     return this.apiService.post('FileUpload/ChangeProfilePicture', obj);
   }
 
-
-
+  deleteOtherParent(id: any) {
+    return this.apiService.delete(`ApplicationUsers/DeleteOtherParent/${id}`);
+  }
 }
