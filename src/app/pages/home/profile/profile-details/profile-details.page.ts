@@ -351,8 +351,25 @@ export class ProfileDetailsPage implements OnInit {
     }
   }
 
+  changeName() {
+    const dataToSend = {
+      parentId: this.localStorageService.getUserId(),
+      fullName: this.receivedObject.name,
+    };
+
+    this.userService.updateUser(dataToSend).subscribe({
+      next: () => {
+        this.modalCtrl.dismiss(true, 'confirm');
+        this.toasterService.presentToast('Uspešno ažurirani podaci', 'success');
+      },
+      error: (err) => {
+        this.toasterService.presentToast('Došlo je do greške', 'danger');
+      },
+    });
+  }
+
   cancel() {
-    this.modal.dismiss(null, 'cancel');
+    this.modalCtrl.dismiss(null, 'cancel');
   }
 
   confirm() {

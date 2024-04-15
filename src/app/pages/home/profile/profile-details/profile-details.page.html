@@ -18,7 +18,10 @@
   </div>
 
   <div class="center-content" style="margin-bottom: 20px">
-    <span class="size16-900">{{ receivedObject?.name }}</span>
+    <span class="size16-900">
+      {{ receivedObject?.name }}
+      <ion-icon id="change-name-modal" *ngIf="!receivedObject.otherParent && !receivedObject.children && !receivedObject.pets" name="create-outline" size="medium" style=" margin-left: 15px;cursor: pointer; font-size: 23px;"></ion-icon>
+    </span>
   </div>
   <div class="center-content">
     <span class="size-16-400" style="color: #1A154C">{{ message }}</span>
@@ -104,6 +107,41 @@
           </ion-buttons>
           <ion-buttons slot="end">
             <ion-button (click)="confirm()" [strong]="true">Potvrdi</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-footer>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal (willDismiss)="onWillDismiss($event)" trigger="change-name-modal" mode="ios">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>
+           <span class="text-black">Izmeni ime i prezime</span> </ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <div class="main-content-modal">
+          <div class="change-name-form">
+            <div class="icon-class" style="margin-bottom: 10px">
+              <span class="size16-600 text-black">Ime i prezime</span>
+            </div>
+            <div style="display: flex;justify-content: space-around">
+              <ion-item lines="none" shape="round" fill="outline" style="margin-left: 5px;" mode="md">
+                <ion-input [(ngModel)]="receivedObject.name" placeholder="Ime i prezime" aria-label="fullName"></ion-input>
+              </ion-item>
+            </div>
+          </div>
+        </div>
+      </ion-content>
+      <ion-footer>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()"> <span class="text-black">Poništi</span></ion-button>
+          </ion-buttons>
+          <ion-buttons slot="end">
+            <ion-button (click)="changeName()" [strong]="true">Potvrdi</ion-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-footer>

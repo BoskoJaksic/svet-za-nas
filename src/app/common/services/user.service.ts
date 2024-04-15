@@ -39,4 +39,8 @@ export class UserService {
   deleteOtherParent(id: any) {
     return this.apiService.delete(`ApplicationUsers/DeleteOtherParent/${id}`);
   }
+
+  updateUser(obj: any) {
+    return this.apiService.put('ApplicationUsers/UpdateUser', obj);
+  }
 }
