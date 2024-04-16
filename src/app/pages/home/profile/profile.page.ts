@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { filter, Subject, takeUntil } from 'rxjs';
 import {
   ActivatedRoute,
@@ -10,12 +10,14 @@ import { UserService } from '../../../common/services/user.service';
 import { LocalStorageService } from '../../../common/services/local-storage.service';
 import { Child } from '../../../models/child.model';
 import { LoaderService } from '../../../common/services/loader.service';
-import {IonModal, ModalController} from '@ionic/angular';
-import {OverlayEventDetail} from "@ionic/core/components";
-import {ChildService} from "../../../common/services/child.service";
-import {ToasterService} from "../../../common/services/toaster.service";
-import {DatePipe} from "@angular/common";
-import {Camera, CameraResultType} from "@capacitor/camera";
+import { IonModal, ModalController } from '@ionic/angular';
+import { OverlayEventDetail } from '@ionic/core/components';
+import { ChildService } from '../../../common/services/child.service';
+import { ToasterService } from '../../../common/services/toaster.service';
+import { DatePipe } from '@angular/common';
+import { Camera, CameraResultType } from '@capacitor/camera';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PetService } from '../../../common/services/pet.service';
 
 @Component({
   selector: 'app-profile',
@@ -27,30 +29,62 @@ export class ProfilePage implements OnInit {
   private destroy$: Subject<boolean> = new Subject<boolean>();
   parent: any;
   otherParent: any;
-  pet: any;
-  @ViewChild(IonModal) modal!: IonModal;
+  mappedPets: any;
+  form: FormGroup;
+  @ViewChild('modal') modal!: IonModal;
+  @ViewChild('modalPet') modalPet!: IonModal;
   children: Child[] = [];
-  days: number[] = Array.from({length: 31}, (_, i) => i + 1);
-  months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  abbreviatedMonths: string[] = this.months.map(month => month.substring(0, 3));
-  years: number[] = Array.from({length: 150}, (_, i) => 1920 + i);
-  birthDate = 31
-  birthMonth = 'January'
-  birthYear = 2024
-  gender: any
-  name: string = ''
-  profilePicture: string | undefined = ''
+  days: number[] = Array.from({ length: 31 }, (_, i) => i + 1);
+  months: string[] = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+  abbreviatedMonths: string[] = this.months.map((month) =>
+    month.substring(0, 3)
+  );
+  years: number[] = Array.from({ length: 150 }, (_, i) => 1920 + i);
+  birthDate = 31;
+  birthMonth = 'January';
+  birthYear = 2024;
+  gender: any;
+  name: string = '';
+  profilePicture: string | undefined = '';
+  selectedImage: string | undefined = '';
+
   constructor(
     private router: Router,
+    public fb: FormBuilder,
     private userService: UserService,
     private loaderService: LoaderService,
     private toasterService: ToasterService,
     private datePipe: DatePipe,
     private childService: ChildService,
+    private petService: PetService,
     private localStorageService: LocalStorageService,
     private modalCtrl: ModalController,
     private activatedRoute: ActivatedRoute
-  ) {}
+  ) {
+    this.form = this.fb.group({
+      petName: ['', Validators.required],
+      dateOfBirth: [''],
+      birthdateDay: [31, Validators.required],
+      birthdateMonth: ['January', Validators.required],
+      birthdateYear: [2024, Validators.required],
+      role: [''],
+      elsePet: [''],
+      profilePicture: [''],
+    });
+  }
 
   ngOnInit() {
     this.router.events
@@ -87,7 +121,16 @@ export class ProfilePage implements OnInit {
     this.userService.getUserDataByEmail(userEmail).subscribe({
       next: (r) => {
         this.localStorageService.setUserId(r.id);
-        this.children = r.children;
+        this.children = r.children.map((child: any) => {
+          return {
+            name: child.name,
+            profilePicture: child.profilePicture,
+            dateOfBirth: child.dateOfBirth,
+            gender: child.gender,
+            children: true,
+            childId: child.id,
+          };
+        });
         this.parent = {
           name: r.fullName,
           profilePicture: r.profilePicture,
@@ -102,17 +145,21 @@ export class ProfilePage implements OnInit {
             dateOfBirth: r.otherParent.dateOfBirth,
             parentRole: r.otherParent.parentRole,
             email: r.otherParent.email,
+            otherParent: true,
           };
+        } else {
+          this.otherParent = null;
         }
 
-        if (r.pets?.length > 0) {
-          this.pet = {
-            name: r.pets[0]?.petName,
-            profilePicture: r.pets[0].profilePicture,
-            dateOfBirth: r.pets[0].dateOfBirth,
+        this.mappedPets = r.pets.map((pet: any) => {
+          return {
+            name: pet?.petName,
+            profilePicture: pet.profilePicture,
+            dateOfBirth: pet.dateOfBirth,
             pets: true,
+            petId: pet.id,
           };
-        }
+        });
 
         this.loaderService.hideLoader();
       },
@@ -127,11 +174,10 @@ export class ProfilePage implements OnInit {
     const image = await Camera.getPhoto({
       quality: 90,
       allowEditing: false,
-      resultType: CameraResultType.DataUrl
+      resultType: CameraResultType.DataUrl,
     });
     this.profilePicture = image.dataUrl;
   };
-
 
   onWillDismiss(event: Event) {
     const ev = event as CustomEvent<OverlayEventDetail<string>>;
@@ -142,36 +188,120 @@ export class ProfilePage implements OnInit {
   cancel() {
     this.modal.dismiss(null, 'cancel');
   }
+  cancelPet() {
+    this.modalPet.dismiss(null, 'cancel');
+  }
 
   confirm() {
-    if (!this.gender || !this.name){
-      this.toasterService.presentToast('Forma nije validna','warning');
+    if (!this.gender || !this.name) {
+      this.toasterService.presentToast('Forma nije validna', 'warning');
       return;
     }
-    const date2 = new Date(`${(this.birthMonth)} ${this.birthDate}, ${this.birthYear}`);
+    const date2 = new Date(
+      `${this.birthMonth} ${this.birthDate}, ${this.birthYear}`
+    );
     let dateOfBirth = this.datePipe.transform(date2, 'yyyy-MM-dd');
     // @ts-ignore
-    let profilePicture = this.profilePicture.replace(/^data:image\/\w+;base64,/, '');
+    let profilePicture = this.profilePicture.replace(
+      /^data:image\/\w+;base64,/,
+      ''
+    );
 
     const dataToSend = {
       email: this.localStorageService.getUserEmail(),
       name: this.name,
       dateOfBirth: dateOfBirth,
       profilePicture: profilePicture,
-      gender: this.gender
-    }
-    this.loaderService.showLoader()
+      gender: this.gender,
+    };
+    this.loaderService.showLoader();
     this.childService.addChild(dataToSend).subscribe({
       next: () => {
         this.modalCtrl.dismiss(true, 'confirm');
-        this.gender = null
-        this.name  = ''
-        this.profilePicture = ''
-       this.loadData();
-      }, error: (err) => {
-        this.toasterService.presentToast('Došlo je do greške','warning');
+        this.gender = null;
+        this.name = '';
+        this.profilePicture = '';
+        this.loadData();
+      },
+      error: (err) => {
+        this.toasterService.presentToast('Došlo je do greške', 'warning');
+        this.loaderService.hideLoader();
+      },
+    });
+  }
 
-      }
-    })
+  confirmPet() {
+    if (!this.form.valid) {
+      this.toasterService.presentToast('Forma nije validna', 'warning');
+      return;
+    }
+    const dateOfBirth = new Date(
+      `${this.form.value.birthdateMonth} ${this.form.value.birthdateDay}, ${this.form.value.birthdateYear}`
+    );
+    this.form.value.dateOfBirth = this.datePipe.transform(
+      dateOfBirth,
+      'yyyy-MM-dd'
+    );
+    // @ts-ignore
+    let profilePicture = this.selectedImage.replace(
+      /^data:image\/\w+;base64,/,
+      ''
+    );
+
+    const dataToSend = {
+      email: this.localStorageService.getUserEmail(),
+      petName: this.form.value.petName,
+      dateOfBirth: this.form.value.dateOfBirth,
+      role: this.form.value.role,
+      profilePicture: profilePicture,
+    };
+    this.loaderService.showLoader();
+    console.log('data to send', dataToSend);
+    this.petService.addPet(dataToSend).subscribe({
+      next: () => {
+        this.modalCtrl.dismiss(true, 'confirm');
+        this.form.reset();
+        this.form.patchValue({
+          birthdateDay: 31,
+        });
+        this.form.patchValue({
+          birthdateMonth: 'January',
+        });
+        this.form.patchValue({
+          birthdateYear: 2024,
+        });
+        this.loadData();
+      },
+      error: (err: any) => {
+        this.toasterService.presentToast('Došlo je do greške', 'warning');
+        this.loaderService.hideLoader();
+      },
+    });
+  }
+
+  takePicturePet = async () => {
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: false,
+      resultType: CameraResultType.DataUrl,
+    });
+    this.selectedImage = image.dataUrl;
+    if (image) {
+      var fullBase64String = image.dataUrl;
+      // @ts-ignore
+      var base64String = fullBase64String.replace(
+        /^data:image\/\w+;base64,/,
+        ''
+      );
+      this.form.patchValue({ profilePicture: base64String });
+    } else {
+      console.error('Nije odabrana slika.');
+    }
+  };
+
+  petChoose(event: any) {
+    this.form.patchValue({
+      role: event.target.value,
+    });
   }
 }
