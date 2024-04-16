@@ -128,6 +128,7 @@ export class ProfilePage implements OnInit {
             dateOfBirth: child.dateOfBirth,
             gender: child.gender,
             children: true,
+            childId: child.id,
           };
         });
         this.parent = {
@@ -156,6 +157,7 @@ export class ProfilePage implements OnInit {
             profilePicture: pet.profilePicture,
             dateOfBirth: pet.dateOfBirth,
             pets: true,
+            petId: pet.id,
           };
         });
 

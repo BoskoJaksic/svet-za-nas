@@ -277,7 +277,7 @@ export class ProfileDetailsPage implements OnInit {
       this.loaderService.showLoader();
       let dataToSend = {
         parentId: this.localStorageService.getUserId(),
-        childName: this.receivedObject.name,
+        childId: this.receivedObject.childId,
       };
       this.childService.deleteChild(dataToSend).subscribe(
         (r) => {
@@ -304,7 +304,7 @@ export class ProfileDetailsPage implements OnInit {
       this.loaderService.showLoader();
       let dataToSend = {
         parentId: this.localStorageService.getUserId(),
-        petName: this.receivedObject.name,
+        petId: this.receivedObject.petId,
       };
       this.petService.deletePet(dataToSend).subscribe(
         (r) => {
