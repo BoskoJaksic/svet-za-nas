@@ -192,7 +192,11 @@ export class ProfileDetailsPage implements OnInit {
 
   async generateLink() {
     if (this.weekPregnant && this.weekPregnant > 0) {
-      this.link = `${this.baseLInk}trudnoca/`;
+      for (let i = 1; i <= 40; i++) {
+        if (this.weekPregnant === i) {
+          this.link = `${this.baseLInk}/kalendar-trudnoce/${i}-nedelja-trudnoce/`;
+        }
+      }
     } else {
       if (this.monthsOld && this.monthsOld <= 36) {
         if (this.monthsOld >= 0 && this.monthsOld <= 3) {
