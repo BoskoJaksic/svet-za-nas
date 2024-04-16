@@ -146,6 +146,8 @@ export class ProfilePage implements OnInit {
             email: r.otherParent.email,
             otherParent: true,
           };
+        } else {
+          this.otherParent = null;
         }
 
         this.mappedPets = r.pets.map((pet: any) => {
@@ -257,6 +259,15 @@ export class ProfilePage implements OnInit {
       next: () => {
         this.modalCtrl.dismiss(true, 'confirm');
         this.form.reset();
+        this.form.patchValue({
+          birthdateDay: 31,
+        });
+        this.form.patchValue({
+          birthdateMonth: 'January',
+        });
+        this.form.patchValue({
+          birthdateYear: 2024,
+        });
         this.loadData();
       },
       error: (err: any) => {
