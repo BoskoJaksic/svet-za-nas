@@ -95,6 +95,7 @@ export class LoginComponent implements OnInit {
           }, 200);
         },
         error: (err) => {
+          this.toasterService.presentToast(err.error[0], 'warning')
           this.errorMessage = err.message;
           this.loaderService.hideLoader()
         },
@@ -111,6 +112,7 @@ export class LoginComponent implements OnInit {
           FacebookLogin.logout();
         }
       }, (error: any) => {
+      this.loaderService.hideLoader();
       }
     )
 
