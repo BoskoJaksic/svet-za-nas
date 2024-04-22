@@ -107,14 +107,6 @@ export class LoginComponent implements OnInit {
 
   async facebookLogin() {
     this.loaderService.showLoader();
-    await FacebookLogin.getCurrentAccessToken().then(result => {
-        if (result.accessToken?.token) {
-          FacebookLogin.logout();
-        }
-      }, (error: any) => {
-      this.loaderService.hideLoader();
-      }
-    )
 
     await FacebookLogin.login({permissions: this.FACEBOOK_PERMISSIONS}).then(result => {
       if (result.accessToken) {
