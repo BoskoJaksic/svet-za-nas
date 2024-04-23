@@ -9,6 +9,8 @@ import {FacebookLogin,} from '@capacitor-community/facebook-login';
 import {UserService} from "../../common/services/user.service";
 import {HttpClient} from '@angular/common/http';
 import {LoaderService} from "../../common/services/loader.service";
+import { Plugins } from '@capacitor/core'
+const { SignInWithApple } = Plugins
 
 @Component({
   selector: 'app-login',
@@ -29,7 +31,7 @@ export class LoginComponent implements OnInit {
   ];
 
   constructor(
-    private commonService: CommonService,
+    public commonService: CommonService,
     private localStorageService: LocalStorageService,
     private toasterService: ToasterService,
     private userService: UserService,
@@ -135,6 +137,14 @@ export class LoginComponent implements OnInit {
       }
     }, (e: any) => {
       this.loaderService.hideLoader()
+    })
+  }
+
+  appleLogin() {
+    SignInWithApple['Authorize']().then((response:any) => {
+      console.log(response)
+    }).catch((response:any) => {
+      console.error(response)
     })
   }
 }

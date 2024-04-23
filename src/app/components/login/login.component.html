@@ -31,6 +31,10 @@
         <img ngSrc="./assets/icons/google.png" alt="" height="20" width="20" style="margin-right: 5px"/>
         <span class="size16-600">Nastavite sa google nalogom</span>
       </div>
+      <div *ngIf="commonService.isIos()" class="google-account-login start-content cursor-pointer" style="margin-top: 30px"  (click)="appleLogin()">
+        <img ngSrc="./assets/images/apple.png" alt="" height="18" width="16" style="margin-right: 5px"/>
+        <span class="size16-600">Nastavite sa apple nalogom</span>
+      </div>
 
 <!--          <div class="google-account-login start-content cursor-pointer" style="margin-top: 30px" (click)="facebookLogin()">-->
 <!--            <img ngSrc="./assets/icons/fb.png" alt="" height="20" width="20" style="margin-right: 5px"/>-->

@@ -37,6 +37,7 @@
     "@capacitor/status-bar": "5.0.7",
     "@codetrix-studio/capacitor-google-auth": "^3.4.0-rc.0",
     "@ionic/angular": "^7.0.0",
+    "capacitor-apple-login": "github:rlfrahm/capacitor-apple-login",
     "ionicons": "^7.0.0",
     "jwt-decode": "^4.0.0",
     "run-script-os": "^1.1.6",
