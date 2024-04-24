@@ -69,6 +69,8 @@ export class LoginComponent implements OnInit {
       error: (err) => {
         this.loginSpinner = false;
         this.errorMessage = err.message;
+        this.toasterService.presentToast(err.error[0], 'warning')
+
       },
     });
   }
