@@ -9,8 +9,9 @@ import {FacebookLogin,} from '@capacitor-community/facebook-login';
 import {UserService} from "../../common/services/user.service";
 import {HttpClient} from '@angular/common/http';
 import {LoaderService} from "../../common/services/loader.service";
-import { Plugins } from '@capacitor/core'
-const { SignInWithApple } = Plugins
+import {Plugins} from '@capacitor/core'
+
+const {SignInWithApple} = Plugins
 
 @Component({
   selector: 'app-login',
@@ -143,10 +144,35 @@ export class LoginComponent implements OnInit {
   }
 
   appleLogin() {
-    SignInWithApple['Authorize']().then((response:any) => {
+    SignInWithApple['Authorize']().then((response: any) => {
       console.log(response)
-    }).catch((response:any) => {
+      this.doAppleLogin(response);
+    }).catch((response: any) => {
       console.error(response)
     })
+  }
+
+  doAppleLogin(response: any) {
+    this.loaderService.showLoader();
+    this.loginService.appleLogin(response.identityToken).subscribe({
+      next: (r) => {
+        const decodedToken = jwtDecode(r.accessToken);
+        // @ts-ignore
+        this.localStorageService.setUserEmail(decodedToken.email);
+        this.localStorageService.setUserToken(r.accessToken);
+        this.localStorageService.setUserRefreshToken(r.refreshToken);
+        this.localStorageService.setIsFromFacebookLoggedIn(true);
+        this.loaderService.hideLoader()
+
+        setTimeout(() => {
+          this.commonService.goToRoute('home');
+        }, 200);
+      },
+      error: (err) => {
+        this.loaderService.hideLoader();
+        this.errorMessage = err.message;
+        this.toasterService.presentToast(err.error[0], 'warning')
+      },
+    });
   }
 }
