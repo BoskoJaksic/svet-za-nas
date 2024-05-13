@@ -9,9 +9,14 @@ import {FacebookLogin,} from '@capacitor-community/facebook-login';
 import {UserService} from "../../common/services/user.service";
 import {HttpClient} from '@angular/common/http';
 import {LoaderService} from "../../common/services/loader.service";
-import {Plugins} from '@capacitor/core'
+// import {Plugins} from '@capacitor/core'
+import {
+  SignInWithApple,
+  SignInWithAppleResponse,
+  SignInWithAppleOptions,
+} from '@capacitor-community/apple-sign-in';
 
-const {SignInWithApple} = Plugins
+// const {SignInWithApple} = Plugins
 
 @Component({
   selector: 'app-login',
@@ -114,7 +119,7 @@ export class LoginComponent implements OnInit {
     this.loaderService.showLoader();
 
     await FacebookLogin.login({permissions: this.FACEBOOK_PERMISSIONS}).then(result => {
-      if (result.accessToken) {
+      if (result?.accessToken) {
         this.loginService.facebookLoginIn(result.accessToken.token).subscribe({
           next: (r) => {
             const decodedToken = jwtDecode(r.accessToken);
@@ -144,24 +149,42 @@ export class LoginComponent implements OnInit {
   }
 
   appleLogin() {
-    SignInWithApple['Authorize']().then((response: any) => {
-      console.log(response)
-      this.doAppleLogin(response);
-    }).catch((response: any) => {
-      console.error(response)
-    })
+    // SignInWithApple['Authorize']().then((response: any) => {
+    //   console.log(response)
+    //
+
+    // }).catch((response: any) => {
+    //   console.error(response)
+    // })
+    let options: SignInWithAppleOptions = {
+      clientId: 'com.bebac.app',
+      redirectURI: 'https://svet-za-nas.wedosoftware.eu/',
+      scopes: 'email name',
+      state: '12345',
+      nonce: 'nonce',
+    };
+
+    SignInWithApple.authorize(options)
+      .then((result: SignInWithAppleResponse) => {
+        console.log('result: ', result);
+        this.doAppleLogin(result.response.identityToken);
+        // Handle user information
+        // Validate token with server and create new session
+      })
+      .catch(error => {
+        // Handle error
+      });
   }
 
-  doAppleLogin(response: any) {
+  doAppleLogin(token: any) {
     this.loaderService.showLoader();
-    this.loginService.appleLogin(response.identityToken).subscribe({
+    this.loginService.appleLogin(token).subscribe({
       next: (r) => {
         const decodedToken = jwtDecode(r.accessToken);
         // @ts-ignore
         this.localStorageService.setUserEmail(decodedToken.email);
         this.localStorageService.setUserToken(r.accessToken);
         this.localStorageService.setUserRefreshToken(r.refreshToken);
-        this.localStorageService.setIsFromFacebookLoggedIn(true);
         this.loaderService.hideLoader()
 
         setTimeout(() => {

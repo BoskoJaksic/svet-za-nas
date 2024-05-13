@@ -9,11 +9,11 @@ PODS:
     - CapacitorCordova
   - CapacitorApp (5.0.7):
     - Capacitor
-  - CapacitorAppleLogin (0.0.1):
-    - Capacitor
   - CapacitorBrowser (5.2.0):
     - Capacitor
   - CapacitorCamera (5.0.9):
+    - Capacitor
+  - CapacitorCommunityAppleSignIn (6.0.0):
     - Capacitor
   - CapacitorCommunityFacebookLogin (5.0.3):
     - Capacitor
@@ -51,9 +51,9 @@ PODS:
 DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorApp (from `../../node_modules/@capacitor/app`)"
-  - CapacitorAppleLogin (from `../../node_modules/capacitor-apple-login`)
   - "CapacitorBrowser (from `../../node_modules/@capacitor/browser`)"
   - "CapacitorCamera (from `../../node_modules/@capacitor/camera`)"
+  - "CapacitorCommunityAppleSignIn (from `../../node_modules/@capacitor-community/apple-sign-in`)"
   - "CapacitorCommunityFacebookLogin (from `../../node_modules/@capacitor-community/facebook-login`)"
   - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorHaptics (from `../../node_modules/@capacitor/haptics`)"
@@ -78,12 +78,12 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/ios"
   CapacitorApp:
     :path: "../../node_modules/@capacitor/app"
-  CapacitorAppleLogin:
-    :path: "../../node_modules/capacitor-apple-login"
   CapacitorBrowser:
     :path: "../../node_modules/@capacitor/browser"
   CapacitorCamera:
     :path: "../../node_modules/@capacitor/camera"
+  CapacitorCommunityAppleSignIn:
+    :path: "../../node_modules/@capacitor-community/apple-sign-in"
   CapacitorCommunityFacebookLogin:
     :path: "../../node_modules/@capacitor-community/facebook-login"
   CapacitorCordova:
@@ -103,9 +103,9 @@ SPEC CHECKSUMS:
   AppAuth: a13994980c1ec792f7e2e665acd4d4aa6be43240
   Capacitor: fc7ef6d935eafb0df9eaaf109ca69be16c51a2d2
   CapacitorApp: 17fecd0e6cb23feafac7eb0939417389038b0979
-  CapacitorAppleLogin: 10cb7ca643691a4dc6ef8f82579c8c47be31e18f
   CapacitorBrowser: a6deae9e5bf87f62b62a753cff7992c5def9e771
   CapacitorCamera: 4892c5c392f60039d853dde78bc50ba19fbd113e
+  CapacitorCommunityAppleSignIn: c8bba4ca8ff6ff843367ece13ee8af24e9266eb9
   CapacitorCommunityFacebookLogin: c0e2bb54cb567d90443a80ae20569fdac0df3f89
   CapacitorCordova: 70b13b8fddb6f35d8adcfe06cb5045c07f35f6de
   CapacitorHaptics: 7c7c206f0c96a628fed073830c96d28c4b2e772e
@@ -121,6 +121,6 @@ SPEC CHECKSUMS:
   GTMAppAuth: 0ff230db599948a9ad7470ca667337803b3fc4dd
   GTMSessionFetcher: 3a63d75eecd6aa32c2fc79f578064e1214dfdec2
 
-PODFILE CHECKSUM: 581734c65e0a3752474dee2136ec4e079897f209
+PODFILE CHECKSUM: d97099582cd997747984d6402693388928ac63f3
 
 COCOAPODS: 1.12.1
