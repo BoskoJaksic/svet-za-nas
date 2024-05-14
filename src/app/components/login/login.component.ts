@@ -163,11 +163,10 @@ export class LoginComponent implements OnInit {
       state: '12345',
       nonce: 'nonce',
     };
-
     SignInWithApple.authorize(options)
       .then((result: SignInWithAppleResponse) => {
         console.log('result: ', result);
-        this.doAppleLogin(result.response.identityToken);
+        this.doAppleLogin(result.response.identityToken,result.response.email);
         // Handle user information
         // Validate token with server and create new session
       })
@@ -176,9 +175,9 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  doAppleLogin(token: any) {
+  doAppleLogin(token: any,email: any) {
     this.loaderService.showLoader();
-    this.loginService.appleLogin(token).subscribe({
+    this.loginService.appleLogin(token,email).subscribe({
       next: (r) => {
         const decodedToken = jwtDecode(r.accessToken);
         // @ts-ignore
