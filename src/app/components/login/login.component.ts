@@ -9,14 +9,12 @@ import { FacebookLogin } from '@capacitor-community/facebook-login';
 import { UserService } from '../../common/services/user.service';
 import { HttpClient } from '@angular/common/http';
 import { LoaderService } from '../../common/services/loader.service';
-// import {Plugins} from '@capacitor/core'
 import {
   SignInWithApple,
   SignInWithAppleResponse,
   SignInWithAppleOptions,
 } from '@capacitor-community/apple-sign-in';
 
-// const {SignInWithApple} = Plugins
 
 @Component({
   selector: 'app-login',
@@ -149,13 +147,6 @@ export class LoginComponent {
   }
 
   appleLogin() {
-    // SignInWithApple['Authorize']().then((response: any) => {
-    //   console.log(response)
-    //
-
-    // }).catch((response: any) => {
-    //   console.error(response)
-    // })
     let options: SignInWithAppleOptions = {
       clientId: 'com.bebac.app',
       redirectURI: 'https://svet-za-nas.wedosoftware.eu/',
