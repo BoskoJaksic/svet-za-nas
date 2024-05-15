@@ -17,6 +17,13 @@ export class LoginService {
   }
 
   facebookLoginIn(token: any): Observable<any> {
-    return this.apiService.post(`ApplicationUsers/FacebookLogin/${token}`, token);
+    return this.apiService.post(
+      `ApplicationUsers/FacebookLogin/${token}`,
+      token
+    );
+  }
+
+  appleLogin(data: any): Observable<any> {
+    return this.apiService.post(`ApplicationUsers/AppleLogin`, data);
   }
 }
