@@ -159,7 +159,7 @@ export class LoginComponent {
       .then((result: SignInWithAppleResponse) => {
         console.log('result: ', result);
         let dataToSend = {
-          email: result.response.email,
+          email: result.response.email? result.response.email : "",
           identityToken: result.response.identityToken,
         };
         this.doAppleLogin(dataToSend);
