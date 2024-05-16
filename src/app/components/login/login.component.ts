@@ -67,6 +67,7 @@ export class LoginComponent {
         this.loginSpinner = false;
         this.errorMessage = err.message;
         this.toasterService.presentToast(err.error[0], 'warning');
+        this.toasterService.presentToast(err.message, 'warning');
       },
     });
   }
@@ -157,7 +158,6 @@ export class LoginComponent {
 
     SignInWithApple.authorize(options)
       .then((result: SignInWithAppleResponse) => {
-        console.log('result: ', result);
         let dataToSend = {
           email: result.response.email? result.response.email : "",
           identityToken: result.response.identityToken,
@@ -176,6 +176,7 @@ export class LoginComponent {
     this.loginService.appleLogin(data).subscribe({
       next: (r) => {
         const decodedToken = jwtDecode(r.accessToken);
+        console.log('dec',decodedToken)
         // @ts-ignore
         this.localStorageService.setUserEmail(decodedToken.email);
         this.localStorageService.setUserToken(r.accessToken);
