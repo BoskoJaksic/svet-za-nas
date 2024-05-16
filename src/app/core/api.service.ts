@@ -1,20 +1,17 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {Platform} from "@ionic/angular";
-import {environment} from "../../environments/environment";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Platform } from '@ionic/angular';
+import { environment } from '../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApiService {
+  baseUrl = environment.baseURL;
+  // baseUrl = this.getApiUrl();
 
-  // baseUrl = environment.baseURL
-  baseUrl = this.getApiUrl();
-
-  constructor(private http: HttpClient, private platform: Platform) {
-  }
-
+  constructor(private http: HttpClient, private platform: Platform) {}
 
   // 2E:4B:E3:F3:2A:9D:4E:C4:E5:0C:56:11:02:8F:D6:A7:C9:4D:29:08 production sha key
   // 5D:8C:97:54:F1:EA:67:71:14:BA:96:75:DB:2C:97:59:C5:78:87:6C test sha key
@@ -47,10 +44,10 @@ export class ApiService {
     return this.http.patch(this.baseUrl + path, data);
   }
 
-  delete(path: string, data?:any): Observable<any> {
+  delete(path: string, data?: any): Observable<any> {
     const options = {
-      body: data // Assuming you want to send data in the request body
+      body: data, // Assuming you want to send data in the request body
     };
-    return this.http.delete(this.baseUrl + path,options);
+    return this.http.delete(this.baseUrl + path, options);
   }
 }

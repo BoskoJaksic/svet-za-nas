@@ -1,7 +1,7 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
-import {HomePage} from './home.page';
+import { HomePage } from './home.page';
 
 const routes: Routes = [
   {
@@ -11,34 +11,49 @@ const routes: Routes = [
       {
         path: '',
         redirectTo: 'profile',
-        pathMatch: "full",
+        pathMatch: 'full',
         data: {
           title: 'Profil',
-        }
+        },
       },
       {
         path: 'profile',
-        loadChildren: () => import('./profile/profile.module').then(m => m.ProfilePageModule),
+        loadChildren: () =>
+          import('./profile/profile.module').then((m) => m.ProfilePageModule),
         data: {
           title: 'Profil',
-        }
+        },
       },
       {
         path: 'in-app-browser',
-        loadChildren: () => import('./in-app-browser/in-app-browser.module').then(m => m.InAppBrowserPageModule),
+        loadChildren: () =>
+          import('./in-app-browser/in-app-browser.module').then(
+            (m) => m.InAppBrowserPageModule
+          ),
         data: {
           title: 'Naš Svet',
-        }
+        },
+      },
+      {
+        path: 'users',
+        loadChildren: () =>
+          import('./users/users.module').then((m) => m.UsersModule),
+        data: {
+          title: 'Korisnici',
+        },
       },
 
       {
         path: 'settings',
-        loadChildren: () => import('./settings/settings.module').then( m => m.SettingsPageModule),
+        loadChildren: () =>
+          import('./settings/settings.module').then(
+            (m) => m.SettingsPageModule
+          ),
         data: {
           title: 'Podešavanja',
-        }
+        },
       },
-    ]
+    ],
   },
 ];
 
@@ -46,5 +61,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class HomePageRoutingModule {
-}
+export class HomePageRoutingModule {}
