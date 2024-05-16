@@ -51,7 +51,7 @@ export class UsersComponent implements OnInit {
         next: (data: any) => {
           this.users = data.items;
           this.totalUsers = data.totalCount;
-          console.log(data);
+          this.restoreSelections();
         },
         error: (err: any) => {
           this.toasterService.presentToast(
@@ -73,7 +73,9 @@ export class UsersComponent implements OnInit {
   }
 
   toggleSelection(user: any) {
-    const index = this.selectedUsers.indexOf(user);
+    const index = this.selectedUsers.findIndex(
+      (selected: any) => selected.id === user.id
+    );
     if (index === -1) {
       this.selectedUsers.push(user);
     } else {
@@ -82,7 +84,13 @@ export class UsersComponent implements OnInit {
   }
 
   isSelected(user: any): boolean {
-    return this.selectedUsers.indexOf(user) !== -1;
+    return this.selectedUsers.some((selected: any) => selected.id === user.id);
+  }
+
+  restoreSelections() {
+    this.users.forEach((user: any) => {
+      user.selected = this.isSelected(user);
+    });
   }
 
   sendNewsletters() {

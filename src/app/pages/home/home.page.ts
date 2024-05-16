@@ -36,7 +36,6 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      console.log('Home page');
       this.filterSidebars();
     });
   }
@@ -54,7 +53,6 @@ export class HomePage implements OnInit {
             (item) => item.pageUrl !== 'users'
           );
         }
-        console.log(this.filteredSidebarsUrl);
       } catch (error) {
         console.error('Invalid token:', error);
       }

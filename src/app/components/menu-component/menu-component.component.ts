@@ -22,7 +22,6 @@ export class MenuComponentComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log(this.sidebarsUrl);
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe(() => {
