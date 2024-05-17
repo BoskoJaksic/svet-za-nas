@@ -1,4 +1,4 @@
-@import '../../scss/mixins/font.mixin';
+@import "../../scss/mixins/font.mixin";
 
 .main-content {
   //padding-top: 45px;
@@ -9,7 +9,7 @@
 
 .title {
   color: var(--ion-color-primary);
-  @include font(36px, 800, normal,)
+  @include font(36px, 800, normal);
 }
 
 .additional-class {
@@ -19,8 +19,99 @@
 .div-component {
   height: 50%;
   overflow-y: auto;
-
 }
+
+@media screen and (min-height: 820px) {
+  .div-component {
+    height: 52% !important;
+    overflow-y: auto;
+  }
+}
+
+@media screen and (min-height: 870px) {
+  .div-component {
+    height: 49% !important;
+    overflow-y: auto;
+  }
+}
+
+@media screen and (min-height: 930px) {
+  .div-component {
+    height: 46% !important;
+    overflow-y: auto;
+  }
+}
+
+@media screen and (min-height: 990px) {
+  .div-component {
+    height: 55% !important;
+    overflow-y: auto;
+  }
+}
+
+@media screen and (min-height: 1010px) {
+  .div-component {
+    height: 54% !important;
+    overflow-y: auto;
+  }
+}
+
+@media screen and (min-height: 1055px) {
+  .div-component {
+    height: 52% !important;
+    overflow-y: auto;
+  }
+}
+
+@media screen and (min-height: 1100px) {
+  .div-component {
+    height: 51% !important;
+    overflow-y: auto;
+  }
+}
+
+@media screen and (min-height: 1120px) {
+  .div-component {
+    height: 50% !important;
+    overflow-y: auto;
+  }
+}
+
+@media screen and (min-height: 1140px) {
+  .div-component {
+    height: 48% !important;
+    overflow-y: auto;
+  }
+}
+
+@media screen and (min-height: 1170px) {
+  .div-component {
+    height: 51% !important;
+    overflow-y: auto;
+  }
+}
+
+@media screen and (min-height: 1180px) {
+  .div-component {
+    height: 66% !important;
+    overflow-y: auto;
+  }
+}
+
+@media screen and (min-height: 1300px) {
+  .div-component {
+    height: 62% !important;
+    overflow-y: auto;
+  }
+}
+
+@media screen and (min-height: 1330px) {
+  .div-component {
+    height: 60% !important;
+    overflow-y: auto;
+  }
+}
+
 @media screen and (min-width: 500px) {
   .main-content {
     display: flex;
@@ -31,11 +122,10 @@
   }
 }
 
-.div-component-partner{
+.div-component-partner {
   padding: 20px;
   display: flex;
   justify-content: center;
-
 }
 .div-component::-webkit-scrollbar {
   width: 0;
