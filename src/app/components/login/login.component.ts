@@ -67,7 +67,6 @@ export class LoginComponent {
         this.loginSpinner = false;
         this.errorMessage = err.message;
         this.toasterService.presentToast(err.error[0], 'warning');
-        this.toasterService.presentToast(err.message, 'warning');
       },
     });
   }
