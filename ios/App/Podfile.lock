@@ -13,7 +13,7 @@ PODS:
     - Capacitor
   - CapacitorCamera (5.0.9):
     - Capacitor
-  - CapacitorCommunityAppleSignIn (6.0.0):
+  - CapacitorCommunityAppleSignIn (5.0.0):
     - Capacitor
   - CapacitorCommunityFacebookLogin (5.0.3):
     - Capacitor
@@ -105,7 +105,7 @@ SPEC CHECKSUMS:
   CapacitorApp: 17fecd0e6cb23feafac7eb0939417389038b0979
   CapacitorBrowser: a6deae9e5bf87f62b62a753cff7992c5def9e771
   CapacitorCamera: 4892c5c392f60039d853dde78bc50ba19fbd113e
-  CapacitorCommunityAppleSignIn: c8bba4ca8ff6ff843367ece13ee8af24e9266eb9
+  CapacitorCommunityAppleSignIn: eafdd59b18b38161fa5cceee7b0e31312b122958
   CapacitorCommunityFacebookLogin: c0e2bb54cb567d90443a80ae20569fdac0df3f89
   CapacitorCordova: 70b13b8fddb6f35d8adcfe06cb5045c07f35f6de
   CapacitorHaptics: 7c7c206f0c96a628fed073830c96d28c4b2e772e
