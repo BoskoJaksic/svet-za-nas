@@ -41,7 +41,7 @@
   </ng-container>
 
   <ng-container *ngIf="login && !showRegisterPartner">
-    <app-login (loginChanged)="onLoginChanged($event)"></app-login>
+    <app-login (loginChanged)="onLoginChanged($event)" (emailChanged)="onEmailChanged($event)"></app-login>
   </ng-container>
 
   <ng-container *ngIf="showRegisterPartner">
