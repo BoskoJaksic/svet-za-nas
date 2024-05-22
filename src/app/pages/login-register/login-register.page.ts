@@ -48,8 +48,9 @@ export class LoginRegisterPage implements OnInit {
   errMessage: string = '';
   showRegisterPartner: boolean = false;
   partnerId: any;
+
   redirectEmail: string = '';
-  appleCredentialId: string = '';
+  appleCredentialId: string | null = null;
 
   constructor(
     private toasterService: ToasterService,
@@ -82,6 +83,14 @@ export class LoginRegisterPage implements OnInit {
 
   onAppleCredentialIdChanged(appleCredentialId: string) {
     this.appleCredentialId = appleCredentialId;
+  }
+
+  showEmailPasswordInputsCheck() {
+    if (this.redirectEmail == '') {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   private onStep1ComponentInitialized() {

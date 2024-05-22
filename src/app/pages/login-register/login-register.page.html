@@ -10,7 +10,7 @@
         </div>
         <app-custom-stepper [currentStep]="currentStep" [stepCompleted]="stepCompleted">
           <div *ngIf="currentStep === 1" class="div-component">
-            <app-step1></app-step1>
+            <app-step1 [showEmailPasswordInputs]="showEmailPasswordInputsCheck()"></app-step1>
           </div>
           <div *ngIf="currentStep === 2" class="div-component">
             <app-step2></app-step2>

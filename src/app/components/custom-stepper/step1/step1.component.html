@@ -47,7 +47,7 @@
     </ion-radio-group>
 
 
-    <div class="icon-class">
+    <div class="icon-class" *ngIf="showEmailPasswordInputs">
       <img ngSrc="./assets/icons/mail.png" height="15" width="20" style="margin-right: 20px" alt="user"/> <span
       class="size16-600 text-color">Mail</span>
     </div>
@@ -57,9 +57,10 @@
       class="custom"
       fill="outline"
       mode="md"
+      *ngIf="showEmailPasswordInputs"
       shape="round"></ion-input>
 
-    <div class="icon-class">
+    <div class="icon-class" *ngIf="showEmailPasswordInputs">
       <ion-icon name="lock-closed" slot="start"
                 style="color: #1A154C;margin-right: 10px;height: 20px;width: 20px"></ion-icon>
       <span class="size16-600 text-color">Lozinka</span>
@@ -82,7 +83,8 @@
       class="custom"
       fill="outline"
       mode="md"
-      shape="round">
+      shape="round"
+      *ngIf="showEmailPasswordInputs">
       <ion-button fill="clear" slot="end" aria-label="Show/hide" style="color: #1A154C;margin-right: 10px" (click)="togglePasswordVisibility()">
         <ion-icon slot="icon-only" [name]="isPasswordVisible ? 'eye-off' : 'eye'" aria-hidden="true"></ion-icon>
       </ion-button>
