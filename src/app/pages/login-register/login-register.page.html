@@ -9,10 +9,10 @@
           Registracija
         </div>
         <app-custom-stepper [currentStep]="currentStep" [stepCompleted]="stepCompleted">
-          <div *ngIf="currentStep === 1" class="div-component">
+          <div *ngIf="currentStep === 1" [ngClass]="{'div-component': showEmailPasswordInputsCheck(), 'no-inputs-div-component': !showEmailPasswordInputsCheck()}">
             <app-step1 [showEmailPasswordInputs]="showEmailPasswordInputsCheck()"></app-step1>
           </div>
-          <div *ngIf="currentStep === 2" class="div-component">
+          <div *ngIf="currentStep === 2" class="div-component-2">
             <app-step2></app-step2>
           </div>
           <div *ngIf="currentStep === 3" class="div-component">
