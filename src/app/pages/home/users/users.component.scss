@@ -42,3 +42,43 @@
 .mat-mdc-table .mat-mdc-cell:hover {
   cursor: pointer;
 }
+
+.select-fields {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0 20% 0 20%;
+  margin-top: 20px;
+}
+
+:host::ng-deep
+  .mdc-checkbox
+  .mdc-checkbox__native-control:enabled:focus:checked
+  ~ .mdc-checkbox__background {
+  border-color: rgb(232, 126, 79);
+  background-color: rgb(232, 126, 79);
+}
+
+:host::ng-deep
+  .mdc-checkbox
+  .mdc-checkbox__native-control:enabled:checked
+  ~ .mdc-checkbox__background {
+  border-color: rgb(232, 126, 79);
+  background-color: rgb(232, 126, 79);
+}
+
+:host::ng-deep
+  .mdc-checkbox
+  .mdc-checkbox__native-control:enabled:hover:checked
+  ~ .mdc-checkbox__background {
+  border-color: rgb(232, 126, 79);
+  background-color: rgb(232, 126, 79);
+}
+
+/* Disabled Checked Checkbox */
+:host::ng-deep
+  .mdc-checkbox
+  .mdc-checkbox__native-control:disabled:checked
+  ~ .mdc-checkbox__background {
+  border-color: rgb(232, 126, 79);
+  background-color: rgb(232, 126, 79);
+}

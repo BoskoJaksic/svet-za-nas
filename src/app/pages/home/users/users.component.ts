@@ -13,13 +13,17 @@ import { UserService } from 'src/app/common/services/user.service';
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
+  ageType: string[] = ['week'];
+  childAgeOptions: Array<{ value: string; viewValue: string }> = [];
+  selectedChildAges: string[] = [];
+
   users: any = [];
   selectedUsers: any = [];
   totalUsers: number = 0;
   pageSize: number = 10;
   currentPage: number = 1;
   searchQuery: string = '';
-  displayedColumns: string[] = ['fullname', 'email'];
+  displayedColumns: string[] = ['select', 'fullname', 'email'];
   selection = new SelectionModel<any>(true, []);
   private searchSubject: Subject<string> = new Subject();
 
@@ -32,6 +36,7 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params) => {
       this.loadUsers();
+      this.defineNumberOfAge();
     });
 
     this.searchSubject
@@ -40,6 +45,58 @@ export class UsersComponent implements OnInit {
         this.searchQuery = query;
         this.loadUsers();
       });
+  }
+
+  changeChildAge(event: any) {
+    this.selectedChildAges = event;
+  }
+
+  defineNumberOfAge(newAgeTypes?: any) {
+    this.childAgeOptions = [];
+    this.ageType = newAgeTypes || this.ageType;
+    if (this.ageType.includes('week')) {
+      for (let i = 1; i <= 40; i++) {
+        this.childAgeOptions.push({
+          value: `week ${i}`,
+          viewValue: `${i} nedelja trudnoce`,
+        });
+      }
+    }
+
+    if (this.ageType.includes('month')) {
+      const monthRanges = [
+        { start: 0, end: 3 },
+        { start: 4, end: 6 },
+        { start: 7, end: 9 },
+        { start: 10, end: 12 },
+        { start: 13, end: 18 },
+        { start: 19, end: 24 },
+        { start: 25, end: 36 },
+      ];
+
+      for (const range of monthRanges) {
+        this.childAgeOptions.push({
+          value: `month ${range.start}-${range.end}`,
+          viewValue: `${range.start}-${range.end} meseci`,
+        });
+      }
+    }
+
+    if (this.ageType.includes('year')) {
+      const yearRanges = [
+        { start: 3, end: 4 },
+        { start: 4, end: 5 },
+        { start: 5, end: 6 },
+        { start: 6, end: 7 },
+      ];
+
+      for (const range of yearRanges) {
+        this.childAgeOptions.push({
+          value: `year ${range.start}-${range.end}`,
+          viewValue: `${range.start}-${range.end} godina`,
+        });
+      }
+    }
   }
 
   loadUsers(page: number = 1, pageSize: number = this.pageSize) {
@@ -91,6 +148,39 @@ export class UsersComponent implements OnInit {
     this.users.forEach((user: any) => {
       user.selected = this.isSelected(user);
     });
+  }
+
+  toggleSelectAll(event: any) {
+    if (event.checked) {
+      this.users.forEach((user: any) => {
+        if (!this.isSelected(user)) {
+          this.selectedUsers.push(user);
+        }
+      });
+    } else {
+      this.users.forEach((user: any) => {
+        const index = this.selectedUsers.findIndex(
+          (selected: any) => selected.id === user.id
+        );
+        if (index !== -1) {
+          this.selectedUsers.splice(index, 1);
+        }
+      });
+    }
+  }
+
+  isAllSelected(): boolean {
+    return (
+      this.users.length &&
+      this.users.every((user: any) => this.isSelected(user))
+    );
+  }
+
+  isSomeSelected(): boolean {
+    return (
+      this.users.some((user: any) => this.isSelected(user)) &&
+      !this.isAllSelected()
+    );
   }
 
   sendNewsletters() {

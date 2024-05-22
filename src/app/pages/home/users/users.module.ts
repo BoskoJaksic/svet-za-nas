@@ -9,6 +9,7 @@ import { UsersComponent } from './users.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
 @NgModule({
   declarations: [UsersComponent],
   imports: [
@@ -20,6 +21,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatTableModule,
     MatCheckboxModule,
     MatPaginatorModule,
+    MatSelectModule,
   ],
 })
 export class UsersModule {}
