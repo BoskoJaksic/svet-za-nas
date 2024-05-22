@@ -49,6 +49,7 @@ export class LoginRegisterPage implements OnInit {
   showRegisterPartner: boolean = false;
   partnerId: any;
   redirectEmail: string = '';
+  appleCredentialId: string = '';
 
   constructor(
     private toasterService: ToasterService,
@@ -77,6 +78,10 @@ export class LoginRegisterPage implements OnInit {
 
   onEmailChanged(email: string) {
     this.redirectEmail = email;
+  }
+
+  onAppleCredentialIdChanged(appleCredentialId: string) {
+    this.appleCredentialId = appleCredentialId;
   }
 
   private onStep1ComponentInitialized() {
@@ -172,6 +177,7 @@ export class LoginRegisterPage implements OnInit {
         parentRole: step1Data.parentRole,
         children: step2Data,
         pets: [step3Data],
+        appleCredentialId: this.appleCredentialId,
       };
       if (step3Data.role === '' || step3Data.role === null) {
         dataToSend.pets = [];

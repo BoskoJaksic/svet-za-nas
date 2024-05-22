@@ -29,6 +29,7 @@ export class LoginComponent {
   token: any = null;
   @Output() loginChanged = new EventEmitter<boolean>();
   @Output() emailChanged = new EventEmitter<string>();
+  @Output() appleCredentialIdChanged = new EventEmitter<string>();
 
   FACEBOOK_PERMISSIONS = ['email'];
 
@@ -193,6 +194,7 @@ export class LoginComponent {
           this.toasterService.presentToast(err.error[0], 'warning');
           this.loginChanged.emit(false);
           this.emailChanged.emit(err.error[1]);
+          if (!!err.error[2]) this.appleCredentialIdChanged.emit(err.error[2]);
         } else {
           this.toasterService.presentToast(err.error[0], 'warning');
         }
