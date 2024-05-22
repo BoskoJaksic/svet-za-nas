@@ -49,7 +49,7 @@ export class LoginRegisterPage implements OnInit {
   showRegisterPartner: boolean = false;
   partnerId: any;
 
-  redirectEmail: string = 'aa';
+  redirectEmail: string = '';
   appleCredentialId: string | null = null;
 
   constructor(
