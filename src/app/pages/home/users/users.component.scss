@@ -74,10 +74,56 @@
   background-color: rgb(232, 126, 79);
 }
 
-/* Disabled Checked Checkbox */
+:host::ng-deep .mdc-checkbox .mdc-checkbox__ripple {
+  background-color: transparent !important;
+}
+
+/* Hover state for the touch target */
+:host::ng-deep .mdc-checkbox .mat-mdc-checkbox-touch-target:hover {
+  :host::ng-deep
+    .mdc-checkbox
+    .mdc-checkbox__native-control:disabled:checked
+    ~ .mdc-checkbox__background {
+    border-color: rgb(232, 126, 79);
+    background-color: rgb(232, 126, 79);
+  }
+}
+
+:host::ng-deep
+  .mdc-checkbox:hover
+  .mdc-checkbox__native-control:enabled:indeterminate
+  ~ .mdc-checkbox__background {
+  border-color: rgb(232, 126, 79);
+  background-color: rgb(232, 126, 79);
+}
+
 :host::ng-deep
   .mdc-checkbox
-  .mdc-checkbox__native-control:disabled:checked
+  .mdc-checkbox__native-control:enabled:indeterminate
+  ~ .mdc-checkbox__background {
+  border-color: rgb(232, 126, 79);
+  background-color: rgb(232, 126, 79);
+}
+
+:host::ng-deep
+  .mdc-checkbox
+  .mdc-checkbox__native-control:enabled:indeterminate:hover
+  ~ .mdc-checkbox__background {
+  border-color: rgb(232, 126, 79);
+  background-color: rgb(232, 126, 79);
+}
+
+:host::ng-deep
+  .mdc-checkbox:not(:disabled):active
+  .mdc-checkbox__native-control:enabled:checked
+  ~ .mdc-checkbox__background {
+  border-color: rgb(232, 126, 79);
+  background-color: rgb(232, 126, 79);
+}
+
+:host::ng-deep
+  .mdc-checkbox:not(:disabled):active
+  .mdc-checkbox__native-control:enabled:indeterminate
   ~ .mdc-checkbox__background {
   border-color: rgb(232, 126, 79);
   background-color: rgb(232, 126, 79);

@@ -44,11 +44,7 @@ export class UserService {
     return this.apiService.put('ApplicationUsers/UpdateUser', obj);
   }
 
-  getAllUsers(currentPage: number, pageSize: number, searchQuery: string) {
-    return this.apiService.get(
-      `ApplicationUsers/GetAll/${currentPage}/${pageSize}?searchQuery=${encodeURIComponent(
-        searchQuery
-      )}`
-    );
+  getAllUsers(obj: any) {
+    return this.apiService.post('ApplicationUsers/GetAll', obj);
   }
 }

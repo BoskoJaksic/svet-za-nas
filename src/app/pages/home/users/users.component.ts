@@ -26,6 +26,7 @@ export class UsersComponent implements OnInit {
   displayedColumns: string[] = ['select', 'fullname', 'email'];
   selection = new SelectionModel<any>(true, []);
   private searchSubject: Subject<string> = new Subject();
+  private childAgeSubject: Subject<string[]> = new Subject();
 
   constructor(
     private route: ActivatedRoute,
@@ -45,6 +46,11 @@ export class UsersComponent implements OnInit {
         this.searchQuery = query;
         this.loadUsers();
       });
+
+    this.childAgeSubject.pipe(debounceTime(300)).subscribe((ages) => {
+      this.selectedChildAges = ages;
+      this.loadUsers();
+    });
   }
 
   changeChildAge(event: any) {
@@ -97,30 +103,42 @@ export class UsersComponent implements OnInit {
         });
       }
     }
+
+    this.selectedChildAges = this.selectedChildAges.filter((age) =>
+      this.childAgeOptions.some((option) => option.value === age)
+    );
   }
 
   loadUsers(page: number = 1, pageSize: number = this.pageSize) {
     this.currentPage = page;
     this.pageSize = pageSize;
-    this.userService
-      .getAllUsers(this.currentPage, this.pageSize, this.searchQuery)
-      .subscribe({
-        next: (data: any) => {
-          this.users = data.items;
-          this.totalUsers = data.totalCount;
-          this.restoreSelections();
-        },
-        error: (err: any) => {
-          this.toasterService.presentToast(
-            'Zabranjen pristup korisnicima.',
-            'danger'
-          );
-        },
-      });
+    let data = {
+      pageNumber: this.currentPage,
+      pageSize: this.pageSize,
+      searchQuery: this.searchQuery,
+      childAgeOptions: this.selectedChildAges,
+    };
+    this.userService.getAllUsers(data).subscribe({
+      next: (data: any) => {
+        this.users = data.items;
+        this.totalUsers = data.totalCount;
+        this.restoreSelections();
+      },
+      error: (err: any) => {
+        this.toasterService.presentToast(
+          'Zabranjen pristup korisnicima.',
+          'danger'
+        );
+      },
+    });
   }
 
   searchUsers() {
     this.searchSubject.next(this.searchQuery);
+  }
+
+  filterByChildAge(event: any) {
+    this.childAgeSubject.next(event);
   }
 
   pageChanged(event: PageEvent) {

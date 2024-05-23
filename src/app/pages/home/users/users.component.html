@@ -26,7 +26,7 @@
 
     <mat-form-field>
       <mat-label>Starost deteta</mat-label>
-      <mat-select [ngModel]="selectedChildAges" (ngModelChange)="changeChildAge($event)" multiple>
+      <mat-select [ngModel]="selectedChildAges" (ngModelChange)="filterByChildAge($event)" multiple>
         @for (age of childAgeOptions; track age) {
           <mat-option [value]="age.value">{{age.viewValue}}</mat-option>
         }
