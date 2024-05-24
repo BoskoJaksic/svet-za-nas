@@ -15,7 +15,6 @@ import {
   SignInWithAppleOptions,
 } from '@capacitor-community/apple-sign-in';
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -29,6 +28,8 @@ export class LoginComponent {
   errorMessage: string = '';
   token: any = null;
   @Output() loginChanged = new EventEmitter<boolean>();
+  @Output() emailChanged = new EventEmitter<string>();
+  @Output() appleCredentialIdChanged = new EventEmitter<string>();
 
   FACEBOOK_PERMISSIONS = ['email'];
 
@@ -158,7 +159,7 @@ export class LoginComponent {
     SignInWithApple.authorize(options)
       .then((result: SignInWithAppleResponse) => {
         let dataToSend = {
-          email: result.response.email? result.response.email : "",
+          email: result.response.email ? result.response.email : '',
           identityToken: result.response.identityToken,
         };
         this.doAppleLogin(dataToSend);
@@ -175,7 +176,7 @@ export class LoginComponent {
     this.loginService.appleLogin(data).subscribe({
       next: (r) => {
         const decodedToken = jwtDecode(r.accessToken);
-        console.log('dec',decodedToken)
+        console.log('dec', decodedToken);
         // @ts-ignore
         this.localStorageService.setUserEmail(decodedToken.email);
         this.localStorageService.setUserToken(r.accessToken);
@@ -189,7 +190,14 @@ export class LoginComponent {
       error: (err) => {
         this.loaderService.hideLoader();
         this.errorMessage = err.message;
-        this.toasterService.presentToast(err.error[0], 'warning');
+        if (err.error && err.error.length > 1) {
+          this.toasterService.presentToast(err.error[0], 'warning');
+          this.loginChanged.emit(false);
+          this.emailChanged.emit(err.error[1]);
+          if (!!err.error[2]) this.appleCredentialIdChanged.emit(err.error[2]);
+        } else {
+          this.toasterService.presentToast(err.error[0], 'warning');
+        }
       },
     });
   }

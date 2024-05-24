@@ -22,8 +22,14 @@
 }
 
 @media screen and (min-height: 820px) {
-  .div-component {
+  .div-component,
+  .div-component-2 {
     height: 52% !important;
+    overflow-y: auto;
+  }
+
+  .no-inputs-div-component {
+    height: 68% !important;
     overflow-y: auto;
   }
 }
@@ -33,11 +39,31 @@
     height: 49% !important;
     overflow-y: auto;
   }
+
+  .div-component-2 {
+    height: 70% !important;
+    overflow-y: auto;
+  }
+
+  .no-inputs-div-component {
+    height: 65% !important;
+    overflow-y: auto;
+  }
 }
 
 @media screen and (min-height: 930px) {
   .div-component {
     height: 46% !important;
+    overflow-y: auto;
+  }
+
+  .div-component-2 {
+    height: 69% !important;
+    overflow-y: auto;
+  }
+
+  .no-inputs-div-component {
+    height: 61% !important;
     overflow-y: auto;
   }
 }
@@ -47,11 +73,31 @@
     height: 55% !important;
     overflow-y: auto;
   }
+
+  .div-component-2 {
+    height: 67% !important;
+    overflow-y: auto;
+  }
+
+  .no-inputs-div-component {
+    height: 57% !important;
+    overflow-y: auto;
+  }
 }
 
 @media screen and (min-height: 1010px) {
   .div-component {
     height: 54% !important;
+    overflow-y: auto;
+  }
+
+  .div-component-2 {
+    height: 66% !important;
+    overflow-y: auto;
+  }
+
+  .no-inputs-div-component {
+    height: 57% !important;
     overflow-y: auto;
   }
 }
@@ -61,11 +107,29 @@
     height: 52% !important;
     overflow-y: auto;
   }
+  .no-inputs-div-component {
+    height: 55% !important;
+    overflow-y: auto;
+  }
+
+  .div-component-2 {
+    height: 64% !important;
+    overflow-y: auto;
+  }
 }
 
 @media screen and (min-height: 1100px) {
   .div-component {
     height: 51% !important;
+    overflow-y: auto;
+  }
+  .no-inputs-div-component {
+    height: 54% !important;
+    overflow-y: auto;
+  }
+
+  .div-component-2 {
+    height: 60% !important;
     overflow-y: auto;
   }
 }
@@ -75,6 +139,15 @@
     height: 50% !important;
     overflow-y: auto;
   }
+  .no-inputs-div-component {
+    height: 53% !important;
+    overflow-y: auto;
+  }
+
+  .div-component-2 {
+    height: 57% !important;
+    overflow-y: auto;
+  }
 }
 
 @media screen and (min-height: 1140px) {
@@ -82,31 +155,53 @@
     height: 48% !important;
     overflow-y: auto;
   }
+
+  .no-inputs-div-component {
+    height: 49% !important;
+    overflow-y: auto;
+  }
+
+  .div-component-2 {
+    height: 55% !important;
+    overflow-y: auto;
+  }
 }
 
 @media screen and (min-height: 1170px) {
-  .div-component {
+  .div-component,
+  .no-inputs-div-component {
     height: 51% !important;
+    overflow-y: auto;
+  }
+
+  .div-component-2 {
+    height: 55% !important;
     overflow-y: auto;
   }
 }
 
 @media screen and (min-height: 1180px) {
-  .div-component {
+  .div-component,
+  .no-inputs-div-component,
+  .div-component-2 {
     height: 66% !important;
     overflow-y: auto;
   }
 }
 
 @media screen and (min-height: 1300px) {
-  .div-component {
+  .div-component,
+  .no-inputs-div-component,
+  .div-component-2 {
     height: 62% !important;
     overflow-y: auto;
   }
 }
 
 @media screen and (min-height: 1330px) {
-  .div-component {
+  .div-component,
+  .no-inputs-div-component,
+  .div-component-2 {
     height: 60% !important;
     overflow-y: auto;
   }

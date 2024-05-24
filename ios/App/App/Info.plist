@@ -50,11 +50,11 @@
             <true />
         </dict>
         <key>NSCameraUsageDescription</key>
-        <string>Need camera access for ability to upload images.</string>
+        <string>Access to the camera allows you to take photos for your profile.</string>
         <key>NSPhotoLibraryAddUsageDescription</key>
         <string />
         <key>NSPhotoLibraryUsageDescription</key>
-        <string>Your photo library allows you to pick image for your profile picture</string>
+        <string>Allow photo access to add photos to your profile</string>
         <key>UILaunchStoryboardName</key>
         <string>LaunchScreen</string>
         <key>UIMainStoryboardFile</key>
