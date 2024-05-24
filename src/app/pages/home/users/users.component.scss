@@ -18,6 +18,16 @@
 .button-container {
   display: flex;
   justify-content: center;
+}
+
+.searchbar {
+  margin-top: 20px;
+}
+
+.select-fields {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0 20% 0 20%;
   margin-top: 20px;
 }
 
@@ -32,7 +42,46 @@
 
 .backButton {
   margin-bottom: 20px;
-  width: 100%;
+  width: 90%;
+}
+
+.select-input {
+  width: 150px;
+  margin: 0px 5px 0px 5px;
+}
+
+@media screen and (max-width: 1000px) {
+  .backButton {
+    margin-bottom: 20px;
+    width: 35%;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .header-panel {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .searchbar {
+    margin-left: 30px;
+    margin-right: 10px;
+  }
+
+  .select-fields {
+    margin-right: 10px;
+    padding: 0px;
+    justify-content: space-between;
+  }
+
+  .back-button {
+    width: 150px !important;
+  }
+
+  .button-content {
+    margin-top: 20px;
+  }
 }
 
 .selected {
@@ -43,88 +92,32 @@
   cursor: pointer;
 }
 
-.select-fields {
-  display: flex;
-  justify-content: space-evenly;
-  padding: 0 20% 0 20%;
-  margin-top: 20px;
-}
-
 :host::ng-deep
   .mdc-checkbox
   .mdc-checkbox__native-control:enabled:focus:checked
-  ~ .mdc-checkbox__background {
-  border-color: rgb(232, 126, 79);
-  background-color: rgb(232, 126, 79);
+  ~ .mdc-checkbox__background
+  .mdc-checkbox__checkmark {
+  color: white;
 }
 
 :host::ng-deep
   .mdc-checkbox
   .mdc-checkbox__native-control:enabled:checked
-  ~ .mdc-checkbox__background {
-  border-color: rgb(232, 126, 79);
-  background-color: rgb(232, 126, 79);
-}
-
-:host::ng-deep
-  .mdc-checkbox
-  .mdc-checkbox__native-control:enabled:hover:checked
-  ~ .mdc-checkbox__background {
-  border-color: rgb(232, 126, 79);
-  background-color: rgb(232, 126, 79);
-}
-
-:host::ng-deep .mdc-checkbox .mdc-checkbox__ripple {
-  background-color: transparent !important;
-}
-
-/* Hover state for the touch target */
-:host::ng-deep .mdc-checkbox .mat-mdc-checkbox-touch-target:hover {
-  :host::ng-deep
-    .mdc-checkbox
-    .mdc-checkbox__native-control:disabled:checked
-    ~ .mdc-checkbox__background {
-    border-color: rgb(232, 126, 79);
-    background-color: rgb(232, 126, 79);
-  }
-}
-
-:host::ng-deep
-  .mdc-checkbox:hover
-  .mdc-checkbox__native-control:enabled:indeterminate
-  ~ .mdc-checkbox__background {
-  border-color: rgb(232, 126, 79);
-  background-color: rgb(232, 126, 79);
+  ~ .mdc-checkbox__background
+  .mdc-checkbox__checkmark {
+  color: white;
 }
 
 :host::ng-deep
   .mdc-checkbox
   .mdc-checkbox__native-control:enabled:indeterminate
-  ~ .mdc-checkbox__background {
-  border-color: rgb(232, 126, 79);
-  background-color: rgb(232, 126, 79);
+  ~ .mdc-checkbox__background
+  .mdc-checkbox__mixedmark {
+  color: white;
 }
 
-:host::ng-deep
-  .mdc-checkbox
-  .mdc-checkbox__native-control:enabled:indeterminate:hover
-  ~ .mdc-checkbox__background {
-  border-color: rgb(232, 126, 79);
-  background-color: rgb(232, 126, 79);
-}
-
-:host::ng-deep
-  .mdc-checkbox:not(:disabled):active
-  .mdc-checkbox__native-control:enabled:checked
-  ~ .mdc-checkbox__background {
-  border-color: rgb(232, 126, 79);
-  background-color: rgb(232, 126, 79);
-}
-
-:host::ng-deep
-  .mdc-checkbox:not(:disabled):active
-  .mdc-checkbox__native-control:enabled:indeterminate
-  ~ .mdc-checkbox__background {
-  border-color: rgb(232, 126, 79);
-  background-color: rgb(232, 126, 79);
+:host::ng-deep .select-fields .mat-mdc-form-field .mat-mdc-text-field-wrapper {
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: white;
 }

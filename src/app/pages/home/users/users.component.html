@@ -2,36 +2,37 @@
 <ion-content class="container">
   <app-our-world></app-our-world>
 
-  <div class="button-container">
-    <div class="button-content">
-      <ion-button expand="full" type="submit" shape="round" mode="ios" class="backButton"
-                  style="width: 35%" (click)="sendNewsletters()">
-        <span class="size20-800">Pošalji ({{selectedUsers.length}})</span></ion-button>
+  <div class="header-panel">
+    <div class="searchbar">
+      <ion-searchbar type="text" [(ngModel)]="searchQuery" (ionInput)="searchUsers()"></ion-searchbar>
     </div>
-  </div>
-
-  <div class="searchbar">
-    <ion-searchbar type="text" [(ngModel)]="searchQuery" (ionInput)="searchUsers()"></ion-searchbar>
-  </div>
-
-  <div class="select-fields">
-    <mat-form-field>
-      <mat-label>Starost deteta</mat-label>
-      <mat-select [ngModel]="ageType" (ngModelChange)="defineNumberOfAge($event)" multiple>
-          <mat-option [value]="'week'">Nedelja</mat-option>
-          <mat-option [value]="'month'">Mesec</mat-option>
-          <mat-option [value]="'year'">Godina</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Starost deteta</mat-label>
-      <mat-select [ngModel]="selectedChildAges" (ngModelChange)="filterByChildAge($event)" multiple>
-        @for (age of childAgeOptions; track age) {
-          <mat-option [value]="age.value">{{age.viewValue}}</mat-option>
-        }
-      </mat-select>
-    </mat-form-field>
+  
+    <div class="select-fields">
+      <mat-form-field class="select-input">
+        <mat-label>Starost deteta</mat-label>
+        <mat-select panelClass="mat-select-overlay" [ngModel]="ageType" (ngModelChange)="defineNumberOfAge($event)" multiple>
+            <mat-option [value]="'week'">Nedelja</mat-option>
+            <mat-option [value]="'month'">Mesec</mat-option>
+            <mat-option [value]="'year'">Godina</mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      <mat-form-field class="select-input">
+        <mat-label>Starost deteta</mat-label>
+        <mat-select panelClass="mat-select-overlay" [ngModel]="selectedChildAges" (ngModelChange)="filterByChildAge($event)" multiple>
+          @for (age of childAgeOptions; track age) {
+            <mat-option [value]="age.value">{{age.viewValue}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+  
+    <div class="button-container">
+      <div class="button-content">
+        <ion-button expand="full" type="submit" shape="round" mode="ios" class="backButton" (click)="sendNewsletters()">
+          <span class="size20-800">Pošalji ({{selectedUsers.length}})</span></ion-button>
+      </div>
+    </div>
   </div>
 
 
