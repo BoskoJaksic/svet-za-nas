@@ -59,6 +59,10 @@ export class UsersComponent implements OnInit {
 
   defineNumberOfAge(newAgeTypes?: any) {
     this.childAgeOptions = [];
+    this.childAgeOptions.push({
+      value: 'allweeks',
+      viewValue: 'Sve nedelje trudnoce',
+    });
     this.ageType = newAgeTypes || this.ageType;
     if (this.ageType.includes('week')) {
       for (let i = 1; i <= 40; i++) {
