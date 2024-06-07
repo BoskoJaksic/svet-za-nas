@@ -1,22 +1,16 @@
-import {Injectable} from '@angular/core';
-import {Router} from "@angular/router";
-import {Platform} from "@ionic/angular";
-import {Subject} from "rxjs";
-import {Capacitor} from "@capacitor/core";
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { Platform } from '@ionic/angular';
+import { Subject } from 'rxjs';
+import { Capacitor } from '@capacitor/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CommonService {
+  constructor(private router: Router, private platform: Platform) {}
 
-  constructor(
-    private router: Router,
-    private platform: Platform
-  ) {
-
-  }
-
-  determinePlatform(){
+  determinePlatform() {
     return Capacitor.getPlatform();
   }
   isIos() {
@@ -25,15 +19,18 @@ export class CommonService {
 
   goToRoute(whereTo: any, params?: any) {
     if (params) {
-      this.router.navigate([whereTo, params])
+      this.router.navigate([whereTo, params]);
     } else {
-      this.router.navigate([whereTo])
+      this.router.navigate([whereTo]);
     }
   }
 
-  isSmallScreen(){
+  isSmallScreen() {
     const screenHeight = this.platform.height();
     return screenHeight < 700;
   }
 
+  getQueryParams() {
+    return this.router.parseUrl(this.router.url).queryParams;
+  }
 }

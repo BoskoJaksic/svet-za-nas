@@ -47,6 +47,10 @@ export class LoginComponent {
     this.loginChanged.emit(false);
   }
 
+  showForgotPasswordPage() {
+    this.commonService.goToRoute('forgot-password');
+  }
+
   onSubmit() {
     const formData = {
       username: this.email,

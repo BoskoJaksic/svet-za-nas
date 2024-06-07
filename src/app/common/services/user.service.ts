@@ -47,4 +47,12 @@ export class UserService {
   getAllUsers(obj: any) {
     return this.apiService.post('ApplicationUsers/GetAll', obj);
   }
+
+  forgotPassword(email: any) {
+    return this.apiService.post(`ApplicationUsers/ForgotPassword/${email}`, {});
+  }
+
+  resetPassword(obj: any) {
+    return this.apiService.post('ApplicationUsers/ResetPassword', obj);
+  }
 }
