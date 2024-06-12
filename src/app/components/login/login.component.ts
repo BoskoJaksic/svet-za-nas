@@ -72,6 +72,32 @@ export class LoginComponent {
     });
   }
 
+  loginAsGuest() {
+    const formData = {
+      username: '',
+      password: '',
+      rememberMe: false,
+      isGuest: true,
+    };
+    this.loginSpinner = true;
+    this.loginService.loginUser(formData).subscribe({
+      next: (r) => {
+        this.localStorageService.setUserEmail(this.email);
+        this.localStorageService.setUserToken(r.accessToken);
+        this.localStorageService.setUserRefreshToken(r.refreshToken);
+        this.localStorageService.setIsFromFacebookLoggedIn(false);
+
+        this.commonService.goToRoute('/home/in-app-browser');
+        this.loginSpinner = false;
+      },
+      error: (err) => {
+        this.loginSpinner = false;
+        this.errorMessage = err.message;
+        this.toasterService.presentToast(err.error[0], 'warning');
+      },
+    });
+  }
+
   async googleLogin() {
     this.loaderService.showLoader();
     GoogleAuth.signIn().then(
