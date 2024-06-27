@@ -81,7 +81,7 @@ export class HttpInterceptorService implements HttpInterceptor {
         }
         this.appPathService.setAppPath('');
         this.commonService.goToRoute('/');
-        return throwError(() => new Error('Neuspjelo osvježavanje tokena'));
+        return throwError(() => new Error('Neuspelo osvježavanje tokena'));
       }),
       catchError((err) => {
         this.commonService.goToRoute('/');
