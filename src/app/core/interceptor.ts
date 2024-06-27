@@ -70,7 +70,7 @@ export class HttpInterceptorService implements HttpInterceptor {
     }
     return this.userService.getRefreshToken(dataToSend).pipe(
       switchMap((response: any) => {
-        const newToken = response.accessToken; //todo check for this response how it looks like
+        const newToken = response.accessToken;
         const newRefreshToken = response.refreshToken;
 
         if (newToken && newRefreshToken) {
@@ -84,7 +84,7 @@ export class HttpInterceptorService implements HttpInterceptor {
         return throwError(() => new Error('Neuspelo osvježavanje tokena'));
       }),
       catchError((err) => {
-        this.commonService.goToRoute('/');
+        window.location.href = '/';
         return of(null as unknown as HttpEvent<any>);
       })
     );
