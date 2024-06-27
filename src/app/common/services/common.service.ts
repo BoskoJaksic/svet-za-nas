@@ -25,6 +25,10 @@ export class CommonService {
     }
   }
 
+  navigateToRoute(route: string) {
+    this.router.navigate([route]);
+  }
+
   isSmallScreen() {
     const screenHeight = this.platform.height();
     return screenHeight < 700;

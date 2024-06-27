@@ -48,6 +48,10 @@ export class HomePage implements OnInit {
         const userRole = decodedToken.role;
         if (userRole == 'Admin') {
           this.filteredSidebarsUrl = this.sidebarsUrl;
+        } else if (userRole == 'Guest') {
+          this.filteredSidebarsUrl = this.sidebarsUrl.filter(
+            (item) => item.pageUrl === 'in-app-browser'
+          );
         } else {
           this.filteredSidebarsUrl = this.sidebarsUrl.filter(
             (item) => item.pageUrl !== 'users'
