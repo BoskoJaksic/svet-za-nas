@@ -1,4 +1,7 @@
-apply plugin: 'com.android.application'
+plugins {
+  id 'com.android.application'
+  id 'com.google.gms.google-services'
+}
 
 android {
     namespace "com.bebac.app"
@@ -15,12 +18,13 @@ android {
              // Default: https://android.googlesource.com/platform/frameworks/base/+/282e181b58cf72b6ca770dc7ca5f91f135444502/tools/aapt/AaptAssets.cpp#61
             ignoreAssetsPattern '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
         }
+        multiDexEnabled true
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-          signingConfig signingConfigs.debug
+            signingConfig signingConfigs.debug
         }
     }
 }
@@ -41,6 +45,8 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
     implementation project(':capacitor-cordova-android-plugins')
+    implementation platform('com.google.firebase:firebase-bom:33.1.1')
+    implementation 'com.google.firebase:firebase-analytics'
 }
 
 apply from: 'capacitor.build.gradle'

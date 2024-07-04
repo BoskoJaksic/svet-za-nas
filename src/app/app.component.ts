@@ -1,5 +1,5 @@
-import { Component, NgZone } from '@angular/core';
-import { isPlatform, Platform } from '@ionic/angular';
+import { Component, NgZone, OnInit } from '@angular/core';
+import { AlertController, isPlatform, Platform } from '@ionic/angular';
 import { LoaderService } from './common/services/loader.service';
 import { App, URLOpenListenerEvent } from '@capacitor/app';
 import { AppPathService } from './common/services/app-path.service';
@@ -11,12 +11,22 @@ import { LocalStorageService } from './common/services/local-storage.service';
 import { jwtDecode } from 'jwt-decode';
 import { switchMap } from 'rxjs';
 import { UserService } from './common/services/user.service';
+import {
+  ActionPerformed,
+  PushNotification,
+  PushNotificationActionPerformed,
+  PushNotificationSchema,
+  PushNotificationToken,
+  PushNotifications,
+  Token,
+} from '@capacitor/push-notifications';
+import { PushNotificationsService } from './common/services/push-notifications.service';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   // isWebPlatform:boolean = false;
   constructor(
     private platform: Platform,
@@ -31,6 +41,12 @@ export class AppComponent {
     this.initializeApp();
     this.deepLinkApp();
     // this.determinePlatform();
+  }
+
+  ngOnInit() {
+    if (this.platform.is('android') || this.platform.is('ios')) {
+      this.initializePushNotifications();
+    }
   }
 
   initializeApp() {
@@ -115,5 +131,11 @@ export class AppComponent {
         });
       });
     }
+  }
+
+  initializePushNotifications() {
+    // With this method, user will be asked to allow push notifications on app start
+    // Registering app is going on in home.page.ts so we have information about user
+    PushNotifications.requestPermissions().then((result: any) => {});
   }
 }

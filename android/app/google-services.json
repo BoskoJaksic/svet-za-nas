@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1082954434910",
+    "project_id": "svet-za-nas",
+    "storage_bucket": "svet-za-nas.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1082954434910:android:e4a7e77d9c66db6d5e67cf",
+        "android_client_info": {
+          "package_name": "com.bebac.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGXirCo-w-1R6abEC849VDlcUHd9g-W1U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
