@@ -131,7 +131,12 @@ export class HomePage implements OnInit {
 
     PushNotifications.addListener(
       'pushNotificationActionPerformed',
-      (args: ActionPerformed) => {}
+      (args: ActionPerformed) => {
+        const url = args.notification.data.url;
+        if (url) {
+          window.open(url, '_blank');
+        }
+      }
     );
   }
 
@@ -139,7 +144,21 @@ export class HomePage implements OnInit {
     const alert = await this.alertCtrl.create({
       header: notificationDetail.title,
       message: notificationDetail.body,
-      buttons: ['OK'],
+      buttons: [
+        {
+          text: 'OK',
+          role: 'cancel',
+        },
+        {
+          text: 'Otvori link',
+          handler: () => {
+            const url = notificationDetail.data.url;
+            if (url) {
+              window.open(url, '_blank');
+            }
+          },
+        },
+      ],
     });
     await alert.present();
   }

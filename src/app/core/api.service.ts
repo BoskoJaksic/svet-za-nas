@@ -8,8 +8,8 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class ApiService {
-  baseUrl = environment.baseURL;
-  // baseUrl = this.getApiUrl();
+  // baseUrl = environment.baseURL;
+  baseUrl = this.getApiUrl();
 
   constructor(private http: HttpClient, private platform: Platform) {}
 
