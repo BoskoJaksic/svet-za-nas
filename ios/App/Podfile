@@ -18,6 +18,7 @@ def capacitor_pods
   pod 'CapacitorCamera', :path => '../../node_modules/@capacitor/camera'
   pod 'CapacitorHaptics', :path => '../../node_modules/@capacitor/haptics'
   pod 'CapacitorKeyboard', :path => '../../node_modules/@capacitor/keyboard'
+  pod 'CapacitorPushNotifications', :path => '../../node_modules/@capacitor/push-notifications'
   pod 'CapacitorShare', :path => '../../node_modules/@capacitor/share'
   pod 'CapacitorStatusBar', :path => '../../node_modules/@capacitor/status-bar'
   pod 'CodetrixStudioCapacitorGoogleAuth', :path => '../../node_modules/@codetrix-studio/capacitor-google-auth'
@@ -26,6 +27,8 @@ end
 target 'App' do
   capacitor_pods
   # Add your Pods here
+  pod 'FirebaseCore'
+  pod 'Firebase/Messaging'
 end
 
 post_install do |installer|

@@ -1,6 +1,7 @@
 import UIKit
 import Capacitor
 import FBSDKCoreKit
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,6 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 didFinishLaunchingWithOptions: launchOptions
             )
 
+            FirebaseApp.configure()
+            
             return true
         }
 
